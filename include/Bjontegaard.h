@@ -10,7 +10,7 @@ using namespace std;
 class Bjontegaard{
 
 	public:
-		Bjontegaard(vector<double> psnr_ref, vector<double> rate_ref, vector<double> psnr_eva, vector<double> rate_eva);
+		Bjontegaard(vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref);
 		~Bjontegaard();
 		double BD_avg();
 		double BD_rate();

@@ -9,14 +9,29 @@ using namespace std;
 class Parse{
 
 	public:
-		Parse(const char *argv[], int argc);
+		Parse(vector<string> command_in);
 		~Parse();
 		int ComputerBjontegaard();
 		vector<string> GetCommand();
 
 		int GetThreadCount();
+		int GetCommandCount();
 		int GetMode();
 		void SetLogParameters();
+
+		vector<double> GetUPSNREva();
+		vector<double> GetVPSNREva();
+		vector<double> GetYPSNREva();
+		vector<double> GetYOUPSNREva();
+		vector<double> GetBitRateEva();
+
+
+		vector<double> GetYPSNRRef();
+		vector<double> GetUPSNRRef();
+		vector<double> GetVPSNRRef();
+		vector<double> GetYOUPSNRRef();
+
+		vector<double> GetBitRateRef();
 
 	private:
 		
@@ -64,7 +79,7 @@ class Parse{
 		void 			CommandManeger(vector<string> command_line);
 		void 			CommandCodecMountRef();
 		void 			CommandCodecMountEva();
-		void 			FindInFile(string file_log, int codec_flag);
+		int 			FindInFile(string file_log, int codec_flag);
 		int 			ConversorStrToInt(string input);
 		string 			ConversorIntToStr(int number);
 		string 			RemoveInvalidChar(string text);

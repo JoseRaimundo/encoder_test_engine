@@ -20,8 +20,6 @@ void *CodecExecutor::run() {
 	struct timeval start, end;
 	gettimeofday(&start, NULL);
 	
-	int initw=0, inith=0;
-	
     CodecSystemCommand(command_line);
 	gettimeofday(&end, NULL);
 

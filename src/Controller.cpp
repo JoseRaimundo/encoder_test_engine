@@ -2,14 +2,21 @@
 #include "../include/CodecExecutor.h"
 #include "../include/Bjontegaard.h"
 
-Controller::Controller(vector<string> command_line, int thread_qtd){
-	this->command_line = command_line;
-	this->count_execution = command_line.size();
-	this->thread_qtd = thread_qtd;
+
+
+Controller::Controller(const char *argv[], int argc){
+    vector<string> command_in;
+    for (int i = 0; i < argc; i++){
+        command_in.push_back(argv[i]);
+    }
+
+    this->parse            = new Parse(command_in);
+    this->command_line     = parse->GetCommand();
+    this->count_execution  = parse->GetCommandCount();
+    this->thread_qtd       = parse->GetThreadCount();
 }
 
 Controller::~Controller(){
-
 }
 
 int Controller::ConversorStrToInt(string str){
@@ -29,49 +36,66 @@ string Controller::ConversorIntToStr(int temp_nuber){
 
 
 void Controller::Execute(){
-	CodecExecutor *codec_executor[command_line.size()];
 
-	for (int i = 0; i < command_line.size(); i++){
-		
-		if (count_execution < thread_qtd)	{
-			thread_qtd = count_execution;		
-		}
-	
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
 
-		for (int j = 0; j < thread_qtd; j++){
-			codec_executor[j] = new CodecExecutor(command_line[i++]);	
-			codec_executor[j]->start();			
-		}
+    CodecExecutor *codec_executor[command_line.size()];
 
-		i--;
+    for (int i = 0; i < command_line.size(); i++){
+        if (count_execution < thread_qtd)   {
+            thread_qtd = count_execution;       
+        }
+    
+        for (int j = 0; j < thread_qtd; j++){
+            codec_executor[j] = new CodecExecutor(command_line[i++]);   
+            codec_executor[j]->start();         
+        }
 
-		for (int j = 0; j < thread_qtd; j++){
-			codec_executor[j]->join();	
-		}
+        i--;
 
-		for (int j = 0; j < thread_qtd; j++){
-			delete codec_executor[j];	
-			count_execution--;	
-		}
-	}
+        for (int j = 0; j < thread_qtd; j++){
+            codec_executor[j]->join();  
+        }
+
+        for (int j = 0; j < thread_qtd; j++){
+            delete codec_executor[j];   
+            count_execution--;  
+        }
+    }
+
+    gettimeofday(&end, NULL);
+    double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 
+             end.tv_usec - start.tv_usec) / 1.e6;
+
+    ofstream result("codec_test_log.txt", ios::app);
+    if (!result){
+        cout << "File couldn't open" << endl;
+    }else{
+        result << "Total time: " + ComputerTime(delta) << endl;
+        result.close();
+    }   
+
+    parse->SetLogParameters();
+    ComputerBjontegaard(parse->GetYPSNREva(), parse->GetBitRateEva(), parse->GetYPSNRRef(), parse->GetBitRateRef());
 }
 
 
-void Controller::ComputerBjontegaard(vector<double> psnr_ref, vector<double> rate_ref, vector<double> psnr_eva, vector<double> rate_eva){
+
+
+void Controller::ComputerBjontegaard( vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref){
 
     Bjontegaard *bjontegaard = new Bjontegaard(psnr_eva, rate_eva, psnr_ref, rate_ref);
     
     double avg  = bjontegaard->BD_avg();
     double rate = bjontegaard->BD_rate();
     
-    ofstream result("Bjontegaard_result.txt", ios::app);
+    ofstream result("codec_test_log.txt", ios::app);
     if (!result){
         cout << "File couldn't open" << endl;
     }else{
         result <<"Bjontegaard AVG .....:  " << avg << endl; 
         result <<"Bjontegaard Rate ....: " << rate <<endl;
-        result <<"Total Time D:H:M:S ..: " << ComputerTime(TotalTime("TIME_result.txt")) << endl;
-        result.close();
     }
 }
 

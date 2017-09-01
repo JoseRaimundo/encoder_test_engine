@@ -34,11 +34,7 @@ int main(int argc, char const *argv[]){
 		usage();
 		return 0;
 	}
-
-	Parse *parse = new Parse(argv, argc);
-
-
-
-	
+	Controller *control = new Controller(argv, argc);
+	control->Execute();
 	return 0;
 }

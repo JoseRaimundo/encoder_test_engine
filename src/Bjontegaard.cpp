@@ -6,16 +6,18 @@ using namespace std;
 #define MAX(a,b) ((a)>(b)?(a):(b))
 
 
-Bjontegaard::Bjontegaard( vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref){
-    this->countOfElements = psnr_eva.size();
+Bjontegaard::Bjontegaard( vector<double> psnr_e, vector<double> rate_e, vector<double> psnr_r, vector<double> rate_r){
+    this->countOfElements = psnr_e.size();
     initBD();
-    std::copy(psnr_eva.begin(), psnr_eva.end(), this->psnr_eva);
-    std::copy(rate_eva.begin(), rate_eva.end(), this->rate_eva);
-    std::copy(psnr_ref.begin(), psnr_ref.end(), this->psnr_ref);
-    std::copy(rate_ref.begin(), rate_ref.end(), this->rate_ref);
+    std::copy(psnr_e.begin(), psnr_e.end(), this->psnr_eva);
+    std::copy(rate_e.begin(), rate_e.end(), this->rate_eva);
+    std::copy(psnr_r.begin(), psnr_r.end(), this->psnr_ref);
+    std::copy(rate_r.begin(), rate_r.end(), this->rate_ref);
 	this->order = 3; //defalt order value
-    BD_avg();
-    BD_rate();
+    // for (int i = 0; i < countOfElements; ++i)
+    // {
+    //     cout << " XX===> " << psnr_eva[i] << " ===> " << rate_eva[i]<< " ===> " << psnr_ref[i] << " ===> " << rate_ref[i]   << endl;
+    // }
 }
 
 void Bjontegaard::initBD() {

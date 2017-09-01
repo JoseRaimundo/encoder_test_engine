@@ -1,13 +1,9 @@
 #include "../include/Parse.h"
 
 
-Parse::Parse(const char *argv[], int argc){
-    vector<string> command_in;
-    for (int i = 0; i < argc; i++){
-        command_in.push_back(argv[i]);
-    }
+Parse::Parse(vector<string> command_in){
     InitParse();
-	CommandManeger(command_in);
+    CommandManeger(command_in);
     CommandCodecMountEva();
     CommandCodecMountRef();
 }
@@ -16,7 +12,7 @@ Parse::~Parse(){
 }
 
 void Parse::InitParse(){
-	this->computer_interval = 0;
+    this->computer_interval = 0;
     this->mode_flag     = 1;
     this->video_count   = 1;
     this->cfg_count     = 1;
@@ -27,17 +23,17 @@ void Parse::InitParse(){
 }
 
 string Parse::RemoveInvalidChar(string text){
-	string result = "";
-	char temp;
-	for (int i = 0; i < text.size(); i++){
-		temp = text[i];
-		if(	temp >= '0' && temp <= '9' || 
-			temp >= 65 && temp <= 90   || 
-			temp >= 97 && temp <= 122) {
-			result += temp;
-		}
-	}
-	return result;
+    string result = "";
+    char temp;
+    for (int i = 0; i < text.size(); i++){
+        temp = text[i];
+        if( temp >= '0' && temp <= '9' || 
+            temp >= 65 && temp <= 90   || 
+            temp >= 97 && temp <= 122) {
+            result += temp;
+        }
+    }
+    return result;
 }
 
 int Parse::ConversorStrToInt(string str){
@@ -130,12 +126,12 @@ void Parse::CommandCodecMountEva(){
                                 + "-o "  + this->out_video_path + "_"
                                 + RemoveInvalidChar(this->videos_vet[j]) + "_" 
                                 + RemoveInvalidChar(this->cfg_vet[i]) + "_" 
-                                + RemoveInvalidChar(this->coeficient_vet[k]) + "eva_.yuv >";
+                                + RemoveInvalidChar(this->coeficient_vet[k]) + "eva_.yuv >> ";
 
                 this->file_out_eva.push_back(this->out_log_path + "eva_" 
                                         + RemoveInvalidChar(this->videos_vet[j]) + "_" 
                                         + RemoveInvalidChar(this->cfg_vet[i]) + "_" 
-                                        + RemoveInvalidChar(this->coeficient_vet[k]) + ".txt ");
+                                        + RemoveInvalidChar(this->coeficient_vet[k]) + ".txt");
 
                 temp_string += file_out_eva.back();            
                 this->command_line.push_back(temp_string);
@@ -162,12 +158,12 @@ void Parse::CommandCodecMountRef(){
                                 + "-o "  + this->out_video_path + "_"
                                 + RemoveInvalidChar(this->videos_vet[j]) + "_" 
                                 + RemoveInvalidChar(this->cfg_vet[i]) + "_" 
-                                + RemoveInvalidChar(this->coeficient_vet[k]) + "ref_.yuv > ";
+                                + RemoveInvalidChar(this->coeficient_vet[k]) + "ref_.yuv >> ";
 
                 this->file_out_ref.push_back(this->out_log_path + "ref_" 
                                         + RemoveInvalidChar(this->videos_vet[j]) + "_" 
                                         + RemoveInvalidChar(this->cfg_vet[i]) + "_" 
-                                        + RemoveInvalidChar(this->coeficient_vet[k]) + ".txt ");
+                                        + RemoveInvalidChar(this->coeficient_vet[k]) + ".txt");
 
                 temp_string += file_out_ref.back();            
                 this->command_line.push_back(temp_string);
@@ -178,7 +174,7 @@ void Parse::CommandCodecMountRef(){
 
 
 vector<string> Parse::GetCommand(){
-	return this->command_line;
+    return this->command_line;
 }
 
 int Parse::GetThreadCount(){
@@ -189,20 +185,59 @@ int Parse::GetMode(){
     return this->mode_flag;
 }
 
+int Parse::GetCommandCount(){
+    return this->command_line.size();
+}
 
-void Parse::FindInFile(string file_log, int codec_flag){
-	ifstream cod_file;
-	string temp_string;
+vector<double> Parse::GetUPSNREva(){
+    return upsnr_eva;
+}
+vector<double> Parse::GetVPSNREva(){
+    return vpsnr_eva;
+}
+vector<double> Parse::GetYPSNREva(){
+    return ypsnr_eva;
+}
+vector<double> Parse::GetYOUPSNREva(){
+    return yuvpsnr_eva;
+}
+vector<double> Parse::GetBitRateEva(){
+    return bit_rate_eva;
+}
+
+
+vector<double> Parse::GetYPSNRRef(){
+    return ypsnr_ref;
+}
+vector<double> Parse::GetUPSNRRef(){
+    return upsnr_ref;
+}
+vector<double> Parse::GetVPSNRRef(){
+    return vpsnr_ref;
+}
+vector<double> Parse::GetYOUPSNRRef(){
+    return yuvpsnr_ref;
+}
+
+vector<double> Parse::GetBitRateRef(){
+    return bit_rate_ref;
+}
+
+
+int Parse::FindInFile(string file_log, int codec_flag){
+    ifstream cod_file;
+    string temp_string;
     cod_file.open(file_log.c_str());
 
-    if(!cod_file.is_open()){
-        cout << "Erro ref, arquivo não encontrado!" << endl;
-    }
     //set evaluated codec log
     if(codec_flag == 1){
-    	while(!cod_file.eof()){
-    		cod_file >> temp_string;
-    		if(temp_string.compare("YUV-PSNR") == 0){
+        if(!cod_file.is_open()){
+            cout << "Erro eva, arquivo não encontrado!" << endl;
+            return 0;
+        }
+        while(!cod_file.eof()){
+            cod_file >> temp_string;
+            if(temp_string.compare("YUV-PSNR") == 0){
                 cod_file >> temp_string;
                 total_frames_eva.push_back(atof(temp_string.c_str()));
                 cod_file >> temp_string;
@@ -216,10 +251,14 @@ void Parse::FindInFile(string file_log, int codec_flag){
                 vpsnr_eva.push_back(atof(temp_string.c_str()));
                 cod_file >> temp_string;
                 yuvpsnr_eva.push_back(atof(temp_string.c_str()));
-    			break;
-    		}
-    	}
+                break;
+            }
+        }
     }else{
+        if(!cod_file.is_open()){
+            cout << "Erro ref, arquivo não encontrado!" << endl;
+            return 0;
+        }
         while(!cod_file.eof()){
             cod_file >> temp_string;
             if(temp_string.compare("YUV-PSNR") == 0){
@@ -241,6 +280,7 @@ void Parse::FindInFile(string file_log, int codec_flag){
             }
         }
     }
+
 } 
 
 
@@ -250,9 +290,9 @@ void Parse::SetLogParameters(){
         FindInFile(file_out_eva[i], 1);
     }
 
-	for (int i = 0; i < file_out_ref.size(); i++){
-		FindInFile(file_out_ref[i], 2);
-	}
+    for (int i = 0; i < file_out_ref.size(); i++){
+        FindInFile(file_out_ref[i], 2);
+    }
 }
 
 
