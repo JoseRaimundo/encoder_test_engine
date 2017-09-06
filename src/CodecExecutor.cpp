@@ -26,7 +26,7 @@ void *CodecExecutor::run() {
 	double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 
 	         end.tv_usec - start.tv_usec) / 1.e6;
 
-	ofstream result("TIME_result.txt", ios::app);
+	ofstream result("Time_per_test.txt", ios::app);
 	if (!result){
 		cout << "File couldn't open" << endl;
 	}else{

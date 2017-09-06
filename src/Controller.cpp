@@ -1,3 +1,4 @@
+#include "../include/common.h"
 #include "../include/Controller.h"
 #include "../include/CodecExecutor.h"
 #include "../include/Bjontegaard.h"
@@ -6,17 +7,46 @@
 
 Controller::Controller(const char *argv[], int argc){
     vector<string> command_in;
+    this->is_bkp = false;
     for (int i = 0; i < argc; i++){
         command_in.push_back(argv[i]);
+        if(command_in.back().compare("-bkp") == 0){
+           this->is_bkp = true;
+        }
     }
 
-    this->parse            = new Parse(command_in);
-    this->command_line     = parse->GetCommand();
+    InitController(command_in);
     this->count_execution  = parse->GetCommandCount();
     this->thread_qtd       = parse->GetThreadCount();
 }
 
 Controller::~Controller(){
+}
+
+void Controller::InitController(vector<string> command_in){
+    std::fstream fs("backup.txt");
+    if(this->is_bkp == true){
+        if (fs.is_open()) {
+            string command;
+            while(!fs.eof()){
+                getline(fs,command);
+                this->command_line.push_back(command);
+            }
+        }
+        
+    }else{
+        this->parse         = new Parse(command_in);
+        this->command_line  = parse->GetCommand();
+        if(fs.is_open()){
+            remove("backup.txt");
+        }
+        ofstream file("backup.txt");
+        
+        for (int i = 0; i < this->command_line.size(); ++i) {
+            file << this->command_line[i] << endl;
+        }
+        file.close();
+    }
 }
 
 int Controller::ConversorStrToInt(string str){
@@ -68,7 +98,7 @@ void Controller::Execute(){
     double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 
              end.tv_usec - start.tv_usec) / 1.e6;
 
-    ofstream result("codec_test_log.txt", ios::app);
+    ofstream result("Result_test.txt", ios::app);
     if (!result){
         cout << "File couldn't open" << endl;
     }else{
@@ -90,7 +120,7 @@ void Controller::ComputerBjontegaard( vector<double> psnr_eva, vector<double> ra
     double avg  = bjontegaard->BD_avg();
     double rate = bjontegaard->BD_rate();
     
-    ofstream result("codec_test_log.txt", ios::app);
+    ofstream result("Result_test.txt", ios::app);
     if (!result){
         cout << "File couldn't open" << endl;
     }else{

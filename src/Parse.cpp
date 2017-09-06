@@ -12,14 +12,20 @@ Parse::~Parse(){
 }
 
 void Parse::InitParse(){
-    this->computer_interval = 0;
+    this->mode_flag     = 1;
     this->mode_flag     = 1;
     this->video_count   = 1;
     this->cfg_count     = 1;
+    this->thread_count  = 1;
     this->wdt_codec     = 3840;
     this->hgt_codec     = 2160;
     this->f_rate        = 30;
     this->f_total       = 130;
+    this->codec_eva_path = "test/codec/eva/TAppEncoderStatic" ;
+    this->codec_ref_path = "test/codec/ref/TAppEncoderStatic";
+    this->out_video_path = "test/videosout/" ;
+    this->out_log_path   = "test/log/";
+    this->computer_interval = 0;
 }
 
 string Parse::RemoveInvalidChar(string text){
@@ -106,6 +112,14 @@ void Parse::CommandManeger(vector<string> command_line){
         this->coeficient_vet.push_back("37");
         this->count_quant = coeficient_vet.size();
     }
+
+    if (this->videos_vet.size() == 0){
+        videos_vet.push_back("test/videos/video.yuv");
+    }
+
+    if (this->cfg_vet.size() == 0){
+        this->cfg_vet.push_back("test/cfg/config.cfg");
+    }
 }
 
 //COMANDOS DO CODIFICADOR AVALIADO
@@ -115,7 +129,7 @@ void Parse::CommandCodecMountEva(){
         for (int j = 0; j < this->videos_vet.size(); j++){
             for (int k = 0; k < this->coeficient_vet.size(); k++) {
                 temp_string = "";
-                temp_string =     "."    + this->codec_eva_path + " "
+                temp_string =     "./"    + this->codec_eva_path + " "
                                 + "-c "  + this->cfg_vet[i] + " "
                                 + "-q "  + this->coeficient_vet[k] + " "
                                 + "-fr " + ConversorIntToStr(this->f_rate) + " "
@@ -147,7 +161,7 @@ void Parse::CommandCodecMountRef(){
         for (int j = 0; j < this->videos_vet.size(); j++){
             for (int k = 0; k < this->coeficient_vet.size(); k++) {
                 temp_string = "";
-                temp_string =     "."    + this->codec_ref_path + " "
+                temp_string =     "./"    + this->codec_ref_path + " "
                                 + "-c "  + this->cfg_vet[i] + " "
                                 + "-q "  + this->coeficient_vet[k] + " "
                                 + "-fr " + ConversorIntToStr(this->f_rate) + " "
@@ -294,7 +308,3 @@ void Parse::SetLogParameters(){
         FindInFile(file_out_ref[i], 2);
     }
 }
-
-
-
-

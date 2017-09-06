@@ -188,7 +188,7 @@ double Bjontegaard::BD_rate(){
   	rate = (int2-int1)/(max-min);
   	rate=(exp(rate)-1)*100;
 
-  	cout <<	"Rate:  " << rate << endl;
+  	cout <<	"BD_Rate:  " << rate << endl;
   	/*conserto relatado no BDPSNR.h*/
   		
 	return rate;
@@ -239,7 +239,7 @@ double Bjontegaard::BD_avg(){
 
   	avg = (int2-int1)/(max-min);
 
-  	cout <<	"PSNR:  " << avg << endl;
+  	cout <<	"BD_PSNR:  " << avg << endl;
 	
 	return avg;
 }

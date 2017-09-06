@@ -48,7 +48,6 @@ class Parse{
 
 		string 	codec_eva_path,
 				codec_ref_path,
-				input_video,
 	            out_video_path,
 	            out_log_path;
 	
