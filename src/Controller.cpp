@@ -7,15 +7,11 @@
 
 Controller::Controller(const char *argv[], int argc){
     vector<string> command_in;
-    this->is_bkp = false;
     for (int i = 0; i < argc; i++){
         command_in.push_back(argv[i]);
-        if(command_in.back().compare("-bkp") == 0){
-           this->is_bkp = true;
-        }
     }
-
-    InitController(command_in);
+    this->parse         = new Parse(command_in);
+    InitController();
     this->count_execution  = parse->GetCommandCount();
     this->thread_qtd       = parse->GetThreadCount();
 }
@@ -23,9 +19,9 @@ Controller::Controller(const char *argv[], int argc){
 Controller::~Controller(){
 }
 
-void Controller::InitController(vector<string> command_in){
-    std::fstream fs("backup.txt");
-    if(this->is_bkp == true){
+void Controller::InitController(){
+    if(parse->IsBkp()){
+        std::fstream fs("backup/backup.txt");
         if (fs.is_open()) {
             string command;
             while(!fs.eof()){
@@ -33,19 +29,8 @@ void Controller::InitController(vector<string> command_in){
                 this->command_line.push_back(command);
             }
         }
-        
     }else{
-        this->parse         = new Parse(command_in);
         this->command_line  = parse->GetCommand();
-        if(fs.is_open()){
-            remove("backup.txt");
-        }
-        ofstream file("backup.txt");
-        
-        for (int i = 0; i < this->command_line.size(); ++i) {
-            file << this->command_line[i] << endl;
-        }
-        file.close();
     }
 }
 
@@ -92,6 +77,12 @@ void Controller::Execute(){
             delete codec_executor[j];   
             count_execution--;  
         }
+
+        ofstream file("backup/backup.txt");
+        for (int j = i+1; j < this->command_line.size(); j++) {
+            file << this->command_line[j] << endl;
+        }
+        file.close();
     }
 
     gettimeofday(&end, NULL);
@@ -105,6 +96,8 @@ void Controller::Execute(){
         result << "Total time: " + ComputerTime(delta) << endl;
         result.close();
     }   
+
+
 
     parse->SetLogParameters();
     ComputerBjontegaard(parse->GetYPSNREva(), parse->GetBitRateEva(), parse->GetYPSNRRef(), parse->GetBitRateRef());

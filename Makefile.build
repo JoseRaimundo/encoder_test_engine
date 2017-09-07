@@ -14,6 +14,8 @@ $(EXE): $(addprefix $(SRCDIR),$(OBJS))
         echo " $(OK)" || (echo " $(FAILED)"; exit 1;)
 	@echo Descompactando arquivos de testes e diretórios padões ...
 	unzip test.zip
+	@mkdir backup > /dev/null 2>&1 && \
+		echo "Criando diretorio de backup ... $(OK)" || echo -n ""
 
 
 %.o: %.cpp
@@ -24,6 +26,6 @@ $(EXE): $(addprefix $(SRCDIR),$(OBJS))
 
 clean:
 	@echo -n Limpando ...
-	@rm -rf $(addprefix $(SRCDIR),$(OBJS)) $(BINDIR) *.bin test *.out test/videosout/*.yuv src/*.o *.txt *.out *.bin 2> /dev/null && \
+	@rm -rf $(addprefix $(SRCDIR),$(OBJS)) $(BINDIR) *.bin test backup *.out src/*.o *.txt *.out *.bin 2> /dev/null && \
                 echo " $(OK)" || (echo " $(FAILED)"; exit 1;)
   

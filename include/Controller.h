@@ -26,7 +26,7 @@ class Controller{
 		bool is_bkp;
 			
 		void ComputerBjontegaard(vector<double> psnr_ref, vector<double> rate_ref, vector<double> psnr_eva, vector<double> rate_eva);
-		void InitController(vector<string> command_in);
+		void InitController();
 		int 			ConversorStrToInt(string input);
 		string 			ConversorIntToStr(int number);
 		string ComputerTime(double t_total);

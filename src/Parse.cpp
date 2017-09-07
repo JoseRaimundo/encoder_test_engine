@@ -17,10 +17,10 @@ void Parse::InitParse(){
     this->video_count   = 1;
     this->cfg_count     = 1;
     this->thread_count  = 1;
-    this->wdt_codec     = 3840;
-    this->hgt_codec     = 2160;
+    this->wdt_codec     = 352;
+    this->hgt_codec     = 288;
     this->f_rate        = 30;
-    this->f_total       = 130;
+    this->f_total       = 120;
     this->codec_eva_path = "test/codec/eva/TAppEncoderStatic" ;
     this->codec_ref_path = "test/codec/ref/TAppEncoderStatic";
     this->out_video_path = "test/videosout/" ;
@@ -57,9 +57,34 @@ string Parse::ConversorIntToStr(int temp_nuber){
     return convert.str();;
 }
 
+vector<string> Parse::split(const string &s) {
+    stringstream ss(s);
+    string item;
+    vector<string> tokens;
+    while (getline(ss, item, ' ')) {
+        tokens.push_back(item);
+    }
+    return tokens;
+}
+
 void Parse::CommandManeger(vector<string> command_line){
-    int count_quant,
-        coef_flag = 0;
+    string command_bkp = "";
+    this->is_bkp = false;
+    for (int i = 0; i < command_line.size(); i++){
+        if(command_line[i].compare("-bkp") == 0){
+            fstream fs("backup/parsebackup.txt");
+            if (fs.is_open()) {
+                string command;
+                getline(fs,command);
+                command_line.erase (command_line.begin(), command_line.end());  
+                command_line = split(command);
+            }
+            is_bkp = true;
+            break;
+        }
+    }
+
+    int count_quant;
 
     string temp_string, temp_aux;
     
@@ -97,15 +122,14 @@ void Parse::CommandManeger(vector<string> command_line){
                 this->cfg_vet.push_back(command_line[i++]);
             }
         }else if (temp_string.compare("-coef") == 0){
-            count_quant = ConversorStrToInt(command_line[i++]);
+            this->count_quant = ConversorStrToInt(command_line[i++]);
             for (int j = 0; j < count_quant; j++){
                 this->coeficient_vet.push_back(command_line[i++]);
             }
-            coef_flag = 1;
         }      
     }
 
-    if (coef_flag != 1){//default value
+    if (coeficient_vet.size() == 0){//default value
         this->coeficient_vet.push_back("22");
         this->coeficient_vet.push_back("27");
         this->coeficient_vet.push_back("32");
@@ -120,6 +144,35 @@ void Parse::CommandManeger(vector<string> command_line){
     if (this->cfg_vet.size() == 0){
         this->cfg_vet.push_back("test/cfg/config.cfg");
     }
+
+
+    command_bkp += " -mod " + ConversorIntToStr(mode_flag)
+                += " -thr " + ConversorIntToStr(thread_count)
+                += " -wdt " + ConversorIntToStr(wdt_codec)
+                += " -hgt " + ConversorIntToStr(hgt_codec)
+                += " -fr "  + ConversorIntToStr(f_rate)
+                += " -f "   + ConversorIntToStr(f_total)
+                += " -eva " + codec_eva_path
+                += " -ref " + codec_ref_path
+                += " -outv "+ out_video_path
+                += " -outl "+ out_log_path
+                += " -v "   + ConversorIntToStr(videos_vet.size());
+                for (int i = 0; i < videos_vet.size(); i++){
+                    command_bkp += " " + videos_vet[i];
+                }
+                command_bkp += " -cfg " + ConversorIntToStr(cfg_vet.size()); 
+                for (int i = 0; i < cfg_vet.size(); i++){
+                    command_bkp += " " + cfg_vet[i];
+                }
+                command_bkp += " -q "   + ConversorIntToStr(coeficient_vet.size()); 
+                for (int i = 0; i < coeficient_vet.size(); i++){
+                    command_bkp += " " + coeficient_vet[i];
+                }
+
+    ofstream file("backup/parsebackup.txt");
+    file << command_bkp << endl;
+    file.close();
+    
 }
 
 //COMANDOS DO CODIFICADOR AVALIADO
@@ -186,6 +239,9 @@ void Parse::CommandCodecMountRef(){
     }
 }
 
+bool Parse::IsBkp(){
+    return this->is_bkp;
+}
 
 vector<string> Parse::GetCommand(){
     return this->command_line;

@@ -19,6 +19,8 @@ class Parse{
 		int GetMode();
 		void SetLogParameters();
 
+		bool IsBkp();
+
 		vector<double> GetUPSNREva();
 		vector<double> GetVPSNREva();
 		vector<double> GetYPSNREva();
@@ -34,6 +36,7 @@ class Parse{
 		vector<double> GetBitRateRef();
 
 	private:
+		bool is_bkp;
 		
 		int mode_flag,
 			video_count,
@@ -83,6 +86,7 @@ class Parse{
 		string 			ConversorIntToStr(int number);
 		string 			RemoveInvalidChar(string text);
 		void 			InitParse();
+		vector<string>  split(const string &s);
 
 };
 #endif
