@@ -24,7 +24,7 @@ void usage(){
 		 	<< "-wdt ............. (int) .... Videos width.\n"
 		 	<< "-hgt ............. (int) .... Videos height.\n"
 			<< "Full command example (the command contain the default values):\n"
-			<< "./bin/CodecTest  -mod 1 -thr 1 -wdt 352 -hgt 288 -fr 30 -f 120 -eva test/codec/eva/TAppEncoderStatic -ref test/codec/ref/TAppEncoderStatic -outv test/videosout/ -outl test/log/ -v 1 test/videos/video.yuv -cfg 1 test/cfg/config.cfg -q 4 22 27 32 37"
+			<< "./bin/CodecTest  -mod 1 -thr 1 -wdt 352 -hgt 288 -fr 30 -f 120 -eva test/codec/eva/TAppEncoderStatic -ref test/codec/ref/TAppEncoderStatic -outv test/videosout/ -outl test/log/ -vin 1 test/videos/video.yuv -cfg 1 test/cfg/config.cfg -q 4 22 27 32 37"
 			<< "Retorn a execution:\n"
 			<< "./bin/CodecTest -bkp"
 
@@ -32,7 +32,7 @@ void usage(){
 }
 
 int main(int argc, char const *argv[]){
-	if (argc < 2){
+	if (argc < 3){
 		usage();
 		return 0;
 	}
