@@ -87,14 +87,13 @@ The Joint Collaborative Team on Video Coding (JCT-VC) provided a open source HM 
 
 After encoding, HM generates, in addition to the encoded video, a record file in which important information about the encoding process is present such as bit rate, total encoding time, output video file size, PSNR for each YUV color matrix (Y = Luma, U = Chroma Blue and V = Chroma Red).
 
-\textcolor{red}{
+
 The way the tool was developed also makes it possible to perform tests with the Joint Exploration Model (JEM) reference encoder~\cite{Bossen:17}. This encoder was developed based on HM and was presented in~\cite{JVET:2015} as the future of the environment for standardized development of HEVC video compression technology, including its current extensions and near-term extensions for screen content coding and high-dynamic-range coding.
-}
 
 
 \subsection{Standardization of Tests}
 
-To ensure common testing conditions, the JCT-VC committee has developed the JCTVC-L1100 documentation \cite{Bossen:13}, which describes the settings and contents for standardized tests that explore different situations. This standardization is applied in the development of new features or encoder optimizations developed using HM. The settings discussed in the document are:
+To ensure common testing conditions, the JCT-VC committee has developed the JCTVC-L1100 documentation~\cite{Bossen:13}, which describes the settings and contents for standardized tests that explore different situations. This standardization is applied in the development of new features or encoder optimizations developed using HM. The settings discussed in the document are:
 
 \begin{itemize}
 
@@ -107,6 +106,7 @@ To ensure common testing conditions, the JCT-VC committee has developed the JCTV
 
 These settings specify situations with videos with 8 bits of depth, besides these there are also the configurations directed to videos with 10 bits. In the documentation, the videos present in \emph{ftp://hevc@ftp.tnt.uni-hannover.de/testsequences/} are also recommended, requiring a registration to access the videos. Finally, the quantization values are specified: 22, 27, 32 and 37. In the tool, these values are already configured with standards, but it is possible to add more quantization values.
 
+\subsection{PSNR Metric}
 
 \subsection{Bjontegaard Metric}
 
@@ -115,9 +115,9 @@ considering the same PSNR or overall video quality difference (BD-PSNR) for two 
 	
 The BD-PSNR is the measure corresponding to the average difference of Peak Signal-to-Night Ratio (PSNR) in decibels, between two encoders, considering the same bit rate. While the BD-Rate value corresponds to the average percentage bit difference for the two encoders. In this work, more attention was given to bit rate evaluation.	
 
-\textcolor{red}{
-In \cite{Mathias}, exemplifies the BD-Rate by means of Figure \ref{fig:chart_barate}, where the curves are further drawn by linear interpolation. For the BD calculations, the rate axis is logarithmized and the rate-distortion curves are interpolated by an advanced interpolation method. The overlapping portions of the rate-distortion curves are used for calculation of the BD values. The BD-rate, the difference in horizontal direction. Depending on the range of overlap of the two curves, the resulting BD measurements get more or less meaningful. Therefore, careful interpretation of the resulting numbers is required.
-}
+
+In~\cite{Mathias}, exemplifies the BD-Rate by means of Figure~\ref{fig:chart_barate}, where the curves are further drawn by linear interpolation. For the BD calculations, the rate axis is logarithmized and the rate-distortion curves are interpolated by an advanced interpolation method. The overlapping portions of the rate-distortion curves are used for calculation of the BD values. The BD-rate, the difference in horizontal direction. Depending on the range of overlap of the two curves, the resulting BD measurements get more or less meaningful. Therefore, careful interpretation of the resulting numbers is required.
+
 
 \FloatBarrier
 \begin{figure}[!ht]
@@ -140,15 +140,22 @@ In \cite{Mathias}, exemplifies the BD-Rate by means of Figure \ref{fig:chart_bar
 %	PWSSIM(f,h)= \frac{\sum_{d=1}^{D}SSIM_{d}(f,h)*SI_{d}}{\sum_{d=1}^{D}=1^{SI_{d}}}		
 %\end{math}
 
+\subsection{SSIM Metric}
+
+\subsection{PW-SSIM Metric}
+
 \section{Related Works}
 
-	
-	
+
+In the literature it is possible to find several studies related to HEVC optimization techniques. Usually the methodological characteristics used in the development of the new technique as metrics and videos used are presented, besides the obtained results. However the test stage is vaguely mentioned or simply has its description ignored. As it happens in~\cite{oliveira:16}, an alternative is presented that uses machine learning to predict the partitioning of the macroblocks and to avoid the extra processing, and the proposed solution is compared with the HM reference encoder. In~\cite{Wang:16}, a parallel approach is used to accelerate coding by distributing multi-core processor efforts. And in~\cite{wang:13}, it is proposed an optimized partitioning algorithm, the texts refer to a scenario in which the coded videos are processed by metrics and then the results are compared, without the aid of a tool for extraction and calculation.
+
+
+The alternative proposed in~\cite{msu:16} offers a coder comparison service, in which several configurations are predefined for the tests. For this it is necessary to submit the encoder to one of the paid services offered. Considering the best service, the premium, includes the SSIM, PSNR objective metrics and subjective metrics psycho visual enhancements, also includes the configurations High Speed, Normal and High. Quality, and presets analysis of systhetic motion, distortion in tail area and spatially variable noise. However, this alternative requires payment for more complex tests and also limits testing to a fixed number of configurations and test cases, nor is more current and advanced metrics like BD-Rate and BD-PSNR mentioned. The postponed solution also uses as reference encoders implemented based on X.265, for UHD video tests, this encoder is constantly mentioned in the literature, however the test scenarios proposed by the JVET specify HM encoders, these specifications help to standardize and document studies on the enhancement of the HEVC encoder.
+
+
 \section{Tool Description}
 
-To verify the efficiency it is necessary to perform several tests in which the modified encoder is executed in several coding scenarios, and then the results of each coding are compared with the results of the reference encoder. Each test sequence of an encoder can 
-last for hours, depending on the videos and test settings, which hinders the development stage. The comparison is made between values such as bit rate, PSNR, coding time, and so on. These values are generated automatically by the HM encoder and are saved in log files. However, 
-for their use it is necessary to manually collect in each log file so that it can be a repetitive work and result in errors from human failure. 
+To verify the efficiency it is necessary to perform several tests in which the modified encoder is executed in several coding scenarios, and then the results of each coding are compared with the results of the reference encoder. Each test sequence of an encoder can last for hours, depending on the videos and test settings, which hinders the development stage. The comparison is made between values such as bit rate, PSNR, coding time, and so on. These values are generated automatically by the HM encoder and are saved in log files. However, for their use it is necessary to manually collect in each log file so that it can be a repetitive work and result in errors from human failure. 
 
 The tool developed in this work executes instances of the modified encoder and reference encoder in all required configurations and then automatically collects all the information necessary for the comparison. With the data collected from the log files the calculation of 
 the Bjontegaard \cite{Bjontegaard} metric is performed, the tool architecture can be viewed in Figure \ref{fig:fluxo}. The modular way the tool was implemented enables other metrics to make use of the encoding values. To reduce the time of the tests, the tool was implemented in a parallel architecture in which multiple instances of the encoder are executed simultaneously, thus considerably reducing the time of a test.
@@ -217,14 +224,12 @@ For more complex tests, the implementation of a distributed version of the tool 
 
 \section{Result}
 
-%- Acho que devemos ter uma seção para mais detalhes da Bjontegaard. E tem que deixar claro qual das métricas de Bjontegaard está sendo usada. BD-Rate nesse caso.
-%- Precisamos melhorar o título, mas vamos deixar isso para depois
+To validate the tool, a sequence of tests was performed to compare the encoder developed in REFERENCIA with the reference encoder HM.16. The tests were performed on a computer with processor SPECIFICATIONS. We used the UHD 4K videos available in REFERENCE. In total, N frames of X sequences were used, being SEQUENCNAME.
 
-%- Na introdução é bom citar que o novo padrão já está sendo especificado e vários experimentos estão em testes. Ambientes como esse seriam bem propícios para o uso da ferramenta.
 
-%- Os principais sistemas de transmissão de vídeo, seja transmissão terrestre ou internet streaming tem tendido a usar conteúdo em UHD, assim como mídeas de realidade virtual também terão resoluções "beyond-4K"
+The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected, but adequate management is required so that the execution of different threads does not compromise the integrity of the values used to calculate the metrics, time and other information present in the sequence of tests.
 
-%- Vamos tentar caracterizar os testes Random Access, Low Delay P e Low Delay B. Vou procurar uma boa definição desses termos.
+
 
 \bibliographystyle{waslon}
 \bibliography{sample}

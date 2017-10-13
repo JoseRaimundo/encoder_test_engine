@@ -142,6 +142,20 @@ M.~Wien.
   Specification}.
 \newblock {\em Signals and Communication Technology\/}, 2015.
 
+\bibitem{Wang:16}
+Y.~Wang, X.~Guo, Y.~Lu, X.~Fan and D.~Zhao.
+\newblock \enquote{GPU-based optimization for sample adaptive offset in HEVC}.
+\newblock In {\em 2016 IEEE International Conference on Image Processing
+  (ICIP)\/}, pp. 829--833, Sept 2016.
+
+\bibitem{msu:16}
+M.~G.~M. Lab.
+\newblock \enquote{Video Codec Analysis and Testing}.
+\newblock Technical report, MSU Graphics Media Lab, 2012.
+\newblock Disponible:
+  http://compression.ru/video/codec\texttt{\_}comparison/codec\texttt{\_}analysis.html,
+  Access: 10 August 2017.
+
 \bibitem{Bjontegaard}
 G.~Bjontegaard.
 \newblock \enquote{Calculation of Average PSNR Differences Between RD-curves}.
