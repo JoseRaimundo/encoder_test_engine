@@ -25,7 +25,6 @@
 \usepackage{balance}
 \usepackage{color,graphicx}
 
-
 \begin{document}
 
 \title{A Tool for Automated Testing of the HEVC Video Encoder}
@@ -143,6 +142,28 @@ In~\cite{Mathias}, exemplifies the BD-Rate by means of Figure~\ref{fig:chart_bar
 %\end{math}
 
 \subsection{SSIM Metric}
+\begin{math}
+SSIM(x, y) = \frac{(2\mu _{x}\mu _{y} + c _{1})(2\sigma _{xy}+c _{2})}{(\mu_{x}^{2}+\mu_{y}^{2}+ c_{1})(\sigma _{x}^{2}+\sigma _{y}^{2}+c _{2})}
+\end{math}
+
+
+In formula X,  $\mu_{x}$ represents the average of x,  $\mu_{y}$ represents the average of y. The variance of x is represented by $\sigma _{x}^{2}$ and the variance of y by $\sigma _{y}^{2}$
+
+The $c_{1}=(k_{1}L)^{2}$, $c_{2}=(k_{2}L)^{2}$ are the variables to stabilize the division with weak
+
+Denominator, watch L is the dynamic range of the pixel-values $k_{1}=0.01$ and $k_{2}=0.03$ by default.
+
+
+
+%\begin{math} {\scriptstyle \mu _{x}}\end{math} represents the average of B, A represents the average of BB
+
+
+%{\scriptstyle \mu _{x}} the average of {\scriptstyle x} {\scriptstyle \mu _{y}} the average of %{\scriptstyle y}
+%{\scriptstyle \sigma _{x}^{2}} the variance of {\scriptstyle x};
+%{\scriptstyle \sigma _{y}^{2}} the variance of {\displaystyle \scriptstyle y};
+%{\scriptstyle \sigma _{xy}} the covariance of {\displaystyle \scriptstyle x} and {\displaystyle \scriptstyle y};
+%{\scriptstyle c_{1}=(k_{1}L)^{2}}, {\scriptstyle c_{2}=(k_{2}L)^{2}} two variables to stabilize the division with weak denominator;
+%\end{math}
 
 \subsection{PW-SSIM Metric}
 
