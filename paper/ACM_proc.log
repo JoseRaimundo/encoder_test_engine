@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.12)  15 OCT 2017 17:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.21)  18 OCT 2017 14:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ACM_proc.tex
 (./ACM_proc.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 6 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (./acm_proc_article-sp.cls
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
@@ -954,7 +954,7 @@ Package babel Info: Making " an active character on input line 145.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
-\langwohyphens=\language6
+\langwohyphens=\language81
 LaTeX Info: Redefining \_ on input line 43.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
@@ -1079,49 +1079,51 @@ Overfull \hbox (2.44734pt too wide) in paragraph at lines 108--109
 tsequences/
  []
 
-<figures/chartbdrate.png, id=13, 633.36626pt x 494.84875pt>
+[2] <figures/chartbdrate.png, id=21, 633.36626pt x 494.84875pt>
 File: figures/chartbdrate.png Graphic file (type png)
 
 <use figures/chartbdrate.png>
-Package pdftex.def Info: figures/chartbdrate.png used on input line 127.
+Package pdftex.def Info: figures/chartbdrate.png used on input line 175.
 (pdftex.def)             Requested size: 201.59692pt x 157.5016pt.
- [2]
-<figures/fluxo.png, id=19, 253.69781pt x 414.04688pt>
+
+<figures/fluxo.png, id=22, 253.69781pt x 414.04688pt>
 File: figures/fluxo.png Graphic file (type png)
  <use figures/fluxo.png>
-Package pdftex.def Info: figures/fluxo.png used on input line 190.
+Package pdftex.def Info: figures/fluxo.png used on input line 201.
 (pdftex.def)             Requested size: 201.59692pt x 329.02669pt.
 
 [3 <./figures/chartbdrate.png>]
-Underfull \hbox (badness 7685) in paragraph at lines 216--216
+Underfull \hbox (badness 7685) in paragraph at lines 227--227
 []\T1/aer/m/n/9 Rated en-co-der bi-
  []
 
-<figures/log.png, id=29, 362.35374pt x 682.55pt>
+<figures/log.png, id=30, 362.35374pt x 682.55pt>
 File: figures/log.png Graphic file (type png)
  <use figures/log.png>
-Package pdftex.def Info: figures/log.png used on input line 236.
+Package pdftex.def Info: figures/log.png used on input line 247.
 (pdftex.def)             Requested size: 201.59692pt x 379.74666pt.
- [4 <./figures/fluxo.png>] <figures/bitrateqp.png, id=35, 642.4pt x 481.8pt>
+ [4 <./figures/fluxo.png>] <figures/bitrateqp.png, id=36, 642.4pt x 481.8pt>
 File: figures/bitrateqp.png Graphic file (type png)
 
 <use figures/bitrateqp.png>
-Package pdftex.def Info: figures/bitrateqp.png used on input line 252.
+Package pdftex.def Info: figures/bitrateqp.png used on input line 263.
 (pdftex.def)             Requested size: 189.6828pt x 142.26378pt.
 
-<figures/psnrqp.png, id=36, 1027.84pt x 788.9475pt>
+<figures/psnrqp.png, id=37, 1027.84pt x 788.9475pt>
 File: figures/psnrqp.png Graphic file (type png)
  <use figures/psnrqp.png>
-Package pdftex.def Info: figures/psnrqp.png used on input line 257.
+Package pdftex.def Info: figures/psnrqp.png used on input line 268.
 (pdftex.def)             Requested size: 185.33257pt x 142.26378pt.
 
-(./ACM_proc.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5 <./figures/log.png> <./figures/bitrateqp.png (PNG copy)> <./figures/psnrqp.
+png (PNG copy)>] (./ACM_proc.bbl
 Overfull \hbox (20.88681pt too wide) in paragraph at lines 5--11
 \T1/aer/m/n/9 http://www.cisco.com/c/en/us/solutions/collateral/service- 
  []
 
-[5 <./figures/log.png> <./figures/bitrateqp.png (PNG copy)> <./figures/psnrqp.p
-ng (PNG copy)>]
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -1129,36 +1131,37 @@ Overfull \hbox (19.50053pt too wide) in paragraph at lines 124--131
 \T1/aer/m/n/9 http://mpeg.chiariglione.org/standards/exploration/future- 
  []
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 156.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 169.
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )) [6] (./ACM_proc.aux) ) 
 Here is how much of TeX's memory you used:
- 24011 strings out of 494888
- 589879 string characters out of 6179126
- 743069 words of memory out of 5000000
- 26838 multiletter control sequences out of 15000+600000
+ 24016 strings out of 493029
+ 589917 string characters out of 6136234
+ 748670 words of memory out of 5000000
+ 27077 multiletter control sequences out of 15000+600000
  47803 words of font info for 66 fonts, out of 8000000 for 9000
- 40 hyphenation exceptions out of 8191
+ 1143 hyphenation exceptions out of 8191
  62i,11n,77p,1123b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r
 .enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on ACM_proc.pdf (6 pages, 316413 bytes).
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+Output written on ACM_proc.pdf (6 pages, 330902 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 90 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  38 words of extra memory for PDF output out of 10000 (max. 10000000)
 

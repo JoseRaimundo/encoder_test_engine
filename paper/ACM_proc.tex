@@ -78,8 +78,8 @@ To promote HEVC optimization research, JVC-TV provided the HM reference encoder 
 This paper describes a tool for automated testing of HM based encoders. The tool was implemented in a parallel architecture in which multiple instances of the encoder are executed simultaneously. To calculate the encoder efficiency and the difference between the codecs the Bjontegaard metric is used, this metric determines the difference of the efficiency of the codecs from the calculation of the mean difference of two curves adjusted by four points~\cite{Bjontegaard:01}, For the formulation of the standardized test cases, the recommendations of JCT-VC were followed~\cite{Bossen:15}. With the tool the comparison between the~\cite{oliveira:16} codec and reference codec~\cite{itu:10} was obtained and reduction of the test time by 86\% in a simple test case was verified, in which one video and one configuration were used, totaling the execution of 8 instances.
 	
 	
-\section{Proposed test scenario}
-	
+%\section{Proposed test scenario}
+\section{Standardization of Tests}	
 %\subsection{Reference Codec HM}
 
 
@@ -92,7 +92,7 @@ After encoding, HM generates, in addition to the encoded video, a record file in
 The way the tool was developed also makes it possible to perform tests with the Joint Exploration Model (JEM) reference encoder~\cite{Bossen:17}. This encoder was developed based on HM and was presented in~\cite{JVET:2015} as the future of the environment for standardized development of HEVC video compression technology, including its current extensions and near-term extensions for screen content coding and high-dynamic-range coding.
 
 
-\subsection{Standardization of Tests}
+%\subsection{Standardization of Tests}
 
 To ensure common testing conditions, the JCT-VC committee has developed the JCTVC-L1100 documentation~\cite{Bossen:13}, which describes the settings and contents for standardized tests that explore different situations. This standardization is applied in the development of new features or encoder optimizations developed using HM. The settings discussed in the document are:
 
@@ -107,7 +107,55 @@ To ensure common testing conditions, the JCT-VC committee has developed the JCTV
 
 These settings specify situations with videos with 8 bits of depth, besides these there are also the configurations directed to videos with 10 bits. In the documentation, the videos present in \emph{ftp://hevc@ftp.tnt.uni-hannover.de/testsequences/} are also recommended, requiring a registration to access the videos. Finally, the quantization values are specified: 22, 27, 32 and 37. In the tool, these values are already configured with standards, but it is possible to add more quantization values.
 
+\section{Objective Metrics}
+
 \subsection{PSNR Metric}
+
+
+
+
+\subsection{SSIM Metric}
+
+
+The Structural Similarity Index (SSIM) is a consolidated and constantly used model for video comparison, it is based on the assumption that the human visual system is highly adapted to extract structural information from images~\cite{danilo:12}. Therefore, each pixel has a strong dependence on the others and this dependence increases with the proximity. This dependence presents important information about the structure of the objects in the image and that quantifying the structural change of an image can provide a good approximation to the perceived quality~\cite{Wang:02}.
+
+To identify the structural information, the SSIM metric uses a statistical approach based on the average luminance and nxn block contrast of the image. The mean ($\mu$), standard deviation ($\sigma^{2}$) and covariance are calculated for each block. The mean and standard deviation are approximate estimates of the luminance and contrast of the image, respectively. Covariance ($\sigma_{fg}$) is the measure of how much a signal is different from the other.
+
+SSIM uses the measure of structural distortion rather than the error itself. If $x = \{x i | i = 1, 2,. . . , N\}$ represents the original signal and $y = \{y i | i = 1, 2,. . . , N\}$ represents the distorted signal, where i is the pixel index value. The structural similarity index can be calculated according to the equation \ref{ssim} ~\cite{oliveira:16}\cite{Wang:02}.
+
+\begin{equation}
+\label{ssim}
+\centering
+SSIM(x, y) = \frac{(2\mu _{x}\mu _{y} + c _{1})(2\sigma _{xy}+c _{2})}{(\mu_{x}^{2}+\mu_{y}^{2}+ c_{1})(\sigma _{x}^{2}+\sigma _{y}^{2}+c _{2})}
+\end{equation}
+
+
+
+In the equation \ref{ssim},  $\mu_{x}$ represents the average of x,  $\mu_{y}$ represents the average of y. The variance of x is represented by $\sigma _{x}^{2}$ and the variance of y by $\sigma _{y}^{2}$. The $c_{1}=(k_{1}L)^{2}$, $c_{2}=(k_{2}L)^{2}$ are the variables to stabilize the division with weak, watch $L = 2^{n} - 1$ is the dynamic range of bits and $k_{1}=0.01$ and $k_{2}=0.03$ by default.
+
+
+
+
+
+
+\subsection{PW-SSIM Metric}
+
+%\Delta R = \frac{R_{B}(D) - R_{A}(D)}{R_{A}(D)}
+
+%\Delta R = 10^{r_{B}{(D)}-r_{B}{(D)}}-1
+\begin{equation}
+	\centering
+	\label{si}
+	SI = \left ( \frac{1}{N-1}\sum_{i=1}^{1}(\upsilon_{S}-S)^{2} \right )^{\frac{1}{2}}
+\end{equation}
+
+
+\begin{equation}
+	\centering
+	\label{pwssim}
+	PWSSIM(f,h)= \frac{\sum_{d=1}^{D}SSIM_{d}(f,h)*SI_{d}}{\sum_{d=1}^{D}=1^{SI_{d}}}		
+\end{equation}
+
 
 \subsection{Bjontegaard Metric}
 
@@ -129,43 +177,6 @@ In~\cite{Mathias}, exemplifies the BD-Rate by means of Figure~\ref{fig:chart_bar
 \end{figure}
 \FloatBarrier
 	
-%\Delta R = \frac{R_{B}(D) - R_{A}(D)}{R_{A}(D)}
-
-%\Delta R = 10^{r_{B}{(D)}-r_{B}{(D)}}-1
-
-%SI = \left ( \frac{1}{N-1}\sum_{i=1}^{1}(\upsilon_{S}-S)^{2} \right )^{\frac{1}{2}}
-
-%\begin{math}
-%	\centering
-%	\label{fig:bj}
-%	PWSSIM(f,h)= \frac{\sum_{d=1}^{D}SSIM_{d}(f,h)*SI_{d}}{\sum_{d=1}^{D}=1^{SI_{d}}}		
-%\end{math}
-
-\subsection{SSIM Metric}
-\begin{math}
-SSIM(x, y) = \frac{(2\mu _{x}\mu _{y} + c _{1})(2\sigma _{xy}+c _{2})}{(\mu_{x}^{2}+\mu_{y}^{2}+ c_{1})(\sigma _{x}^{2}+\sigma _{y}^{2}+c _{2})}
-\end{math}
-
-
-In formula X,  $\mu_{x}$ represents the average of x,  $\mu_{y}$ represents the average of y. The variance of x is represented by $\sigma _{x}^{2}$ and the variance of y by $\sigma _{y}^{2}$
-
-The $c_{1}=(k_{1}L)^{2}$, $c_{2}=(k_{2}L)^{2}$ are the variables to stabilize the division with weak
-
-Denominator, watch L is the dynamic range of the pixel-values $k_{1}=0.01$ and $k_{2}=0.03$ by default.
-
-
-
-%\begin{math} {\scriptstyle \mu _{x}}\end{math} represents the average of B, A represents the average of BB
-
-
-%{\scriptstyle \mu _{x}} the average of {\scriptstyle x} {\scriptstyle \mu _{y}} the average of %{\scriptstyle y}
-%{\scriptstyle \sigma _{x}^{2}} the variance of {\scriptstyle x};
-%{\scriptstyle \sigma _{y}^{2}} the variance of {\displaystyle \scriptstyle y};
-%{\scriptstyle \sigma _{xy}} the covariance of {\displaystyle \scriptstyle x} and {\displaystyle \scriptstyle y};
-%{\scriptstyle c_{1}=(k_{1}L)^{2}}, {\scriptstyle c_{2}=(k_{2}L)^{2}} two variables to stabilize the division with weak denominator;
-%\end{math}
-
-\subsection{PW-SSIM Metric}
 
 \section{Related Works}
 
@@ -272,7 +283,7 @@ To validate the tool, a sequence of tests was performed to compare the encoder d
 
 The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected, but adequate management is required so that the execution of different threads does not compromise the integrity of the values used to calculate the metrics, time and other information present in the sequence of tests.
 
-
+\pagebreak
 
 \bibliographystyle{waslon}
 \bibliography{sample}

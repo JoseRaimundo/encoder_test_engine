@@ -142,6 +142,19 @@ M.~Wien.
   Specification}.
 \newblock {\em Signals and Communication Technology\/}, 2015.
 
+\bibitem{danilo:12}
+J.~V. de~Miranda~Cardoso, A.~C.~S. Mariano, C.~D.~M. Regis and M.~S. Alencar.
+\newblock \enquote{Comparação das Métricas Objetivas de Qualidade de Vídeos
+  Baseadas na Similaridade Estrutural e na Sensibilidade ao Erro}.
+\newblock {\em Revista de Tecnologia da Informação e Comunicação\/}, 2012.
+
+\bibitem{Wang:02}
+Z.~Wang, L.~Lu and A.~C. Bovik.
+\newblock \enquote{Video quality assessment using structural distortion
+  measurement}.
+\newblock In {\em Proceedings. International Conference on Image Processing\/},
+  volume~3, pp. III--65--III--68 vol.3, 2002.
+
 \bibitem{Wang:16}
 Y.~Wang, X.~Guo, Y.~Lu, X.~Fan and D.~Zhao.
 \newblock \enquote{GPU-based optimization for sample adaptive offset in HEVC}.

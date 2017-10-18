@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ACM_proc.aux
 The style file: waslon.bst
 Database file #1: sample.bib
-You've used 23 entries,
+You've used 25 entries,
             2244 wiz_defined-function locations,
-            675 strings with 8775 characters,
-and the built_in function-call counts, 5608 in all, are:
-= -- 483
-> -- 242
-< -- 8
-+ -- 96
-- -- 73
-* -- 388
-:= -- 882
-add.period$ -- 79
-call.type$ -- 23
-change.case$ -- 26
+            688 strings with 9339 characters,
+and the built_in function-call counts, 6272 in all, are:
+= -- 543
+> -- 265
+< -- 10
++ -- 105
+- -- 80
+* -- 439
+:= -- 973
+add.period$ -- 85
+call.type$ -- 25
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 270
-empty$ -- 527
-format.name$ -- 73
-if$ -- 1269
+cite$ -- 25
+duplicate$ -- 298
+empty$ -- 591
+format.name$ -- 80
+if$ -- 1425
 int.to.chr$ -- 0
-int.to.str$ -- 23
-missing$ -- 15
-newline$ -- 128
-num.names$ -- 23
-pop$ -- 71
+int.to.str$ -- 25
+missing$ -- 17
+newline$ -- 138
+num.names$ -- 25
+pop$ -- 78
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 140
+skip$ -- 160
 stack$ -- 0
-substring$ -- 271
-swap$ -- 127
-text.length$ -- 8
+substring$ -- 335
+swap$ -- 144
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 41
-width$ -- 25
-write$ -- 273
+while$ -- 45
+width$ -- 27
+write$ -- 295
