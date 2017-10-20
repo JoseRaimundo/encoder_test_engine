@@ -136,11 +136,34 @@ F.~Bossen.
 \newblock Technical report, JCT-VC, 2013.
 \newblock Disponible: http://phenix.it-sudparis.eu/, Access: 18 January 2017.
 
-\bibitem{Mathias}
-M.~Wien.
-\newblock \enquote{High Efficiency Video Coding: Coding Tools and
-  Specification}.
-\newblock {\em Signals and Communication Technology\/}, 2015.
+\bibitem{itu:99}
+ITU.
+\newblock \enquote{\textsc{International Telecommunication Union: ITU-T}
+  recommendation P.910, subjective video quality assess- ment methods for
+  multimedia applications}.
+\newblock Recommendation, Sep 1999.
+
+\bibitem{estrada:09}
+C.~R.~D. Estrada.
+\newblock \enquote{Avalia\c{c}\~{a}o autom\'{a}tica de qualidade de
+  video-confer\^{e}ncias de alta defini\c{c}\~{a}o}.
+\newblock Technical report, 2009.
+
+\bibitem{regis:12}
+J.~V.~M. Cardoso, A.~C.~S. Mariano, C.~D.~M. Regis and M.~S. Alencar.
+\newblock \enquote{Compara\c{c}\~{a}o das M\'{e}tricas Objetivas de Qualidade
+  de V\'{i}deos Baseadas na Similaridade Estrutural e na Sensibilidade ao
+  Erro}.
+\newblock {\em Revista de Tecnologia da Informa\c{c}\~{a}o e
+  Comunica\c{c}\~{a}o\/}, vol. 1, no. 2, pp. 33--40, Apr 2012.
+
+\bibitem{danilo:15}
+C.~D. de~Miranda~Regis, I.~de~Pontes~Oliveira, J.~V. de~Miranda~Cardoso and
+  M.~S. de~Alencar.
+\newblock \enquote{Design of Objective Video Quality Metrics Using Spatial and
+  Temporal Informations}.
+\newblock {\em IEEE Latin America Transactions\/}, vol. 13, no. 3, pp.
+  790--795, March 2015.
 
 \bibitem{danilo:12}
 J.~V. de~Miranda~Cardoso, A.~C.~S. Mariano, C.~D.~M. Regis and M.~S. Alencar.
@@ -154,6 +177,12 @@ Z.~Wang, L.~Lu and A.~C. Bovik.
   measurement}.
 \newblock In {\em Proceedings. International Conference on Image Processing\/},
   volume~3, pp. III--65--III--68 vol.3, 2002.
+
+\bibitem{Mathias}
+M.~Wien.
+\newblock \enquote{High Efficiency Video Coding: Coding Tools and
+  Specification}.
+\newblock {\em Signals and Communication Technology\/}, 2015.
 
 \bibitem{Wang:16}
 Y.~Wang, X.~Guo, Y.~Lu, X.~Fan and D.~Zhao.

@@ -3,44 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ACM_proc.aux
 The style file: waslon.bst
 Database file #1: sample.bib
-You've used 25 entries,
+Warning--empty institution in itu:99
+Warning--empty institution in estrada:09
+You've used 29 entries,
             2244 wiz_defined-function locations,
-            688 strings with 9339 characters,
-and the built_in function-call counts, 6272 in all, are:
-= -- 543
-> -- 265
+            709 strings with 10235 characters,
+and the built_in function-call counts, 7014 in all, are:
+= -- 605
+> -- 299
 < -- 10
-+ -- 105
-- -- 80
-* -- 439
-:= -- 973
-add.period$ -- 85
-call.type$ -- 25
-change.case$ -- 28
++ -- 119
+- -- 90
+* -- 507
+:= -- 1103
+add.period$ -- 97
+call.type$ -- 29
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 25
-duplicate$ -- 298
-empty$ -- 591
-format.name$ -- 80
-if$ -- 1425
+cite$ -- 31
+duplicate$ -- 326
+empty$ -- 659
+format.name$ -- 90
+if$ -- 1579
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 17
-newline$ -- 138
-num.names$ -- 25
-pop$ -- 78
+int.to.str$ -- 29
+missing$ -- 19
+newline$ -- 158
+num.names$ -- 29
+pop$ -- 86
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 160
+skip$ -- 164
 stack$ -- 0
-substring$ -- 335
-swap$ -- 144
+substring$ -- 371
+swap$ -- 152
 text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 45
-width$ -- 27
-write$ -- 295
+warning$ -- 2
+while$ -- 51
+width$ -- 31
+write$ -- 337
+(There were 2 warnings)

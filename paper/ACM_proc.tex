@@ -109,9 +109,29 @@ These settings specify situations with videos with 8 bits of depth, besides thes
 
 \section{Objective Metrics}
 
+The evaluation of the quality of the videos can be carried out subjectively, that is, from the human evaluation \cite{itu:99}. However, this type of evaluation may be ineffective in detecting small image debris, which is generally difficult to perceive in the human eye, and may be exhaustive in long applications or in the case of real-time evaluation \cite{estrada:09}\cite{regis:12}. However, objective video evaluation techniques work better because they are faster and lower cost and indicate the existence of slight degradations \cite{regis:12}.
+
+In this section, the objective metrics used in this work will be discussed.
+
 \subsection{PSNR Metric}
 
+The Peak Signal to Noise Ratio (PSNR) is among the most used because of the ease of calculation and the low computational cost \cite{danilo:15}. This method expresses the maximum ratio of a signal and the noise of this signal and is constantly used to measure the structural quality of images. For this it is necessary to formulate the mean square error in addition to the digital representation of monochromatic images I and K of size m x n, the MSE is defined by the equation \ref{mse}.
 
+\begin{equation}
+	\centering
+	\label{mse}
+	MSE=\frac{1}{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^{2}
+\end{equation}
+
+In this way, the PSNR is represented by \ref{psnr}, where MAX indicates the maximum possible pixel value in an image.
+
+\begin{equation}
+	\centering
+	\label{psnr}
+	PSNR = 10 \cdot log_{10}(\frac{MAX^{2}_{I}}{MSE}) = 20 \cdot log_{10}(\frac{MAX_{I}}{\sqrt{MSE}})  
+\end{equation}
+
+The higher the ratio of signal power to noise power the better the quality. For example: PSNR values (in decibels) above 42dB correspond to compressions that introduce imperceptible losses to the human eye, which means exceptional quality. We can consider videos with PSNR above 36dB is quite acceptable quality, between 30dB and 36dB we will have a medium quality and below 30dB the quality is already bad.
 
 
 \subsection{SSIM Metric}
@@ -153,7 +173,7 @@ In the equation \ref{ssim},  $\mu_{x}$ represents the average of x,  $\mu_{y}$ r
 \begin{equation}
 	\centering
 	\label{pwssim}
-	PWSSIM(f,h)= \frac{\sum_{d=1}^{D}SSIM_{d}(f,h)*SI_{d}}{\sum_{d=1}^{D}=1^{SI_{d}}}		
+	PWSSIM(f,h)= \frac{\sum_{d=1}^{D}SSIM_{d}(f,h)\cdot SI_{d}}{\sum_{d=1}^{D}SI_{d}}		
 \end{equation}
 
 
