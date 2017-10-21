@@ -1,5 +1,11 @@
-\documentclass{acm_proc_article-sp}
 
+\documentclass[journal]{IEEEtran}
+
+\ifCLASSINFOpdf
+   \usepackage[pdftex]{graphicx}
+\else
+
+\fi
 %encoding
 %--------------------------------------
 \usepackage[utf8]{inputenc}
@@ -7,6 +13,10 @@
 \usepackage{pgfplots}
 \usepackage{subfig}
 % Define o caminho das figuras
+
+\usepackage{nomencl}
+\usepackage{hyphenat}
+\hyphenation{op-tical net-works semi-conduc-tor}
 
 %--------------------------------------
  
@@ -27,53 +37,42 @@
 
 \begin{document}
 
-\title{A Tool for Automated Testing of the HEVC Video Encoder}
+\title{An Automated Testing Environment For The ITU-I/ISO-IEC Reference Video Codecs}
 
-
-\numberofauthors{6}
-\author{
-\alignauthor
-José Raimundo Barbosa\\
-       \affaddr{Grupo de Processamento Digital de Sinais (GPDS)}\\
-       \affaddr{Instituto Federal da  Paraíba}\\
-       \email{j.zmais@gmail.com}
-\alignauthor
-Carlos Danilo Miranda Regis\\
-       \affaddr{Grupo de Processamento Digital de Sinais (GPDS)}\\
-       \affaddr{Instituto Federal da  Paraíba}\\
-       \email{regis.danilo@gmail.com}
-\alignauthor
-Ruan Delgado Gomes\\
-       \affaddr{Laboratório de Computação Embarcada e Distribuída (Laced)}\\
-       \affaddr{Instituto Federal da  Paraíba}\\
-       \email{ruandgomes@gmail.com}
-\and % go to new row
-\alignauthor
-Jean Felipe Fonseca de Oliveira\\
-       \affaddr{Instituto de Estudos Avançados em Comunicações (IECOM)}\\
-       \email{jeanfelipefonseca@gmail.com}
+\author{\IEEEauthorblockN{José Raimundo Barbosa\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}\IEEEauthorrefmark{3}, 
+Jean Felipe Fonseca de Oliveira\IEEEauthorrefmark{5}
+Carlos Danilo Miranda Regis\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
+Ruan Delgado Gomes\IEEEauthorrefmark{1}\IEEEauthorrefmark{3}\\}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Instituto Federal de Educação, Ciência e Tecnologia da Paraíba\\}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Grupo de Processamento de Sinais Digitais\\}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Laboratório de Computação Embarcada e Distribuída\\}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}TPV Technology, São Paulo, Brasil}
+\\E-mail:  jraimundo@lavid.ufpb.br, jeanfelipefonseca@gmail.com, danilo.regis@ifpb.edu.br, ruan.gomes@ifpb.edu.br
 }
+
+
 \maketitle
 \begin{abstract}
 
-H.265/HEVC is the state-of-the-art video codec, focusing in Ultra-High Definition video (UHD) and it is 50\% more efficient in bit-rate compression than its predecessor, the H.264/AVC. However this efficiency requires a high computational cost, which may compromise the use of the encoder in limited machines or in real time applications that use UHD videos. Several studies look for ways to enhance the HEVC encoder and reduce the computational cost. However, to develop optimized versions of the encoder it is necessary to perform tests that can last for hours and usually requires manual collection of coding information.  In this work, a tool to perform automated tests of HEVC encoders  was developed. The tool was implemented in a parallel architecture that allows the execution of several instances of the encoder. It collect the informations and executes objective metrics to evaluate the efficiency of the encoder, the dualty of the encoder video and the encoding time. \textcolor{blue}{This work intends to provide a useful solution to help analyze encoders in long sequences of tests}.
+H.265/HEVC is the state-of-the-art video codec, focusing in Ultra-High Definition video (UHD) and it is 50\% more efficient in bit-rate compression than its predecessor, the H.264/AVC. However this efficiency requires a high computational cost, which may compromise the use of the encoder in limited machines or in real time applications that use UHD videos. Several studies look for ways to enhance the HEVC encoder and reduce the computational cost. However, to develop optimized versions of the encoder it is necessary to perform tests that can last for hours and usually requires manual collection of coding information.  In this work, a tool to perform automated tests of HEVC encoders  was developed. The tool was implemented in a parallel architecture that allows the execution of several instances of the encoder. \textcolor{red}{It collect the informations and executes objective metrics to evaluate the efficiency of the encoder, the dualty of the encoder video and the encoding time. This work intends to provide a useful solution to help analyze encoders in long sequences of tests}.
 
 \end{abstract}
 
-\keywords{Automated testing, HEVC encoder, UHD videos} 
 
 \section{Introduction}
 
-Currently, about three-quarters of annual data traffic on the Internet is assigned to video content, according to Cisco's Visual Networking Index report. In 2014 this consumption was 64\% and in 2020 this value will be about 80\%~\cite{Cisco:16}. One of the contributing factors is the increase in video quality, which makes it possible to explore more and more new experiences on Internet-broadcast television channels, video conferencing and on-demand video transmission services such as YouTube and Netflix, which Already distribute videos in UHD~\cite{cheon:14}.
 
-The UHD videos are highly popular in the market, because high pixel density makes it possible to increase the perception of image details, allowing new experiences for viewers~\cite{cheon:14}. UHD 4K videos, for example, have resolution of 4096x2160 pixels while previous standards such as Full HD have 1920x1080. However, a UHD 4K stream raw, with 24 bits per pixel and 24 frames per second, requires a bandwidth of 5 Gbit/s~\cite{gomes:13}. These settings represent challenges in to storage and transmission of such videos.
-
-To enable the intense and growing traffic of videos on the Internet and to satisfy the bandwidth conditions about the UHD characteristics, it is necessary to develop codecs responsible for digital video signal compression and descompreesion, which reduces the storage space and adjusts data volume to bandwidth limitations~\cite{oliveira:16}\cite{wang:13}. However, when compression occurs several times or in the wrong way, it generates loss of information that can degrade image quality~\cite{netflix:16}. In this context, the challenge arises of developing codecs capable of meeting the demand for UHD videos, and maintaining compression efficiency and image quality.
-
-The ITU-T H.265~\cite{itu:265}, also known as High Efficiency Video Coding (HEVC), is the state-of-the-art codec which focus primarily on new UHD video technologies and presents a compression efficiency 50\% higher than its predecessor. H.264/Advanced Video Coding (AVC)~\cite{Bossen:12}\cite{Hanhart:12}\cite{Sullivan:12}. However, the HEVC has a computational cost up to four times higher than H.264. This is attributed to the processing of the new block structures used in the compression, which increases the computational cost presents challenges for situations that demand real-time video reproduction or in machines with processing limitations~\cite{Yoon:13}\cite{Correa:12}.
+Currently, about three-quarters of annual data traffic on the Internet is assigned to video content, according to Cisco's Visual Networking Index report. In 2014 this consumption was 64\% and in 2020 this value will be about 80\%~\cite{Cisco:16}. One of the contributing factors is the increasing in video quality, which enables new experiences on Internet-broadcast television channels, video conferencing and on-demand video transmission services such as YouTube and Netflix, which already distribute videos in UHD~\cite{cheon:14}.
 
 
-To promote HEVC optimization research, JVC-TV provided the HM reference encoder which features a basic implementation of HEVC that makes possible  to carry out studies on the efficiency of the codec and develop new features and optimizations~\cite{itu:10}. However, evaluating codecs developed based on the HM reference source code is a normally time-consuming process, since each test implies in the execution of several instances of the evaluated codec and the reference codec, which can last for several hours. After execution, is necessary to compare the UHD videos using objective or subjective metrics. With the comparisons it is possible to monitor the efficiency and performance of the new encoders compared to stable versions in the UHD scenario~\cite{netflix:16}.
+The UHD videos are \textcolor{red}{highly popular} in the market, because high pixel improve the perception of image details, allowing new experiences for viewers~\cite{cheon:14}. UHD 4K videos, for example, have resolution of 4096x2160 pixels while previous standards such as Full HD have 1920x1080. However, a raw UHD 4K stream, with 24 bits per pixel and 24 frames per second, requires a bandwidth of 5 Gbit/s~\cite{gomes:13}. These settings represent challenges in the storage and transmission of such videos.
+
+To enable the intense and growing traffic of videos on the Internet and to satisfy the bandwidth conditions related to the UHD characteristics, it is necessary to develop codecs capable of a reducing the storage space and according data volume to bandwidth limitations~\cite{oliveira:16}\cite{wang:13}.  \textcolor{red}{However, when compression occurs several times or in the wrong way, it generates loss of information that can degrade image quality~\cite{netflix:16}}. In this context, the challenge arises of developing codecs capable of meeting the demand for UHD videos, and improving compression efficiency and image quality.
+
+The ITU-T H.265~\cite{itu:265}, also known as High Efficiency Video Coding (HEVC), is the state-of-the-art codec which focus primarily on the newest UHD video technologies and presents a compression efficiency 50\% higher than its predecessor, H.264/Advanced Video Coding (AVC)~\cite{Bossen:12}\cite{Hanhart:12}\cite{Sullivan:12}. However, the encoder has a computational cost up to four times higher than H.264. This is attributed to the processing of the new block structures used in the compression, presenting challenges for situations that demand real-time video reproduction or in machines with processing limited processing power~\cite{Yoon:13}\cite{Correa:12}.
+
+
+To promote HEVC optimization research, JCT-VC provided the HM reference encoder which features a  \textcolor{red}{basic} implementation of HEVC that makes possible  to carry out studies on the efficiency of the codec and develop new features and optimizations~\cite{itu:10}. However, evaluating codecs developed based on the HM reference source code is a normally time-consuming process, since each test implies in the execution of several instances of the evaluated codec and the reference codec, which can last for several hours. After execution, is necessary to compare the UHD videos using objective or subjective metrics. With the comparisons it is possible to monitor the efficiency and performance of the new encoders compared to stable versions in the UHD scenario~\cite{netflix:16}.
 
 This paper describes a tool for automated testing of HM based encoders. The tool was implemented in a parallel architecture in which multiple instances of the encoder are executed simultaneously. To calculate the encoder efficiency and the difference between the codecs the Bjontegaard metric is used, this metric determines the difference of the efficiency of the codecs from the calculation of the mean difference of two curves adjusted by four points~\cite{Bjontegaard:01}, For the formulation of the standardized test cases, the recommendations of JCT-VC were followed~\cite{Bossen:15}. With the tool the comparison between the~\cite{oliveira:16} codec and reference codec~\cite{itu:10} was obtained and reduction of the test time by 86\% in a simple test case was verified, in which one video and one configuration were used, totaling the execution of 8 instances.
 	
