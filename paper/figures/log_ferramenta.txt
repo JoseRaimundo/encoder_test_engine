@@ -1,6 +1,6 @@
------------------------
+----------------------------------------------
 CODEC LOG
------------------------
+----------------------------------------------
 CONF:			/test/config.cfg
 VIDEO:			/test/videos/test.yuv
 Chroma fromat:	/4:2:0
@@ -9,33 +9,38 @@ Width:			3840
 Hight:			2060	
 Frames:			130
 Frame rate:		30
-
-QT:
-PSNR-Y:			22
-PSNR-U:			
-PSNR-V:
-BitRate:
-QT:				27
-PSNR-Y:
-PSNR-U:
-PSNR-V:
-BitRate:
-QT:				32
-PSNR-Y:
-PSNR-U:
-PSNR-V:
-BitRate:
-QT:				37
-PSNR-Y:
-PSNR-U:
-PSNR-V:
-BitRate:
-----------------------
+----------------------------------------------
+		Evaluate	Reference
+QT:		22		22			
+PSNR-Y:		41.12		41.19
+PSNR-U:		47.15		47.2
+PSNR-V:		46.1		46.22
+BitRate:	7871		7704
+QT:		27		27
+PSNR-Y:		40.13		40.2
+PSNR-U:		45.67		45.75
+PSNR-V:		44.1		44.62
+BitRate:	2870		2822
+QT:		32		32
+PSNR-Y:		38.67		38.8
+PSNR-U:		44.25		44.35
+PSNR-V:		43.02		43.1
+BitRate:	1451		1437
+QT:		37		37
+PSNR-Y:		36.85		36.99
+PSNR-U:		43.08		43.21
+PSNR-V:		41.86		41.99
+BitRate:	800		791
+----------------------------------------------
 Test Log
-----------------------
+----------------------------------------------
 Total Time:		12:33:56
-BD-Rate:		
-BD-PSNR:
-PSNR:
-SSIM:
-PW-SSIM:
+BD-Rate:		0.55
+BD-PSNR:		0.0096
+PSNR:			33.748
+SSIM:			49.589
+PW-SSIM:		57.595
+
+
+
+

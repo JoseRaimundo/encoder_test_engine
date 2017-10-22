@@ -7,6 +7,7 @@
 
 \fi
 %encoding
+\usepackage{fancybox}
 %--------------------------------------
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -218,7 +219,6 @@ The alternative proposed in~\cite{msu:16} offers a encoder comparison service, i
 To verify the efficiency it is necessary to perform several tests in which the modified encoder is executed in several coding scenarios, and then the results of each coding are compared with the results of the reference encoder. Each test sequence of an encoder can last for hours, depending on the videos and test settings, which hinders the development stage. The comparison is made between values such as bit rate, PSNR, coding time, and so on. These values are generated automatically by the HM encoder and are saved in log files. However, for their use it is necessary to manually collect in each log file which a repetitive work and can result in errors from human failure. 
 
 The tool developed in this work executes instances of the modified encoder and reference encoder in all required configurations and then automatically collects all the information necessary for the comparison. With the data collected from the log files the calculation of the Bjontegaard \cite{Bjontegaard} metric is performed. The tool architecture can be viewed in Figure \ref{fig:fluxo}. The modular architecture of the tool enables other metrics to make use of the encoding values. To reduce the time of the tests, the tool was implemented in a parallel architecture in which multiple instances of the encoder are executed simultaneously, thus considerably reducing the time of a test.
-
 %%usar a mesma fonte do texto
 \FloatBarrier
 \begin{figure}[!ht]
@@ -236,11 +236,13 @@ To execute the tests, the tool receives the parameters specified in Table \ref{p
 \FloatBarrier
 
 \begin{table}[!ht]
-%\vspace{-4in} 
+
 \centering
 \caption{Parameters for tool execution.}
 \label{parameter_tool}
-\begin{tabular}{|l|l|p{3cm}|l|}
+\renewcommand*{\arraystretch}{1.5}
+\small
+\begin{tabular}{|l|l|p{4cm}|l|}
 \hline
 \textbf{Command} & \textbf{Example}      & \textbf{Description}                                         \\ \hline
 ./CodecTest      & --                    & Tool executable                                                             \\ \hline
@@ -269,7 +271,9 @@ The output file structure of the testing tool presents the key information about
 \begin{figure}[!ht]
 	\centering
 	\caption{File log example.}
+	\fbox{
 	\includegraphics[width=0.4\textwidth]{figures/log.png}
+	}
 	\label{fig:log}
 \end{figure}
 
