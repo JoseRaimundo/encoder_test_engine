@@ -178,6 +178,28 @@ Z.~Wang, L.~Lu and A.~C. Bovik.
 \newblock In {\em Proceedings. International Conference on Image Processing\/},
   volume~3, pp. III--65--III--68 vol.3, 2002.
 
+\bibitem{danilo:15a}
+C.~D. de~Miranda~Regis, I.~de~Pontes~Oliveira, J.~V. de~Miranda~Cardoso and
+  M.~S. de~Alencar.
+\newblock \enquote{Design of Objective Video Quality Metrics Using Spatial and
+  Temporal Informations}.
+\newblock {\em IEEE Latin America Transactions\/}, vol. 13, no. 3, pp.
+  790--795, March 2015.
+
+\bibitem{furnari:15}
+A.~Furnari, G.~M. Farinella, A.~R. Bruna and S.~Battiato.
+\newblock \enquote{Generalized Sobel Filters for gradient estimation of
+  distorted images}.
+\newblock In {\em 2015 IEEE International Conference on Image Processing
+  (ICIP)\/}, pp. 3250--3254, Sept 2015.
+
+\bibitem{jean:15}
+J.~F.~F. de~Oliveira, C.~D.~M. Regis and M.~S. de~Alencar.
+\newblock \enquote{Performance Evaluation of the PWSSIM Metric for HEVC and
+  H.264}.
+\newblock {\em International Conference on Communication, Management and
+  Information Technology\/}, vol. 65, no. 9, pp. 115--124, 2015.
+
 \bibitem{Mathias}
 M.~Wien.
 \newblock \enquote{High Efficiency Video Coding: Coding Tools and

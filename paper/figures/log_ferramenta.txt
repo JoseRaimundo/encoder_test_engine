@@ -1,0 +1,41 @@
+-----------------------
+CODEC LOG
+-----------------------
+CONF:			/test/config.cfg
+VIDEO:			/test/videos/test.yuv
+Chroma fromat:	/4:2:0
+Color depth:	8 (bits per color component)
+Width:			3840
+Hight:			2060	
+Frames:			130
+Frame rate:		30
+
+QT:
+PSNR-Y:			22
+PSNR-U:			
+PSNR-V:
+BitRate:
+QT:				27
+PSNR-Y:
+PSNR-U:
+PSNR-V:
+BitRate:
+QT:				32
+PSNR-Y:
+PSNR-U:
+PSNR-V:
+BitRate:
+QT:				37
+PSNR-Y:
+PSNR-U:
+PSNR-V:
+BitRate:
+----------------------
+Test Log
+----------------------
+Total Time:		12:33:56
+BD-Rate:		
+BD-PSNR:
+PSNR:
+SSIM:
+PW-SSIM:

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.12)  21 OCT 2017 11:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.12)  22 OCT 2017 07:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1058,10 +1058,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 54.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 54.
-
-Underfull \vbox (badness 1776) has occurred while \output is active []
-
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
@@ -1072,13 +1069,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 File: figures/chartbdrate.png Graphic file (type png)
 
 <use figures/chartbdrate.png>
-Package pdftex.def Info: figures/chartbdrate.png used on input line 194.
+Package pdftex.def Info: figures/chartbdrate.png used on input line 201.
 (pdftex.def)             Requested size: 209.63669pt x 163.78384pt.
  [3 <./figures/chartbdrate.png>]
 <figures/fluxo.png, id=29, 253.69781pt x 414.04688pt>
 File: figures/fluxo.png Graphic file (type png)
  <use figures/fluxo.png>
-Package pdftex.def Info: figures/fluxo.png used on input line 220.
+Package pdftex.def Info: figures/fluxo.png used on input line 227.
 (pdftex.def)             Requested size: 209.63669pt x 342.14885pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1087,25 +1084,22 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures/log.png, id=31, 362.35374pt x 682.55pt>
 File: figures/log.png Graphic file (type png)
  <use figures/log.png>
-Package pdftex.def Info: figures/log.png used on input line 266.
+Package pdftex.def Info: figures/log.png used on input line 272.
 (pdftex.def)             Requested size: 209.63669pt x 394.88986pt.
  [4 <./figures/fluxo.png>] <figures/bitrateqp.png, id=36, 642.4pt x 481.8pt>
 File: figures/bitrateqp.png Graphic file (type png)
 
 <use figures/bitrateqp.png>
-Package pdftex.def Info: figures/bitrateqp.png used on input line 282.
+Package pdftex.def Info: figures/bitrateqp.png used on input line 289.
 (pdftex.def)             Requested size: 189.6828pt x 142.26378pt.
 
 <figures/psnrqp.png, id=37, 1027.84pt x 788.9475pt>
 File: figures/psnrqp.png Graphic file (type png)
  <use figures/psnrqp.png>
-Package pdftex.def Info: figures/psnrqp.png used on input line 287.
+Package pdftex.def Info: figures/psnrqp.png used on input line 294.
 (pdftex.def)             Requested size: 185.33257pt x 142.26378pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5 <./figures/log.png> <./figures/bitrateqp.png (PNG copy)> <./figures/psnrqp.
-png (PNG copy)>] (./codec_tool.bbl
+(./codec_tool.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 5--11
 []\T1/ptm/m/n/8 CISCO.  ``Cisco VNI Fo-re-cast and Metho-do-logy, 2015-
  []
@@ -1126,7 +1120,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--11
 l,
  []
 
-
+[5 <./figures/log.png> <./figures/bitrateqp.png (PNG copy)> <./figures/psnrqp.p
+ng (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 43--49
 []\T1/ptm/m/n/8 Z. Li, A. Aa-ron, I. Kat-sa-vou-ni-dis, A. Mo-orthy and
  []
@@ -1176,29 +1171,29 @@ Underfull \hbox (badness 1668) in paragraph at lines 133--138
 po-ni-ble:
  []
 
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 198.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 220.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 194--200
+Underfull \hbox (badness 10000) in paragraph at lines 216--222
 []\T1/ptm/m/n/8 M. G. M. Lab.  ``Vi-deo Co-dec Analy-sis and Tes-ting''.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--200
+Underfull \hbox (badness 10000) in paragraph at lines 216--222
 \T1/ptm/m/n/8 http://compression.ru/video/codec\T1/pcr/m/n/8 _-\T1/ptm/m/n/8 co
 m-pa-ri-son/codec\T1/pcr/m/n/8 _-\T1/ptm/m/n/8 analy-sis.html,
  []
 
 ) [6] (./codec_tool.aux) ) 
 Here is how much of TeX's memory you used:
- 23806 strings out of 494888
- 593394 string characters out of 6179126
- 744721 words of memory out of 5000000
- 26679 multiletter control sequences out of 15000+600000
+ 23808 strings out of 494888
+ 593420 string characters out of 6179126
+ 744720 words of memory out of 5000000
+ 26681 multiletter control sequences out of 15000+600000
  117280 words of font info for 119 fonts, out of 8000000 for 9000
  43 hyphenation exceptions out of 8191
- 62i,10n,77p,1123b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,77p,1123b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8
 r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
@@ -1213,7 +1208,7 @@ crr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on codec_tool.pdf (6 pages, 319292 bytes).
+Output written on codec_tool.pdf (6 pages, 320360 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream
