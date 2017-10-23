@@ -55,7 +55,7 @@
 \maketitle
 \begin{abstract}
 
-H.265/HEVC is the state-of-the-art video codec, focusing in Ultra-High Definition video (UHD) and it is 50\% more efficient in bit-rate compression than its predecessor, the H.264/AVC. However this efficiency requires a high computational cost, which may compromise the use of the encoder in limited machines or in real time applications that use UHD videos. Several studies look for ways to enhance the HEVC encoder and reduce the computational cost. However, to develop optimized versions of the encoder it is necessary to perform tests that can last for hours and usually requires manual collection of coding information.  In this work, a tool to perform automated tests of HEVC encoders  was developed. The tool was implemented in a parallel architecture that allows the execution of several instances of the encoder. \textcolor{red}{It collect the informations and executes objective metrics to evaluate the efficiency of the encoder, the dualty of the encoder video and the encoding time. This work intends to provide a useful solution to help analyze encoders in long sequences of tests}.
+H.265/HEVC is the state-of-the-art video codec, focusing in Ultra-High Definition video (UHD) and it is 50\% more efficient in bit-rate compression than its predecessor, the H.264/AVC. However this efficiency requires a high computational cost, which may compromise the use of the encoder in limited machines or in real time applications that use UHD videos. Several studies look for ways to enhance the HEVC encoder and reduce the computational cost. However, to develop optimized versions of the encoder it is necessary to perform tests that can last for hours and usually requires manual collection of coding information.  In this work, a tool to perform automated tests of HEVC encoders  was developed. The tool was implemented in a parallel architecture that allows the execution of several instances of the encoder. \textcolor{red}{It collect the informations and executes objective metrics to evaluate the efficiency of the encoder, organizes the results and generates reports. This work intends to provide a useful solution to help analyze encoders in long sequences of tests}.
 
 \end{abstract}
 
@@ -63,12 +63,12 @@ H.265/HEVC is the state-of-the-art video codec, focusing in Ultra-High Definitio
 \section{Introduction}
 
 
-Currently, about three-quarters of annual data traffic on the Internet is assigned to video content, according to Cisco's Visual Networking Index report. In 2014 this consumption was 64\% and in 2020 this value will be about 80\%~\cite{Cisco:16}. One of the contributing factors is the increasing in video quality, which enables new experiences on Internet-broadcast television channels, video conferencing and on-demand video transmission services such as YouTube and Netflix, which already distribute videos in UHD~\cite{cheon:14}.
+Currently, about three-quarters of annual data traffic on the Internet is assigned to video content, according to Cisco's Visual Networking Index report. In 2014 this consumption was 64\% and in 2020 this value will be about 80\%~\cite{Cisco:16}. One of the contributing factors is the increasing in video quality, which enables new experiences on Internet-broadcast television channels, video conferencing and on-demand video transmission services such as YouTube, Amazon and Netflix, which already distribute videos in UHD~\cite{cheon:14}.
 
 
-The UHD videos are \textcolor{red}{highly popular} in the market, because high pixel improve the perception of image details, allowing new experiences for viewers~\cite{cheon:14}. UHD 4K videos, for example, have resolution of 4096x2160 pixels while previous standards such as Full HD have 1920x1080. However, a raw UHD 4K stream, with 24 bits per pixel and 24 frames per second, requires a bandwidth of 5 Gbit/s~\cite{gomes:13}. These settings represent challenges in the storage and transmission of such videos.
+\textcolor{red}{The UHD videos have a amount pixel that improve the perception of image details, allowing new experiences for viewers, but also represent challenges to current market~\cite{cheon:14}}. UHD 4K videos, for example, have resolution of 4096x2160 pixels while previous standards such as Full HD have 1920x1080. However, a raw UHD 4K stream, with 24 bits per pixel and 24 frames per second, requires a bandwidth of 5 Gbit/s~\cite{gomes:13}. These settings represent challenges in the storage and transmission of such videos.
 
-To enable the intense and growing traffic of videos on the Internet and to satisfy the bandwidth conditions related to the UHD characteristics, it is necessary to develop codecs capable of a reducing the storage space and according data volume to bandwidth limitations~\cite{oliveira:16}\cite{wang:13}.  \textcolor{red}{However, when compression occurs several times or in the wrong way, it generates loss of information that can degrade image quality~\cite{netflix:16}}. In this context, the challenge arises of developing codecs capable of meeting the demand for UHD videos, and improving compression efficiency and image quality.
+To enable the intense and growing traffic of videos on the Internet and to satisfy the bandwidth conditions related to the UHD characteristics, it is necessary to develop codecs capable of a reducing the storage space and according data volume to bandwidth limitations~\cite{oliveira:16}\cite{wang:13}. In this context, the challenge arises of developing codecs capable of meeting the demand for UHD videos, and improving compression efficiency \textcolor{red}{with the minimum possible loss of quality~\cite{netflix:16}}.
 
 The ITU-T H.265~\cite{itu:265}, also known as High Efficiency Video Coding (HEVC), is the state-of-the-art codec which focus primarily on the newest UHD video technologies and presents a compression efficiency 50\% higher than its predecessor, H.264/Advanced Video Coding (AVC)~\cite{Bossen:12}\cite{Hanhart:12}\cite{Sullivan:12}. However, the encoder has a computational cost up to four times higher than H.264. This is attributed to the processing of the new block structures used in the compression, presenting challenges for situations that demand real-time video reproduction or in machines with processing limited processing power~\cite{Yoon:13}\cite{Correa:12}.
 
@@ -132,7 +132,8 @@ In this way, the PSNR is represented by \ref{psnr}, where MAX indicates the maxi
 \end{equation}
 
 \textcolor{red}{
-The higher the ratio of signal power to noise power the better the quality. For example: PSNR values (in decibels) above 42dB correspond to compressions that introduce imperceptible losses to the human eye, which means exceptional quality. We can consider videos with PSNR above 36dB is quite acceptable quality, between 30dB and 36dB we will have a medium quality and below 30dB the quality is already bad.
+The Equation \ref{psnr} results in a value between 0 and $\infty$. In the literature a range between 0 and 50 is usually estimated, with 0 being the worst case and 50 being the best.
+%The equation N results in a value between 0 and INFINITY. In the literature a range between 0 and 50 is usually estimated, with 0 being the worst case and 50 being the best, but the range of values can be further specified. For example: PSNR values (in decibels dB) above 42dB correspond to compressions that introduce imperceptible losses to the human eye, which means exceptional quality. We can consider videos with PSNR above 36dB is quite acceptable quality, between 30dB and 36dB we will have a medium quality and below 30dB the quality is already bad.
 }
 
 \subsection{SSIM Metric}
@@ -152,7 +153,7 @@ SSIM(x, y) = \frac{(2\mu _{x}\mu _{y} + c _{1})(2\sigma _{xy}+c _{2})}{(\mu_{x}^
 
 
 \textcolor{red}{
-In the Equation \ref{ssim},  $\mu_{x}$ represents the average of x,  $\mu_{y}$ represents the average of y. The variance of x is represented by $\sigma _{x}^{2}$ and the variance of y by $\sigma _{y}^{2}$. The $c_{1}=(k_{1}L)^{2}$, $c_{2}=(k_{2}L)^{2}$ are the variables to stabilize the division with weak, watch $L = 2^{n} - 1$ is the dynamic range of bits and $k_{1}=0.01$ and $k_{2}=0.03$ by default.
+In the Equation \ref{ssim},  $\mu_{x}$ represents the average of x,  $\mu_{y}$ represents the average of y. The variance of x is represented by $\sigma _{x}^{2}$ and the variance of y by $\sigma _{y}^{2}$. The $c_{1}=(k_{1}L)^{2}$, $c_{2}=(k_{2}L)^{2}$ are the variables to stabilize the division, watch $L = 2^{n} - 1$ is the dynamic range of bits and $k_{1}=0.01$ and $k_{2}=0.03$ by default.
 }
 
 
@@ -186,11 +187,9 @@ Where $D$ is the distance of the object, and $f$ is the representation of a 2D v
 
 \subsection{Bjontegaard Metric}
 
-The Bjontegaard metric is considered the state-of-the-art with regards to the evaluation of video coding mechanisms and is one of the most widespread metrics in the current literature~\cite{Bjontegaard:01}\cite{Mathias}. It allows to obtain the values for overall bit rate (BD-Rate) in percent for two different encoding algorithms
-considering the same PSNR or overall video quality difference (BD-PSNR) for two different encoding algorithms considering the same bit rate. %These values are used to evaluate the efficiency of the modified encoders in relation to the HM reference encoder.
+The Bjontegaard metric is considered the state-of-the-art with regards to the evaluation of video coding mechanisms and is one of the most widespread metrics in the current literature~\cite{Bjontegaard:01}\cite{Mathias}. It allows to obtain the values for overall bit rate (BD-Rate) in percent for two different encoding algorithmsconsidering the same PSNR or overall video quality difference (BD-PSNR) for two different encoding algorithms considering the same bit rate. %These values are used to evaluate the efficiency of the modified encoders in relation to the HM reference encoder.
 	
-The BD-PSNR is the measure corresponding to the average difference of Peak Signal-to-Night Ratio (PSNR) in decibels, between two encoders, considering the same bit rate. The BD-Rate value corresponds to the average percentage bit difference for the two encoders. In this work, more attention was given to bit rate and time evaluation.	
-
+The BD-PSNR is the measure corresponding to the average difference of PSNR in decibels, between two encoders, considering the same bit rate. The BD-Rate value corresponds to the average percentage bit difference for the two encoders. In this work, more attention was given to bit rate and time evaluation.	
 
 In~\cite{Mathias}, it is exemplifies the BD-Rate by means of Figure~\ref{fig:chart_barate}, where the curves are further drawn by linear interpolation. For the BD calculations, the rate axis is logarithmized and the rate-distortion curves are interpolated by an advanced interpolation method. The overlapping portions of the rate-distortion curves are used for calculation of the BD values. Depending on the range of overlap of the two curves, the resulting BD measurements get more or less meaningful. Therefore, a careful interpretation of the resulting numbers is required.
 
@@ -211,14 +210,16 @@ In~\cite{Mathias}, it is exemplifies the BD-Rate by means of Figure~\ref{fig:cha
 In the literature it is possible to find several studies related to HEVC optimization techniques. Usually the methodological characteristics used in the development of the new technique as metrics and videos used are presented, besides the obtained results. However the test stage is vaguely mentioned or simply has its description ignored. As it happens in~\cite{oliveira:16}, an alternative is presented that uses machine learning to predict the partitioning of the macroblocks and to avoid the extra processing, and the proposed solution is compared with the HM reference encoder. In~\cite{Wang:16}, a parallel approach is used to accelerate coding by distributing multi-core processor efforts. And in~\cite{wang:13}, it is proposed an optimized partitioning algorithm, which refer to a scenario where the coded videos are processed by metrics and then the results are compared, without the aid of a tool for extraction and calculation.
 
 
-The alternative proposed in~\cite{msu:16} offers a encoder comparison service, in which several configurations are predefined for the tests. For this it is necessary to submit the encoder to one of the paid services offered. Considering the best service, the premium, includes the SSIM, PSNR objective metrics and subjective metrics psycho visual enhancements, also includes the configurations High Speed, Normal and High. Quality, and presets analysis of systhetic motion, distortion in tail area and spatially variable noise. However, this alternative requires payment for more complex tests and also limits testing to a fixed number of configurations and test cases, nor is more current and advanced metrics like BD-Rate and BD-PSNR mentioned. The postponed solution also uses as reference encoders implemented based on X.265, for UHD video tests, this encoder is constantly mentioned in the literature, however the test scenarios proposed by the JVET specify HM encoders, these specifications help to standardize and document studies on the enhancement of the HEVC encoder.
-
+\textcolor{red}{ The alternative proposed in~\cite{msu:16} offers a encoder comparison service, in which several configurations are predefined for the tests. For this it is necessary to submit the encoder to one of the paid or free services offered. Considering the best service, the premium, includes the SSIM, PSNR objective metrics and subjective metrics psycho visual enhancements, also includes the configurations High Speed, Normal and High. Quality, and presets analysis of systhetic motion, distortion in tail area and spatially variable noise. However, this alternative requires payment for more complex tests and also limits testing to a fixed number of configurations and test cases, nor is more current and advanced metrics like BD-Rate and BD-PSNR mentioned. The postponed solution also uses as reference encoders implemented based on X.265, for UHD video tests, this encoder is constantly mentioned in the literature, however the test scenarios proposed by the JVET specify HM encoders, these specifications help to standardize and document studies on the enhancement of the HEVC encoder. Tthe free service offers tests similar to paid, but with the reduced number of videos, metrics and reports.
+}
 
 \section{Tool Description}
 
 To verify the efficiency it is necessary to perform several tests in which the modified encoder is executed in several coding scenarios, and then the results of each coding are compared with the results of the reference encoder. Each test sequence of an encoder can last for hours, depending on the videos and test settings, which hinders the development stage. The comparison is made between values such as bit rate, PSNR, coding time, and so on. These values are generated automatically by the HM encoder and are saved in log files. However, for their use it is necessary to manually collect in each log file which a repetitive work and can result in errors from human failure. 
 
-The tool developed in this work executes instances of the modified encoder and reference encoder in all required configurations and then automatically collects all the information necessary for the comparison. With the data collected from the log files the calculation of the Bjontegaard \cite{Bjontegaard} metric is performed. The tool architecture can be viewed in Figure \ref{fig:fluxo}. The modular architecture of the tool enables other metrics to make use of the encoding values. To reduce the time of the tests, the tool was implemented in a parallel architecture in which multiple instances of the encoder are executed simultaneously, thus considerably reducing the time of a test.
+The tool developed in this work executes instances of the modified encoder and reference encoder in all required configurations and then automatically collects all the information necessary for the comparison. With the data collected from the log files the calculation of the Bjontegaard \cite{Bjontegaard} metric is performed. The tool architecture can be viewed in Figure \ref{fig:fluxo}. 
+
+
 %%usar a mesma fonte do texto
 \FloatBarrier
 \begin{figure}[!ht]
@@ -228,6 +229,8 @@ The tool developed in this work executes instances of the modified encoder and r
 	\label{fig:fluxo}	
 \end{figure}
 \FloatBarrier
+
+The modular architecture of the tool enables other metrics to make use of the encoding values. To reduce the time of the tests, the tool was implemented in a parallel architecture in which multiple instances of the encoder are executed simultaneously, thus considerably reducing the time of a test. For this, is necessary a adequate management is required so that the execution of different threads does not compromise the integrity of the values used to calculate the metrics, time and other information present in the sequence of tests.
 
 To prevent data loss during an unexpectedly stopped execution, a tool log file is generated that saves the current state of the test and makes it possible to return from where it left off. It is also possible to save the data of the tests performed by the encoders, thus avoiding to repeat the process and thus to promote the construction of a database with the results of the tests.
 
@@ -272,7 +275,7 @@ The output file structure of the testing tool presents the key information about
 	\centering
 	\caption{File log example.}
 	\fbox{
-	\includegraphics[width=0.4\textwidth]{figures/log.png}
+	\includegraphics[width=0.38\textwidth]{figures/log.png}
 	}
 	\label{fig:log}
 \end{figure}
@@ -305,11 +308,11 @@ It is also possible to observe the values of Bit Rate per QP used in the test in
 %\pagebreak
 
 \section{Result}
+\textcolor{blue}{
+To validate the tool, a sequence of tests was performed to compare the encoder developed in \cite{oliveira:16} with the reference encoder HM.16. The tests were performed on a computer with processor SPECIFICATIONS. We used the UHD 4K videos available in \cite{sjtu:17}. In total, N frames of X sequences were used, being SEQUENCNAME.
+}
 
-To validate the tool, a sequence of tests was performed to compare the encoder developed in REFERENCIA with the reference encoder HM.16. The tests were performed on a computer with processor SPECIFICATIONS. We used the UHD 4K videos available in REFERENCE. In total, N frames of X sequences were used, being SEQUENCNAME.
-
-
-The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected, but adequate management is required so that the execution of different threads does not compromise the integrity of the values used to calculate the metrics, time and other information present in the sequence of tests.
+The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected.
 
 
 \bibliographystyle{waslon}

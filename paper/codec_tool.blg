@@ -5,45 +5,45 @@ The style file: waslon.bst
 Database file #1: sample.bib
 Warning--empty institution in itu:99
 Warning--empty institution in estrada:09
-You've used 32 entries,
+You've used 33 entries,
             2244 wiz_defined-function locations,
-            722 strings with 10715 characters,
-and the built_in function-call counts, 7928 in all, are:
-= -- 685
-> -- 335
+            726 strings with 10827 characters,
+and the built_in function-call counts, 8060 in all, are:
+= -- 699
+> -- 339
 < -- 11
-+ -- 133
-- -- 101
-* -- 588
-:= -- 1235
-add.period$ -- 106
-call.type$ -- 32
-change.case$ -- 32
++ -- 135
+- -- 102
+* -- 592
+:= -- 1262
+add.period$ -- 110
+call.type$ -- 33
+change.case$ -- 33
 chr.to.int$ -- 0
-cite$ -- 34
-duplicate$ -- 365
-empty$ -- 746
-format.name$ -- 101
-if$ -- 1788
+cite$ -- 35
+duplicate$ -- 371
+empty$ -- 758
+format.name$ -- 102
+if$ -- 1816
 int.to.chr$ -- 0
-int.to.str$ -- 32
+int.to.str$ -- 33
 missing$ -- 22
-newline$ -- 173
-num.names$ -- 32
-pop$ -- 94
+newline$ -- 179
+num.names$ -- 33
+pop$ -- 95
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 185
+skip$ -- 186
 stack$ -- 0
 substring$ -- 449
-swap$ -- 173
+swap$ -- 174
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 58
-width$ -- 34
-write$ -- 370
+while$ -- 59
+width$ -- 35
+write$ -- 383
 (There were 2 warnings)

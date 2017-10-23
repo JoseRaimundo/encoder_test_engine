@@ -225,4 +225,11 @@ G.~Bjontegaard.
 \newblock \enquote{Calculation of Average PSNR Differences Between RD-curves}.
 \newblock {\em ITU - Telecommunications Standardization Sector\/}, 2001.
 
+\bibitem{sjtu:17}
+SJTU.
+\newblock \enquote{SJTU 4K Video Sequences}.
+\newblock Technical report, SJTU, 2013.
+\newblock Disponible: http://medialab.sjtu.edu.cn/web4k/index.html, Access: 8
+  April 2017.
+
 \end{thebibliography}
