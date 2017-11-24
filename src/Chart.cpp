@@ -141,7 +141,7 @@ Chart::Chart(vector<double> psnr_eva, vector<double> rate_eva, vector<double> ps
 }
 
 	
-void Chart::ChartPSNRxGP(){
+void Chart::chartPSNRxGP(){
 	Gnuplot gp;
 
 	std::vector<std::pair<double, double> > xy_pts_A;
@@ -176,7 +176,7 @@ void Chart::ChartPSNRxGP(){
 
 
 
-void Chart::ChartBRxGP(){
+void Chart::chartBRxGP(){
 	Gnuplot gp;
 
 	std::vector<std::pair<double, double> > xy_pts_A;

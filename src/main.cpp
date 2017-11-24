@@ -37,6 +37,6 @@ int main(int argc, char const *argv[]){
 		return 0;
 	}
 	Controller *control = new Controller(argv, argc);
-	control->Execute();
+	control->executeEncodes();
 	return 0;
 }

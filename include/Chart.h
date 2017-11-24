@@ -23,8 +23,8 @@ class Chart{
 		string name_test;
 
 
-		void ChartPSNRxGP();
-		void ChartBRxGP();
+		void chartPSNRxGP();
+		void chartBRxGP();
 		// void ChartPSNRxBR();
 	};
 #endif

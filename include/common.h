@@ -13,3 +13,5 @@
 #include <sys/types.h>
 #include <strings.h>
 #include <string>
+#include "Test.h"
+#include "Video.h"

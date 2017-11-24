@@ -9,7 +9,7 @@ CodecExecutor::CodecExecutor(string command_line){
 CodecExecutor::~CodecExecutor() {
 }
 
-void CodecExecutor::CodecSystemCommand(string command){
+void CodecExecutor::codecSystemCommand(string command){
     system(command.c_str());
 }
 
@@ -20,7 +20,7 @@ void *CodecExecutor::run() {
 	struct timeval start, end;
 	gettimeofday(&start, NULL);
 	
-    CodecSystemCommand(command_line);
+    codecSystemCommand(command_line);
 	gettimeofday(&end, NULL);
 
 	double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 

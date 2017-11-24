@@ -1,40 +1,44 @@
-#include "../include/common.h"
-#include "../include/Controller.h"
-#include "../include/CodecExecutor.h"
-#include "../include/Bjontegaard.h"
 
+#include "../include/Controller.h"
 
 
 Controller::Controller(const char *argv[], int argc){
-    vector<string> command_in;
-    for (int i = 0; i < argc; i++){
-        command_in.push_back(argv[i]);
-    }
-    this->parse         = new Parse(command_in);
-    InitController();
-    this->count_execution  = parse->GetCommandCount();
-    this->thread_qtd       = parse->GetThreadCount();
+    initController(argv, argc);
 }
 
 Controller::~Controller(){
 }
 
-void Controller::InitController(){
-    if(parse->IsBkp()){
-        std::fstream fs("backup/backup.txt");
-        if (fs.is_open()) {
-            string command;
-            while(!fs.eof()){
-                getline(fs,command);
-                this->command_line.push_back(command);
-            }
-        }
-    }else{
-        this->command_line  = parse->GetCommand();
+void Controller::initController(const char *argv[], int argc){
+    vector<string> command_in;
+    for (int i = 0; i < argc; i++){
+        command_in.push_back(argv[i]);
     }
+
+    MountTest mount_test = MountTest(command_in);
+    this->test           = mount_test.getTest();
+
+    //this->parse     = new Parse(command_in);
+
+    this->thread_qtd       = conversorStrToInt(test->getThreadCount());
+    this->count_execution  = test->getCommandCount();
+    this->command_line     = test->getCommandLine();
+    // if(parse->isBkp()){
+    //     std::fstream fs("backup/backup.txt");
+    //     if (fs.is_open()) {
+    //         string command;
+    //         while(!fs.eof()){
+    //             getline(fs,command);
+    //             this->command_line.push_back(command);
+    //         }
+    //     }
+    // }else{
+    //     this->command_line  = parse->getCommand();
+    // }
+    
 }
 
-int Controller::ConversorStrToInt(string str){
+int Controller::conversorStrToInt(string str){
     stringstream convert(str); 
     int temp_nuber;
     if(!(convert >> temp_nuber))
@@ -42,7 +46,7 @@ int Controller::ConversorStrToInt(string str){
     return temp_nuber;
 }
 
-string Controller::ConversorIntToStr(int temp_nuber){
+string Controller::conversorIntToStr(int temp_nuber){
     stringstream convert;
     if(!(convert << temp_nuber))
         return "1";
@@ -50,7 +54,7 @@ string Controller::ConversorIntToStr(int temp_nuber){
 }
 
 
-void Controller::Execute(){
+void Controller::executeEncodes(){
 
     struct timeval start, end;
     gettimeofday(&start, NULL);
@@ -65,6 +69,7 @@ void Controller::Execute(){
         for (int j = 0; j < thread_qtd; j++){
             codec_executor[j] = new CodecExecutor(command_line[i++]);   
             codec_executor[j]->start();         
+
         }
 
         i--;
@@ -78,11 +83,11 @@ void Controller::Execute(){
             count_execution--;  
         }
 
-        ofstream file("backup/backup.txt");
-        for (int j = i+1; j < this->command_line.size(); j++) {
-            file << this->command_line[j] << endl;
-        }
-        file.close();
+        // ofstream file("backup/backup.txt");
+        // for (int j = i+1; j < this->command_line.size(); j++) {
+        //     file << this->command_line[j] << endl;
+        // }
+        // file.close();
     }
 
     gettimeofday(&end, NULL);
@@ -93,25 +98,25 @@ void Controller::Execute(){
     if (!result){
         cout << "File couldn't open" << endl;
     }else{
-        result << "Total time: " + ComputerTime(delta) << endl;
+        result << "Total time: " + computerTime(delta) << endl;
         result.close();
     }   
 
 
 
-    parse->SetLogParameters();
-    ComputerBjontegaard(parse->GetYPSNREva(), parse->GetBitRateEva(), parse->GetYPSNRRef(), parse->GetBitRateRef());
+    //parse->setLogParameters();
+   // computerBjontegaard(parse->getYPSNREva(), parse->getBitRateEva(), parse->getYPSNRRef(), parse->getBitRateRef());
 }
 
 
 
 
-void Controller::ComputerBjontegaard( vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref){
+void Controller::computerBjontegaard( vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref){
 
     Bjontegaard *bjontegaard = new Bjontegaard(psnr_eva, rate_eva, psnr_ref, rate_ref);
     
-    double avg  = bjontegaard->BD_avg();
-    double rate = bjontegaard->BD_rate();
+    double avg  = bjontegaard->bdAvg();
+    double rate = bjontegaard->bdRate();
     
     ofstream result("Result_test.txt", ios::app);
     if (!result){
@@ -123,7 +128,7 @@ void Controller::ComputerBjontegaard( vector<double> psnr_eva, vector<double> ra
 }
 
 
-double Controller::TotalTime(string file_log){
+double Controller::totalTime(string file_log){
     ifstream cod_file;
     cod_file.open(file_log.c_str());
 
@@ -142,7 +147,7 @@ double Controller::TotalTime(string file_log){
     return temp_aux;    
 } 
 
-string Controller::ComputerTime(double t_total){
+string Controller::computerTime(double t_total){
     int d = 0, 
         h = 0, 
         m = 0, 
@@ -166,10 +171,10 @@ string Controller::ComputerTime(double t_total){
         aux = aux % 60;
     }
     s = aux;
-    result_time =  ConversorIntToStr(d) + " : ";
-    result_time += ConversorIntToStr(h) + " : ";
-    result_time += ConversorIntToStr(m) + " : ";
-    result_time += ConversorIntToStr(s);
+    result_time =  conversorIntToStr(d) + " : ";
+    result_time += conversorIntToStr(h) + " : ";
+    result_time += conversorIntToStr(m) + " : ";
+    result_time += conversorIntToStr(s);
     cout << result_time << endl;
     return result_time;
 }

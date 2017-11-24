@@ -12,8 +12,8 @@ class Bjontegaard{
 	public:
 		Bjontegaard(vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref);
 		~Bjontegaard();
-		double BD_avg();
-		double BD_rate();
+		double bdAvg();
+		double bdRate();
 
 	private:
 

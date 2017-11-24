@@ -143,7 +143,7 @@ double Bjontegaard::polyval(double *c_in, int deg, double  x_in) {
 	return result;
 }
 
-double Bjontegaard::BD_rate(){
+double Bjontegaard::bdRate(){
 
     int 	deg = 3;
 
@@ -194,7 +194,7 @@ double Bjontegaard::BD_rate(){
 	return rate;
 }
 
-double Bjontegaard::BD_avg(){
+double Bjontegaard::bdAvg(){
 
     int 	deg = 3;
 	double 	max = 0, min = 0, 

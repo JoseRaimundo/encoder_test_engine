@@ -11,14 +11,20 @@ CFLAGS = -I$(INCDIR)/ \
         #-I../../common/xml/include/\
         #-I../common/include/\
 
-CFLAGS += -g -ggdb -fPIC -lboost_iostreams -lboost_system -lboost_filesystem
+CFLAGS += -g -ggdb -fPIC
+
+## -lboost_iostreams 
+###-lboost_system -lboost_filesystem
 
 LDFLAGS = \
 	-L/usr/local/lib\
 
 SOURCES = \
+	Video.cpp\
+	Test.cpp\
+	MountTest.cpp\
+	LogFile.cpp\
 	Bjontegaard.cpp\
-	Chart.cpp\
 	Parse.cpp\
 	Thread.cpp\
 	CodecExecutor.cpp\

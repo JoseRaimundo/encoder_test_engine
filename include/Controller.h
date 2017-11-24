@@ -2,9 +2,11 @@
 #define Controller_H
 
 
+#include "../include/common.h"
+#include "../include/Parse.h"
 #include "../include/CodecExecutor.h"
 #include "../include/Bjontegaard.h"
-#include "../include/Parse.h"
+#include "../include/MountTest.h"
 #include "common.h"
 
 
@@ -15,9 +17,10 @@ class Controller{
 	public:
 		Controller(const char *argv[], int argc);
 		~Controller();
-		void Execute();
+		void executeEncodes();
 
 	private:
+		Test *test;
 		Parse *parse;
 		vector<string> command_line;
 		int count_execution,
@@ -25,12 +28,12 @@ class Controller{
 
 		bool is_bkp;
 			
-		void ComputerBjontegaard(vector<double> psnr_ref, vector<double> rate_ref, vector<double> psnr_eva, vector<double> rate_eva);
-		void InitController();
-		int 			ConversorStrToInt(string input);
-		string 			ConversorIntToStr(int number);
-		string ComputerTime(double t_total);
-		double TotalTime(string file_log);
+		void 	computerBjontegaard(vector<double> psnr_ref, vector<double> rate_ref, vector<double> psnr_eva, vector<double> rate_eva);
+		void 	initController(const char *argv[], int argc);
+		int 	conversorStrToInt(string input);
+		string 	conversorIntToStr(int number);
+		string 	computerTime(double t_total);
+		double 	totalTime(string file_log);
 		
 };
 #endif
