@@ -1,9 +1,7 @@
 #include "../include/Parse.h"
 
 
-Parse::Parse(string file_path){
-    this->file_path =file_path;
-
+Parse::Parse(){
 }
 
 Parse::~Parse(){

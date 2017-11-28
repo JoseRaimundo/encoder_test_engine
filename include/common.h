@@ -13,5 +13,6 @@
 #include <sys/types.h>
 #include <strings.h>
 #include <string>
-#include "Test.h"
+#include "InputTest.h"
 #include "Video.h"
+#include "LogFile.h"

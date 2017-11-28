@@ -1,14 +1,14 @@
-#ifndef Test_H
-#define Test_H
+#ifndef InputTest_H
+#define InputTest_H
 
 #include "common.h"
 
 using namespace std;
 
-class Test{
+class InputTest{
 
 	public:
-		Test(string mode_flag, 
+		InputTest(string mode_flag, 
 			string codec_eva_path, 
 			string codec_ref_path, 
 			string thread_count, 
@@ -19,16 +19,14 @@ class Test{
 
 			vector<string> cfg_vet,
 	    	vector<string> coeficient_vet,
-	    	vector<Video> videos_vet,        
+	    	vector<Video> 	videos_vet,        
 			vector<string> file_out_ref,
 			vector<string> file_out_eva,
 			vector<string> command_line
 		);
 
-		~Test();
+		~InputTest();
 
-		bool isBkp();
-	
 
 		string getModeFlag();
 		string getCodecEvaPath();
@@ -43,6 +41,7 @@ class Test{
 
 		int getCommandCount();
 		
+		vector<string> getFileOutRef();
 		vector<string> getCommandLine();
 
 

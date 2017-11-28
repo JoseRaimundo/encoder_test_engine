@@ -10,7 +10,7 @@ using namespace std;
 class Parse{
 
 	public:
-		Parse(string file_path);
+		Parse();
 		~Parse();
 		LogFile* getFile();
 

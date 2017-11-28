@@ -6,7 +6,8 @@
 #include "../include/Parse.h"
 #include "../include/CodecExecutor.h"
 #include "../include/Bjontegaard.h"
-#include "../include/MountTest.h"
+#include "../include/MountInputTest.h"
+
 #include "common.h"
 
 
@@ -20,9 +21,11 @@ class Controller{
 		void executeEncodes();
 
 	private:
-		Test *test;
+		InputTest *input_test;
 		Parse *parse;
+		vector<LogFile> file_logs;
 		vector<string> command_line;
+
 		int count_execution,
 			thread_qtd;
 

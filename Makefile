@@ -21,9 +21,9 @@ LDFLAGS = \
 
 SOURCES = \
 	Video.cpp\
-	Test.cpp\
-	MountTest.cpp\
 	LogFile.cpp\
+	InputTest.cpp\
+	MountInputTest.cpp\
 	Bjontegaard.cpp\
 	Parse.cpp\
 	Thread.cpp\

@@ -12,10 +12,10 @@ class LogFile{
 		LogFile(double 	y_psnr, double u_pnsr, double v_psnr, double bit_rate, double total_time);
 		~LogFile();
 	
-		// double getYPSNR();
-		// double getUPSNR();
-		// double getVPSNR();
-		// double getBitRate();
+		double getYPSNR();
+		double getUPSNR();
+		double getVPSNR();
+		double getBitRate();
 
 	private:
 

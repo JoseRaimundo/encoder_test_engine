@@ -1,7 +1,7 @@
-#include "../include/Test.h"
+#include "../include/InputTest.h"
 
 
-Test::Test(	string mode_flag, string codec_eva_path, string codec_ref_path, string thread_count, 
+InputTest::InputTest(	string mode_flag, string codec_eva_path, string codec_ref_path, string thread_count, 
 			string frame_rate,	string total_frames, string cfg_count, string out_log_path,
 			vector<string> cfg_vet, vector<string> coeficient_vet, vector<Video> videos_vet,        
 			vector<string> file_out_ref, vector<string> file_out_eva, vector<string> command_line){
@@ -25,96 +25,104 @@ Test::Test(	string mode_flag, string codec_eva_path, string codec_ref_path, stri
 }
 
 
-Test::~Test() {
+InputTest::~InputTest() {
 }
 
 
+// vector<string> InputTest::getFileOutRef() {
+// 	return this->file_out_ref;
+// }
 
-int Test::getCommandCount() {
+vector<string> InputTest::getFileOutEva() {
+	return this->file_out_eva;
+}
+
+
+int InputTest::getCommandCount() {
 	return this->command_line.size(); 
 }
 
 
-void Test::setModeFlag(string mode_flag) {
+void InputTest::setModeFlag(string mode_flag) {
 	this->mode_flag = mode_flag; 
 }
 
-string Test::getModeFlag() {
+string InputTest::getModeFlag() {
 	return this->mode_flag; 
 }
 
-void Test::setCodecEvaPath(string codec_eva_path) {
+void InputTest::setCodecEvaPath(string codec_eva_path) {
 	this->codec_eva_path = codec_eva_path;
 }
 
-string Test::getCodecEvaPath() {
+string InputTest::getCodecEvaPath() {
 	return this->codec_eva_path; 
 }
 
-void Test::setCodecRefPath(string codec_ref_path) {
+void InputTest::setCodecRefPath(string codec_ref_path) {
 	this->codec_ref_path = codec_ref_path;
 }
 
-string Test::getCodecRefPath() {
+string InputTest::getCodecRefPath() {
 	return this->codec_ref_path; 
 }
 
-void Test::setThreadCount(string thread_count) {
+void InputTest::setThreadCount(string thread_count) {
 	this->thread_count = thread_count;
 }
 
-string Test::getThreadCount() {
+string InputTest::getThreadCount() {
 	return this->thread_count; 
 }
 
-void Test::setFrameRate(string frame_rate) {
+void InputTest::setFrameRate(string frame_rate) {
 	this->frame_rate = frame_rate;
 }
 
-string Test::getFrameRate() {
+string InputTest::getFrameRate() {
 	return this->frame_rate; 
 }
 
-void Test::setTotalFrames(string total_frames) {
+void InputTest::setTotalFrames(string total_frames) {
 	this->total_frames = total_frames;
 }
 
-string Test::getTotalFrames() {
+string InputTest::getTotalFrames() {
 	return this->total_frames; 
 }
 
-void Test::setCfgCount(string cfg_count) {
+void InputTest::setCfgCount(string cfg_count) {
 	this->cfg_count = cfg_count;
 }
 
-string Test::getCfgCount() {
+string InputTest::getCfgCount() {
 	return this->cfg_count; 
 }
 
-void Test::setVideoCount(string video_count) {
+void InputTest::setVideoCount(string video_count) {
 	this->video_count = video_count;
 }
 
-string Test::getVideoCount() {
+string InputTest::getVideoCount() {
 	return this->video_count; 
 }
 
-void Test::setOutVideoPath(string out_video_path) {
+void InputTest::setOutVideoPath(string out_video_path) {
 	this->out_video_path = out_video_path;
 }
 
-string Test::getOutVideoPath() {
+string InputTest::getOutVideoPath() {
 	return this->out_video_path; 
 }
 
-void Test::setOutLogPath(string out_log_path) {
+void InputTest::setOutLogPath(string out_log_path) {
 	this->out_log_path = out_log_path;
 }
 
-string Test::getOutLogPath() {
+string InputTest::getOutLogPath() {
 	return this->out_log_path; 
 }
 
-vector<string> Test::getCommandLine() {
+vector<string> InputTest::getCommandLine() {
 	return this->command_line; 
 }

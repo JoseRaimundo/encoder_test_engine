@@ -1,20 +1,20 @@
-#ifndef MountTest_H
-#define MountTest_H
+#ifndef MountInputTest_H
+#define MountInputTest_H
 
 #include "common.h"
 
 
 using namespace std;
 
-class MountTest{
+class MountInputTest{
 
 	public:
-		MountTest(vector<string> command_line);
-		Test* getTest();
-		~MountTest();
+		MountInputTest(vector<string> command_line);
+		InputTest* getTest();
+		~MountInputTest();
 
 	private:
-		void 	mountTest(vector<string> command_line);
+		void 	mountInputTest(vector<string> command_line);
 		void  	mountBaseTest(vector<string> command_line);
 		void  	mountCfgFile(vector<string> command_line);
 		void  	mountVideos(vector<string> command_line);
@@ -26,7 +26,7 @@ class MountTest{
 
 
 
-		Test *test;
+		InputTest *input_test;
 
 		vector<string> command_line;
 		vector<string> 	cfgs;

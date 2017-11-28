@@ -1,17 +1,17 @@
-#include "../include/MountTest.h"
+#include "../include/MountInputTest.h"
 
 
-MountTest::MountTest(vector<string> command_line){
+MountInputTest::MountInputTest(vector<string> command_line){
 	this->command_line = command_line;
-    mountTest(this->command_line);
     //setar valores default
+    mountInputTest(this->command_line);
 }
 
-MountTest::~MountTest(){
+MountInputTest::~MountInputTest(){
 }
 
 
-void MountTest::mountTest(vector<string> command_line){
+void MountInputTest::mountInputTest(vector<string> command_line){
     mountBaseTest(command_line);
     mountCfgFile(command_line);
     mountVideos(command_line);
@@ -20,7 +20,7 @@ void MountTest::mountTest(vector<string> command_line){
     mountFullCommands();
 
 
-    this->test = new Test(
+    this->input_test = new InputTest(
                     mode, 
     				enc_eva, 
     				enc_ref, 
@@ -38,12 +38,21 @@ void MountTest::mountTest(vector<string> command_line){
     				);
 }
 
-Test* MountTest::getTest(){
-    return this->test;
+InputTest* MountInputTest::getTest(){
+    return this->input_test;
 }
 
 
-void MountTest::mountBaseTest(vector<string> command_line){
+void MountInputTest::mountBaseTest(vector<string> command_line){
+    //test values
+    this->frame_rate    = "30";
+    this->total_frames  = "130";
+    this->mode = "1";
+    this->enc_eva = "test/codec/eva/TAppEncoderStatic";
+    this->enc_ref = "test/codec/ref/TAppEncoderStatic";
+    this->out_video = "test/videosout/";
+    this->threads = "1";
+
     for (int i = 1; i < command_line.size(); i++) {
         string temp_string = command_line[i-1];
         if(temp_string.compare("-mod") == 0){
@@ -69,7 +78,7 @@ void MountTest::mountBaseTest(vector<string> command_line){
 }
 
 
-void MountTest::mountCfgFile(vector<string> command_line){
+void MountInputTest::mountCfgFile(vector<string> command_line){
 	for (int i = 1; i < command_line.size(); i++) {
 	    string temp_string = command_line[i-1];
 	    if (temp_string.compare("-cfg") == 0){
@@ -80,18 +89,20 @@ void MountTest::mountCfgFile(vector<string> command_line){
             break;
         }
 	}
-	//verifica se é null
-	//passa para o test
+    //test value
+    if (this->cfgs.size() == 0) {
+        this->cfgs.push_back("test/cfg/config.cfg");
+    }
 }
 
 
-void MountTest:: mountVideos(vector<string> command_line){
-    //default values
-	string 	width,
-			height,
-			video_subsampling = "4:2:0",
-			frames = "300",
-			bit_depth = "8";
+void MountInputTest:: mountVideos(vector<string> command_line){
+    //test values
+	string 	width              = "352",
+			height             = "288",
+			video_subsampling  = "4:2:0",
+			frames             = "300",
+			bit_depth          = "8";
 
 	for (int i = 1; i < command_line.size(); i++) {
         string temp_string = command_line[i-1];
@@ -116,10 +127,12 @@ void MountTest:: mountVideos(vector<string> command_line){
             break;
         }
     }
-    //verifica se é null
+    if (this->videos.size() == 0) {
+        this->videos.push_back(Video("video_test", "test/videos/video.yuv", width, height, video_subsampling, frames, bit_depth));
+    }
 }
 
-void MountTest:: mountQp(vector<string> command_line){
+void MountInputTest:: mountQp(vector<string> command_line){
 	for (int i = 1; i < command_line.size(); i++) {
 	    string temp_string = command_line[i-1];
 	    if (temp_string.compare("-qp") == 0){
@@ -130,11 +143,17 @@ void MountTest:: mountQp(vector<string> command_line){
             break;
         }      
 	}
-	//verifica se é null
+    //test values
+	if (this->qps.size() ==0){
+         this->qps.push_back("22");
+         this->qps.push_back("27");
+         this->qps.push_back("32");
+         this->qps.push_back("37");
+    }
 }
 
 
-int MountTest::conversorStrToInt(string str){
+int MountInputTest::conversorStrToInt(string str){
     stringstream convert(str); 
     int temp_nuber;
     if(!(convert >> temp_nuber))
@@ -143,7 +162,7 @@ int MountTest::conversorStrToInt(string str){
 }
 
 
-string MountTest::removeInvalidChar(string text){
+string MountInputTest::removeInvalidChar(string text){
     string result = "";
     char temp;
     for (int i = 0; i < text.size(); i++){
@@ -157,7 +176,7 @@ string MountTest::removeInvalidChar(string text){
     return result;
 }
 
-void MountTest:: mountFile(){
+void MountInputTest:: mountFile(){
 	for (int h = 0; h < encoder_path.size(); h++){
 		for (int i = 0; i < cfgs.size(); i++){
 			for (int j = 0; j < videos.size(); j++){
@@ -173,7 +192,7 @@ void MountTest:: mountFile(){
 	}
 }
 
-void MountTest:: mountFullCommands(){
+void MountInputTest:: mountFullCommands(){
 	int out_cont = 0;
 	for (int h = 0; h < encoder_path.size(); h++){
 		for (int i = 0; i < cfgs.size(); i++){

@@ -1,6 +1,6 @@
 
 #include "../include/Controller.h"
-
+//make clean; clear; make; ./bin/CodecTest -mod 1 -thr 2 -eva test/codec/eva/TAppEncoderStatic -ref test/codec/ref/TAppEncoderStatic -vin 1 test/videos/video.yuv -o test/videosout/ -cfg 1 test/cfg/config.cfg
 
 Controller::Controller(const char *argv[], int argc){
     initController(argv, argc);
@@ -15,16 +15,20 @@ void Controller::initController(const char *argv[], int argc){
         command_in.push_back(argv[i]);
     }
 
-    MountTest mount_test = MountTest(command_in);
-    this->test           = mount_test.getTest();
+    MountInputTest mount_input_test = MountInputTest(command_in);
 
-    //this->parse     = new Parse(command_in);
+    //init class
+    this->input_test       = mount_input_test.getTest();
+    this->parse            = new Parse();
+    
+    std::vector<string> v  = input_test->getFileOutEva();;
 
-    this->thread_qtd       = conversorStrToInt(test->getThreadCount());
-    this->count_execution  = test->getCommandCount();
-    this->command_line     = test->getCommandLine();
+    this->count_execution  = input_test->getCommandCount();
+    this->command_line     = input_test->getCommandLine();
+    this->thread_qtd       = conversorStrToInt(input_test->getThreadCount());
     // if(parse->isBkp()){
     //     std::fstream fs("backup/backup.txt");
+
     //     if (fs.is_open()) {
     //         string command;
     //         while(!fs.eof()){
@@ -42,14 +46,14 @@ int Controller::conversorStrToInt(string str){
     stringstream convert(str); 
     int temp_nuber;
     if(!(convert >> temp_nuber))
-        return 1;
+        return 0;
     return temp_nuber;
 }
 
 string Controller::conversorIntToStr(int temp_nuber){
     stringstream convert;
     if(!(convert << temp_nuber))
-        return "1";
+        return "0";
     return convert.str();;
 }
 
@@ -101,6 +105,9 @@ void Controller::executeEncodes(){
         result << "Total time: " + computerTime(delta) << endl;
         result.close();
     }   
+
+
+
 
 
 
