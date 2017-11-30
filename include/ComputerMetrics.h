@@ -1,4 +1,4 @@
-#ifndef Parse_H
+#ifndef ComputerMetrics_H
 #define Parse_H
 
 #include "common.h"

@@ -7,7 +7,7 @@ Parse::Parse(){
 Parse::~Parse(){
 }
 
-int Parse::findInFile(string file_path){
+LogFile Parse::parseLog(string file_path){
     double  y_psnr,
             u_pnsr,
             v_psnr;
@@ -16,6 +16,8 @@ int Parse::findInFile(string file_path){
 
     double total_time;
 
+    double total_frames;
+
     ifstream cod_file;
     string temp_string;
     bool chave = true;
@@ -23,8 +25,9 @@ int Parse::findInFile(string file_path){
 
     //set evaluated codec log
     if(!cod_file.is_open()){
-            cout << "Erro eva, arquivo não encontrado!" << endl;
-            return 0;
+
+            cout << "Error, file not found: " << file_path << endl;
+            //return NULL;
     }
     while(!cod_file.eof()){
         cod_file >> temp_string;
@@ -49,12 +52,5 @@ int Parse::findInFile(string file_path){
             break;
         }
     }
-    this->log_file = new LogFile( y_psnr, u_pnsr, v_psnr, bit_rate, total_time);    
-    return 1;
+    return LogFile( y_psnr, u_pnsr, v_psnr, bit_rate, total_time);  
 }
-
-
-LogFile* Parse::getFile(){
-    return this->log_file;
-}
-

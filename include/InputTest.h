@@ -9,20 +9,18 @@ class InputTest{
 
 	public:
 		InputTest(string mode_flag, 
-			string codec_eva_path, 
-			string codec_ref_path, 
+			string encoder_eva, 
+			string encoder_ref, 
+			string decoder, 
 			string thread_count, 
 			string frame_rate,
 			string total_frames, 
 			string out_video_path,
 			string out_log_path,
-
+			vector<string> qp_vet,
 			vector<string> cfg_vet,
-	    	vector<string> coeficient_vet,
-	    	vector<Video> 	videos_vet,        
-			vector<string> file_out_ref,
-			vector<string> file_out_eva,
-			vector<string> command_line
+	    	vector<UnitTest> unit_tests,
+	    	vector<Video> 	videos_vet    
 		);
 
 		~InputTest();
@@ -34,15 +32,9 @@ class InputTest{
 		string getThreadCount();
 		string getFrameRate();
 		string getTotalFrames();
-		string getCfgCount();
-		string getVideoCount();
-		string getOutVideoPath();
-		string getOutLogPath();
 
 		int getCommandCount();
 		
-		vector<string> getFileOutRef();
-		vector<string> getCommandLine();
 
 
 		void setModeFlag(string mode_flag);
@@ -56,33 +48,25 @@ class InputTest{
 		void setOutVideoPath(string out_video_path);
 		void setOutLogPath(string out_log_path);
 
+		vector<UnitTest> getTests();
+
 
 
 
 	private:
-		
-		vector<string> command_line;
-		string mode_flag;
-		string codec_eva_path;
-		string codec_ref_path;
-		string thread_count;
+
+		string mode_flag; 
+		string encoder_eva; 
+		string encoder_ref; 
+		string decoder; 
+		string thread_count; 
 		string frame_rate;
-		string total_frames;
-		string cfg_count;
-		string video_count;
+		string total_frames; 
 		string out_video_path;
 		string out_log_path;
-		bool is_bkp;
-
-	
-		int computer_interval;
-		int count_quant;
-		
+		vector<string> qp_vet;
 		vector<string> cfg_vet;
-	    vector<string> coeficient_vet;
-	    vector<Video> videos_vet;        
-		vector<string> file_out_ref;
-		vector<string> file_out_eva;
-
+    	vector<UnitTest> unit_tests;
+    	vector<Video> 	videos_vet;
 };
 #endif

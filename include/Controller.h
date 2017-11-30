@@ -24,17 +24,19 @@ class Controller{
 		InputTest *input_test;
 		Parse *parse;
 		vector<LogFile> file_logs;
+		vector<UnitTest>test_units;
 		vector<string> command_line;
 
 		int count_execution,
+			total_tests,
 			thread_qtd;
 
 		bool is_bkp;
 			
 		void 	computerBjontegaard(vector<double> psnr_ref, vector<double> rate_ref, vector<double> psnr_eva, vector<double> rate_eva);
 		void 	initController(const char *argv[], int argc);
-		int 	conversorStrToInt(string input);
-		string 	conversorIntToStr(int number);
+		int 	converterStrToInt(string input);
+		string 	converterIntToStr(int number);
 		string 	computerTime(double t_total);
 		double 	totalTime(string file_log);
 		

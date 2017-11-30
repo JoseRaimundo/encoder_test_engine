@@ -14,5 +14,11 @@
 #include <strings.h>
 #include <string>
 #include "InputTest.h"
+#include "UnitTest.h"
 #include "Video.h"
 #include "LogFile.h"
+
+
+#define IN_QUEUE 1
+#define RUNNING	 2
+#define COMPLETE 3

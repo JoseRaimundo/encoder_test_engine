@@ -18,14 +18,14 @@ void Controller::initController(const char *argv[], int argc){
     MountInputTest mount_input_test = MountInputTest(command_in);
 
     //init class
-    this->input_test       = mount_input_test.getTest();
-    this->parse            = new Parse();
-    
-    std::vector<string> v  = input_test->getFileOutEva();;
+    this->input_test        = mount_input_test.getTest();
+    this->total_tests       = input_test->getCommandCount();
 
-    this->count_execution  = input_test->getCommandCount();
-    this->command_line     = input_test->getCommandLine();
-    this->thread_qtd       = conversorStrToInt(input_test->getThreadCount());
+    this->test_units        = input_test->getTests();
+    this->thread_qtd        = converterStrToInt(input_test->getThreadCount());
+
+    this->parse             = new Parse();
+
     // if(parse->isBkp()){
     //     std::fstream fs("backup/backup.txt");
 
@@ -42,20 +42,6 @@ void Controller::initController(const char *argv[], int argc){
     
 }
 
-int Controller::conversorStrToInt(string str){
-    stringstream convert(str); 
-    int temp_nuber;
-    if(!(convert >> temp_nuber))
-        return 0;
-    return temp_nuber;
-}
-
-string Controller::conversorIntToStr(int temp_nuber){
-    stringstream convert;
-    if(!(convert << temp_nuber))
-        return "0";
-    return convert.str();;
-}
 
 
 void Controller::executeEncodes(){
@@ -63,15 +49,23 @@ void Controller::executeEncodes(){
     struct timeval start, end;
     gettimeofday(&start, NULL);
 
-    CodecExecutor *codec_executor[command_line.size()];
+    int current_test = 0;
+    count_execution = total_tests;
+    CodecExecutor *codec_executor[total_tests];
 
-    for (int i = 0; i < command_line.size(); i++){
+    for (int i = 0; i < total_tests; i++){
+
         if (count_execution < thread_qtd)   {
             thread_qtd = count_execution;       
         }
     
         for (int j = 0; j < thread_qtd; j++){
-            codec_executor[j] = new CodecExecutor(command_line[i++]);   
+            // if(this->test_units[i].getStatus() == COMPLETE){
+            //     i++;
+            //     continue;
+            // }
+            cout << this->test_units[i].getCommand() << endl;
+            codec_executor[j] = new CodecExecutor(this->test_units[i++].getCommand());   
             codec_executor[j]->start();         
 
         }
@@ -84,14 +78,19 @@ void Controller::executeEncodes(){
 
         for (int j = 0; j < thread_qtd; j++){
             delete codec_executor[j];   
+            
+            //fazer
+            // ofstream file("backup/backup.txt");
+    
+            // file << this->command_line[j] << endl;
+     
+            //     file.close();
+
+            this->file_logs.push_back(parse->parseLog(this->test_units[current_test++].getOutFile()));
+            this->test_units[current_test].setStatus(COMPLETE);
             count_execution--;  
         }
-
-        // ofstream file("backup/backup.txt");
-        // for (int j = i+1; j < this->command_line.size(); j++) {
-        //     file << this->command_line[j] << endl;
-        // }
-        // file.close();
+       
     }
 
     gettimeofday(&end, NULL);
@@ -108,10 +107,6 @@ void Controller::executeEncodes(){
 
 
 
-
-
-
-    //parse->setLogParameters();
    // computerBjontegaard(parse->getYPSNREva(), parse->getBitRateEva(), parse->getYPSNRRef(), parse->getBitRateRef());
 }
 
@@ -178,10 +173,26 @@ string Controller::computerTime(double t_total){
         aux = aux % 60;
     }
     s = aux;
-    result_time =  conversorIntToStr(d) + " : ";
-    result_time += conversorIntToStr(h) + " : ";
-    result_time += conversorIntToStr(m) + " : ";
-    result_time += conversorIntToStr(s);
+    result_time =  converterIntToStr(d) + " : ";
+    result_time += converterIntToStr(h) + " : ";
+    result_time += converterIntToStr(m) + " : ";
+    result_time += converterIntToStr(s);
     cout << result_time << endl;
     return result_time;
+}
+
+
+int Controller::converterStrToInt(string str){
+    stringstream convert(str); 
+    int temp_nuber;
+    if(!(convert >> temp_nuber))
+        return 0;
+    return temp_nuber;
+}
+
+string Controller::converterIntToStr(int temp_nuber){
+    stringstream convert;
+    if(!(convert << temp_nuber))
+        return "0";
+    return convert.str();;
 }

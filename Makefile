@@ -2,7 +2,7 @@
 include Makefile.top
 
 
-MODULE     = CodecTest
+MODULE     = EncoderTest
 
 CFLAGS = -I$(INCDIR)/ \
         -I/usr/local/include/\
@@ -21,6 +21,7 @@ LDFLAGS = \
 
 SOURCES = \
 	Video.cpp\
+	UnitTest.cpp\
 	LogFile.cpp\
 	InputTest.cpp\
 	MountInputTest.cpp\

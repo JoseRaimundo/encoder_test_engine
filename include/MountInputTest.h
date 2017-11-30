@@ -10,8 +10,8 @@ class MountInputTest{
 
 	public:
 		MountInputTest(vector<string> command_line);
-		InputTest* getTest();
 		~MountInputTest();
+		InputTest* getTest();
 
 	private:
 		void 	mountInputTest(vector<string> command_line);
@@ -20,21 +20,26 @@ class MountInputTest{
 		void  	mountVideos(vector<string> command_line);
 		void  	mountQp(vector<string> command_line);
 		int 	conversorStrToInt(string str);
-		void  	mountFullCommands();
+		void  	mountUnitTests();
 		string 	removeInvalidChar(string text);
-		void  mountFile();
+		void  	mountFile();
+
 
 
 
 		InputTest *input_test;
 
+		
 		vector<string> command_line;
 		vector<string> 	cfgs;
 		vector<string> 	qps;
 		vector<string> 	out_files;
+		vector<string> 	out_videos;
 		vector<string> 	encoder_path;
+
 		vector<string> 	full_commands;
 		vector<Video> 	videos;
+		vector<UnitTest> unit_tests;
 
 		string 	enc_eva,
 				enc_ref,
@@ -43,7 +48,8 @@ class MountInputTest{
 				out_log,
 				out_video,
 				total_frames,
-				frame_rate;
+				frame_rate,
+				default_decoder;
 
 
 };

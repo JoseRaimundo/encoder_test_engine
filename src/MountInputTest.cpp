@@ -17,25 +17,24 @@ void MountInputTest::mountInputTest(vector<string> command_line){
     mountVideos(command_line);
     mountQp(command_line);
     mountFile();
-    mountFullCommands();
+    mountUnitTests();
 
 
     this->input_test = new InputTest(
                     mode, 
-    				enc_eva, 
-    				enc_ref, 
-    				threads, 
-    				frame_rate, 
-    				total_frames, 
-    				out_video,	
-    				out_log,
-    				cfgs,
-    				qps,
-    				videos,
-    				out_files,
-    				out_files,
-    				full_commands
-    				);
+                    enc_eva, 
+                    enc_ref,
+                    default_decoder, 
+                    threads, 
+                    frame_rate, 
+                    total_frames, 
+                    out_video,  
+                    out_log,
+                    qps,
+                    cfgs,
+                    unit_tests,
+                    videos
+                    );
 }
 
 InputTest* MountInputTest::getTest(){
@@ -51,6 +50,9 @@ void MountInputTest::mountBaseTest(vector<string> command_line){
     this->enc_eva = "test/codec/eva/TAppEncoderStatic";
     this->enc_ref = "test/codec/ref/TAppEncoderStatic";
     this->out_video = "test/videosout/";
+    this->out_log   = "test/log/";
+
+    this->default_decoder = "test/decoder/TAppDecoderStatic";
     this->threads = "1";
 
     for (int i = 1; i < command_line.size(); i++) {
@@ -61,10 +63,10 @@ void MountInputTest::mountBaseTest(vector<string> command_line){
             this->threads = command_line[i];
         }else if (temp_string.compare("-eva") == 0){
             this->enc_eva = command_line[i];
-            this->encoder_path.push_back(enc_eva);
         }else if (temp_string.compare("-ref") == 0){
             this->enc_ref = command_line[i];
-            this->encoder_path.push_back(enc_ref);
+        }else if (temp_string.compare("-dec") == 0){
+            this->default_decoder = command_line[i];
         }else if (temp_string.compare("-outl") == 0){
             this->out_log = command_line[i];
         }else if (temp_string.compare("-outv") == 0){
@@ -75,6 +77,8 @@ void MountInputTest::mountBaseTest(vector<string> command_line){
             this->frame_rate = command_line[i];
         }
     }
+    this->encoder_path.push_back(enc_ref);
+    this->encoder_path.push_back(enc_eva);
 }
 
 
@@ -177,41 +181,43 @@ string MountInputTest::removeInvalidChar(string text){
 }
 
 void MountInputTest:: mountFile(){
-	for (int h = 0; h < encoder_path.size(); h++){
-		for (int i = 0; i < cfgs.size(); i++){
-			for (int j = 0; j < videos.size(); j++){
+	for (int h = 0; h < cfgs.size(); h++){
+		for (int i = 0; i < videos.size(); i++){
+			for (int j = 0; j < encoder_path.size(); j++){
 				for (int k = 0; k < qps.size(); k++){
-					string command 	= 	removeInvalidChar(encoder_path[h])
-									+	removeInvalidChar(cfgs[i])
-									+	removeInvalidChar(videos[j].getVideoPaht())
+					string command 	= 	removeInvalidChar(encoder_path[j])
+									+	removeInvalidChar(cfgs[h])
+									+	removeInvalidChar(videos[i].getVideoPaht())
 									+	removeInvalidChar(qps[k]);
-					this->out_files.push_back(command);
-				}
+					this->out_files.push_back( this->out_log   + command + ".txt");
+                    this->out_videos.push_back(this->out_video + command + ".yuv");
+ 				}
 			}
 		}
 	}
 }
 
-void MountInputTest:: mountFullCommands(){
+void MountInputTest:: mountUnitTests(){
 	int out_cont = 0;
-	for (int h = 0; h < encoder_path.size(); h++){
-		for (int i = 0; i < cfgs.size(); i++){
-			for (int j = 0; j < qps.size(); j++){
-				for (int k = 0; k < videos.size(); k++){
-					string command = " ./"  	+ this->encoder_path[h]
+	for (int h = 0; h < cfgs.size() ; h++){
+		for (int i = 0; i < videos.size(); i++){
+			for (int j = 0; j < encoder_path.size(); j++){
+				for (int k = 0; k < qps.size(); k++){
+					string command = " ./"  	+ this->encoder_path[j]
 									+ " -f "  	+ this->total_frames
 									+ " -fr "  	+ this->frame_rate
-									+ " -c "  	+ this->cfgs[i] 
-									+ " -q "  	+ this->qps[j] 
-									+ " -wdt "	+ this->videos[k].getVideoWdt()
-									+ " -hgt "	+ this->videos[k].getVideoHgt()
-								    + " -i "  	+ this->videos[k].getVideoPaht()
-									+ " -o " 	+ this->out_video 
-												+ this->out_files[out_cont] + ".yuv" 
-									+ " >> "	+ this->out_log
-                                    + this->out_files[out_cont] + ".txt";
-					out_cont++;
-                    full_commands.push_back(command);
+									+ " -c "  	+ this->cfgs[h] 
+									+ " -q "  	+ this->qps[k] 
+									+ " -wdt "	+ this->videos[i].getVideoWdt()
+									+ " -hgt "	+ this->videos[i].getVideoHgt()
+								    + " -i "  	+ this->videos[i].getVideoPaht()
+									+ " -o " 	+ this->out_videos[out_cont]
+									+ " >> "	+ this->out_files[out_cont];
+                    this->unit_tests.push_back(UnitTest(command, this->out_files[out_cont], 
+                                                     this->out_videos[out_cont], 
+                                                     this->encoder_path[j],   
+                                                     this->default_decoder));
+                    out_cont++;
 				}
 			}
 		}
