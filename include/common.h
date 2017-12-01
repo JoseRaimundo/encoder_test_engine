@@ -17,8 +17,13 @@
 #include "UnitTest.h"
 #include "Video.h"
 #include "LogFile.h"
+#include "ComputerMetric.h"
+#include "FormatTime.h"
+
+//maximum QP per test (considere Bjontegaard metric)
+#define MAX_QP 4
 
 
-#define IN_QUEUE 1
-#define RUNNING	 2
-#define COMPLETE 3
+//status of test units
+#define IN_QUEUE 0
+#define COMPLETE 1

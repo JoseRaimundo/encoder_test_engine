@@ -16,16 +16,16 @@ InputTest::InputTest(	string mode_flag,
 				    	vector<Video> 	videos_vet ){
 
 		this->mode_flag			= mode_flag; 
-		this->encoder_eva  	= encoder_eva; 
-		this->encoder_ref	= encoder_ref; 
-		this->decoder	= decoder; 
+		this->encoder_eva  		= encoder_eva; 
+		this->encoder_ref		= encoder_ref; 
+		this->decoder			= decoder; 
 		this->thread_count		= thread_count; 
 		this->frame_rate 		= frame_rate; 
 		this->total_frames 		= total_frames; 
 		this->out_video_path	= out_video_path; 
 		this->out_log_path 		= out_log_path; 
 		this->cfg_vet			= cfg_vet;
-		this->qp_vet	= qp_vet;
+		this->qp_vet			= qp_vet;
 		this->unit_tests      	= unit_tests;
 		this->videos_vet      	= videos_vet;
 }

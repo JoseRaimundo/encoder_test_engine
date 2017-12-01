@@ -20,6 +20,7 @@ LDFLAGS = \
 	-L/usr/local/lib\
 
 SOURCES = \
+	Thread.cpp\
 	Video.cpp\
 	UnitTest.cpp\
 	LogFile.cpp\
@@ -27,8 +28,9 @@ SOURCES = \
 	MountInputTest.cpp\
 	Bjontegaard.cpp\
 	Parse.cpp\
-	Thread.cpp\
-	CodecExecutor.cpp\
+	FormatTime.cpp\
+	ComputerMetric.cpp\
+	EncoderExec.cpp\
 	Controller.cpp\
     main.cpp
 

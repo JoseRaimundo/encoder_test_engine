@@ -2,6 +2,8 @@
 #include "../include/Controller.h"
 //make clean; clear; make; ./bin/CodecTest -mod 1 -thr 2 -eva test/codec/eva/TAppEncoderStatic -ref test/codec/ref/TAppEncoderStatic -vin 1 test/videos/video.yuv -o test/videosout/ -cfg 1 test/cfg/config.cfg
 
+string result_file = "result_test.txt";
+
 Controller::Controller(const char *argv[], int argc){
     initController(argv, argc);
 }
@@ -23,8 +25,6 @@ void Controller::initController(const char *argv[], int argc){
 
     this->test_units        = input_test->getTests();
     this->thread_qtd        = converterStrToInt(input_test->getThreadCount());
-
-    this->parse             = new Parse();
 
     // if(parse->isBkp()){
     //     std::fstream fs("backup/backup.txt");
@@ -51,7 +51,7 @@ void Controller::executeEncodes(){
 
     int current_test = 0;
     count_execution = total_tests;
-    CodecExecutor *codec_executor[total_tests];
+    EncoderExec *encoder_exec[total_tests];
 
     for (int i = 0; i < total_tests; i++){
 
@@ -65,19 +65,19 @@ void Controller::executeEncodes(){
             //     continue;
             // }
             cout << this->test_units[i].getCommand() << endl;
-            codec_executor[j] = new CodecExecutor(this->test_units[i++].getCommand());   
-            codec_executor[j]->start();         
+            encoder_exec[j] = new EncoderExec(this->test_units[i++].getCommand());   
+            encoder_exec[j]->start();         
 
         }
 
         i--;
 
         for (int j = 0; j < thread_qtd; j++){
-            codec_executor[j]->join();  
+            encoder_exec[j]->join();  
         }
 
         for (int j = 0; j < thread_qtd; j++){
-            delete codec_executor[j];   
+            delete encoder_exec[j];   
             
             //fazer
             // ofstream file("backup/backup.txt");
@@ -86,31 +86,89 @@ void Controller::executeEncodes(){
      
             //     file.close();
 
-            this->file_logs.push_back(parse->parseLog(this->test_units[current_test++].getOutFile()));
+
+            this->file_logs.push_back(Parse::parseLog(this->test_units[current_test++].getOutFile()));
+
             this->test_units[current_test].setStatus(COMPLETE);
             count_execution--;  
         }
        
     }
 
-    gettimeofday(&end, NULL);
-    double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 
-             end.tv_usec - start.tv_usec) / 1.e6;
-
-    ofstream result("Result_test.txt", ios::app);
-    if (!result){
-        cout << "File couldn't open" << endl;
-    }else{
-        result << "Total time: " + computerTime(delta) << endl;
-        result.close();
-    }   
+    // //se a métrica bjontegaard estiver ativa entra aqui
+    // if (true){
 
 
 
-   // computerBjontegaard(parse->getYPSNREva(), parse->getBitRateEva(), parse->getYPSNRRef(), parse->getBitRateRef());
+    //     vector<double> psnr_eva;
+    //     vector<double> rate_eva;
+    //     vector<double> psnr_ref;
+    //     vector<double> rate_ref;
+
+    //     int block_test = 0;
+
+    //     //take evaluate encoder variables
+    //     for (int i = block_test; i < MAX_QP + block_test; ++i) {
+    //         psnr_eva.push_back(this->file_logs[i++].getOutFile())
+    //     }
+
+    //     block_test += MAX_QP;
+
+    //     for (int i = block_test; i < MAX_QP + block_test; ++i) {
+    //         /* code */
+    //     }
+        
+    // }
+
+    
+
+   // if(true){ //metricas atividas
+
+        // //decoding all videos
+        // ComputerMetric *computer_metric[total_tests];
+        // for (int i = 0; i < total_tests; i++){
+
+        //     int current_test = 0;
+        //     count_execution = total_tests;
+
+        //     if (count_execution < thread_qtd)   {
+        //         thread_qtd = count_execution;       
+        //     }
+        
+        //     for (int j = 0; j < thread_qtd; j++){
+        //         computer_metric[j] = new ComputerMetric(this->test_units[i].getOutVideo(),
+        //                                                 this->test_units[i].getInputVideo(),
+        //                                                 0);   
+        //         computer_metric[j]->start();         
+        //     }
+
+        //     i--;
+
+        //     for (int j = 0; j < thread_qtd; j++){
+        //         computer_metric[j]->join();  
+        //     }
+
+        //     for (int j = 0; j < thread_qtd; j++){
+        //         delete computer_metric[j];   
+        //         count_execution--;  
+        //     }
+        // }  
+
+            // computerBjontegaard(parse->getYPSNREva(), parse->getBitRateEva(), parse->getYPSNRRef(), parse->getBitRateRef());
+
+        gettimeofday(&end, NULL);
+        double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 
+                 end.tv_usec - start.tv_usec) / 1.e6;
+
+        ofstream result(result_file.c_str(), ios::app);
+        if (!result){
+            cout << "File couldn't open" << endl;
+        }else{
+            result << "Total time: " + FormatTime::formatTime(delta) << endl;
+            result.close();
+        } 
+    //}
 }
-
-
 
 
 void Controller::computerBjontegaard( vector<double> psnr_eva, vector<double> rate_eva, vector<double> psnr_ref, vector<double> rate_ref){
@@ -149,37 +207,8 @@ double Controller::totalTime(string file_log){
     return temp_aux;    
 } 
 
-string Controller::computerTime(double t_total){
-    int d = 0, 
-        h = 0, 
-        m = 0, 
-        s = 0,
-        aux = (int) t_total;
 
-    string result_time;
 
-    if (aux >= 86400) {
-        d = aux/86400;
-        aux = aux % 86400;
-    }
-
-    if (aux >= 3600){
-        h = aux/3600;
-        aux = aux % 3600;
-    }
-
-    if(aux >= 60){
-        m = aux/60;
-        aux = aux % 60;
-    }
-    s = aux;
-    result_time =  converterIntToStr(d) + " : ";
-    result_time += converterIntToStr(h) + " : ";
-    result_time += converterIntToStr(m) + " : ";
-    result_time += converterIntToStr(s);
-    cout << result_time << endl;
-    return result_time;
-}
 
 
 int Controller::converterStrToInt(string str){
@@ -188,11 +217,4 @@ int Controller::converterStrToInt(string str){
     if(!(convert >> temp_nuber))
         return 0;
     return temp_nuber;
-}
-
-string Controller::converterIntToStr(int temp_nuber){
-    stringstream convert;
-    if(!(convert << temp_nuber))
-        return "0";
-    return convert.str();;
 }

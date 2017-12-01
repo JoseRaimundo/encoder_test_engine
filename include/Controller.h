@@ -4,7 +4,7 @@
 
 #include "../include/common.h"
 #include "../include/Parse.h"
-#include "../include/CodecExecutor.h"
+#include "../include/EncoderExec.h"
 #include "../include/Bjontegaard.h"
 #include "../include/MountInputTest.h"
 

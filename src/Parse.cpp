@@ -1,11 +1,6 @@
 #include "../include/Parse.h"
 
 
-Parse::Parse(){
-}
-
-Parse::~Parse(){
-}
 
 LogFile Parse::parseLog(string file_path){
     double  y_psnr,

@@ -47,12 +47,12 @@ void MountInputTest::mountBaseTest(vector<string> command_line){
     this->frame_rate    = "30";
     this->total_frames  = "130";
     this->mode = "1";
-    this->enc_eva = "test/codec/eva/TAppEncoderStatic";
-    this->enc_ref = "test/codec/ref/TAppEncoderStatic";
-    this->out_video = "test/videosout/";
+    this->enc_eva = "test/encoder/eva";
+    this->enc_ref = "test/encoder/ref";
+    this->out_video = "test/vout/";
     this->out_log   = "test/log/";
 
-    this->default_decoder = "test/decoder/TAppDecoderStatic";
+    this->default_decoder = "test/decoder/dec";
     this->threads = "1";
 
     for (int i = 1; i < command_line.size(); i++) {
@@ -132,7 +132,7 @@ void MountInputTest:: mountVideos(vector<string> command_line){
         }
     }
     if (this->videos.size() == 0) {
-        this->videos.push_back(Video("video_test", "test/videos/video.yuv", width, height, video_subsampling, frames, bit_depth));
+        this->videos.push_back(Video("video_test", "test/vin/video.yuv", width, height, video_subsampling, frames, bit_depth));
     }
 }
 
@@ -213,7 +213,8 @@ void MountInputTest:: mountUnitTests(){
 								    + " -i "  	+ this->videos[i].getVideoPaht()
 									+ " -o " 	+ this->out_videos[out_cont]
 									+ " >> "	+ this->out_files[out_cont];
-                    this->unit_tests.push_back(UnitTest(command, this->out_files[out_cont], 
+                    this->unit_tests.push_back(UnitTest(command, this->out_files[out_cont],
+                                                     this->videos[i].getVideoPaht() ,
                                                      this->out_videos[out_cont], 
                                                      this->encoder_path[j],   
                                                      this->default_decoder));
