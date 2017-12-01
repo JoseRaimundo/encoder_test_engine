@@ -122,37 +122,38 @@ void Controller::executeEncodes(){
 
     
 
-   // if(true){ //metricas atividas
+   if(true){ //metricas atividas
 
-        // //decoding all videos
-        // ComputerMetric *computer_metric[total_tests];
-        // for (int i = 0; i < total_tests; i++){
+        //decoding all videos
+        ComputerMetric *computer_metric[total_tests];
+        for (int i = 0; i < total_tests; i++){
 
-        //     int current_test = 0;
-        //     count_execution = total_tests;
+            int current_test = 0;
+            count_execution = total_tests;
 
-        //     if (count_execution < thread_qtd)   {
-        //         thread_qtd = count_execution;       
-        //     }
+            if (count_execution < thread_qtd)   {
+                thread_qtd = count_execution;       
+            }
         
-        //     for (int j = 0; j < thread_qtd; j++){
-        //         computer_metric[j] = new ComputerMetric(this->test_units[i].getOutVideo(),
-        //                                                 this->test_units[i].getInputVideo(),
-        //                                                 0);   
-        //         computer_metric[j]->start();         
-        //     }
+            for (int j = 0; j < thread_qtd; j++){
+                computer_metric[j] = new ComputerMetric(this->test_units[i].getOutVideo(),
+                                                        this->test_units[i].getInputVideo(),
+                                                        result_file);   
+                computer_metric[j]->start();         
+            }
 
-        //     i--;
+            i--;
 
-        //     for (int j = 0; j < thread_qtd; j++){
-        //         computer_metric[j]->join();  
-        //     }
+            for (int j = 0; j < thread_qtd; j++){
+                computer_metric[j]->join();  
+            }
 
-        //     for (int j = 0; j < thread_qtd; j++){
-        //         delete computer_metric[j];   
-        //         count_execution--;  
-        //     }
-        // }  
+            for (int j = 0; j < thread_qtd; j++){
+                delete computer_metric[j];   
+                count_execution--;  
+            }
+        }  
+    }
 
             // computerBjontegaard(parse->getYPSNREva(), parse->getBitRateEva(), parse->getYPSNRRef(), parse->getBitRateRef());
 
