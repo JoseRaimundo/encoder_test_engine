@@ -15,7 +15,7 @@ In the directory "codec_test_tool", usu the *make* command for generate the exec
 
 Run the binary program using the *./bin/EncoderTest* and the parameters of the test.
 
-	./bin/EncoderTest -mod 1 -thr 2 -f 300 -fr 30 -eva encoderEva -ref encoderRef -vin 1 video.yuv -vout videosout/ -cfg 1 config.cfg -outl filelog/ -qp 4 22 27 32 37
+	./bin/EncoderTest -mod 1 -thr 2 -f 300 -fr 30 -eva test/encoder/eva -ref test/encoder/ref -vin 1 test/vin/video.yuv -vout test/vout/ -cfg 1 test/cfg/config.cfg -outl test/log/ -qp 4 22 27 32 37
 	 
 Command     | Description												| Default values
 -------- 	| ---														| ---
@@ -24,8 +24,7 @@ Command     | Description												| Default values
 -ref     	| Reference encoder 										| test/encoder/ref
 -dec 	 	| Default decoder (use only to objective metrics) 			| test/decoder/dec
 -vin     	| Number of videos followed by the input video sequences	| 1	test/vin/video.yuv
--outv     	| Output video path 										| test/vin/video.yuv
--outl     	| Output log file path										| test/vout/
+-outv     	| Output video path 										| test/vout/
 -outl     	| Output log file path										| test/log/
 -cfg     	| Number of cfg files followed by the cfg path files 		| 1 test/cfg/config.cfg
 -f     		| Total frames used in test 								| 130

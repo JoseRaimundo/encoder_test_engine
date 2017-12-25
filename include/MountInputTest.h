@@ -38,7 +38,7 @@ class MountInputTest{
 		vector<string> 	encoder_path;
 
 		vector<string> 	full_commands;
-		vector<Video> 	videos;
+		vector<InputVideo> 	videos;
 		vector<UnitTest> unit_tests;
 
 		string 	enc_eva,

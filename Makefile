@@ -21,7 +21,7 @@ LDFLAGS = \
 
 SOURCES = \
 	Thread.cpp\
-	Video.cpp\
+	InputVideo.cpp\
 	UnitTest.cpp\
 	LogFile.cpp\
 	InputTest.cpp\

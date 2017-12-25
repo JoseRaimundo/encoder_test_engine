@@ -15,7 +15,7 @@
 #include <string>
 #include "InputTest.h"
 #include "UnitTest.h"
-#include "Video.h"
+#include "InputVideo.h"
 #include "LogFile.h"
 #include "ComputerMetric.h"
 #include "FormatTime.h"

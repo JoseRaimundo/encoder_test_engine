@@ -20,7 +20,7 @@ class InputTest{
 			vector<string> qp_vet,
 			vector<string> cfg_vet,
 	    	vector<UnitTest> unit_tests,
-	    	vector<Video> 	videos_vet    
+	    	vector<InputVideo> 	videos_vet    
 		);
 
 		~InputTest();
@@ -67,6 +67,6 @@ class InputTest{
 		vector<string> qp_vet;
 		vector<string> cfg_vet;
     	vector<UnitTest> unit_tests;
-    	vector<Video> 	videos_vet;
+    	vector<InputVideo> 	videos_vet;
 };
 #endif

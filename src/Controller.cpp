@@ -1,6 +1,6 @@
 
 #include "../include/Controller.h"
-//make clean; clear; make; ./bin/CodecTest -mod 1 -thr 2 -eva test/codec/eva/TAppEncoderStatic -ref test/codec/ref/TAppEncoderStatic -vin 1 test/videos/video.yuv -o test/videosout/ -cfg 1 test/cfg/config.cfg
+//make clean; clear; make; ./bin/CodecTest -mod 1 -thr 2 -eva test/encoder/eva -ref test/encoder/ref -vin 1 test/vin/video.yuv -o test/vout/ -cfg 1 test/cfg/config.cfg
 
 string result_file = "result_test.txt";
 

@@ -1,16 +1,16 @@
-#ifndef Video_H
-#define Video_H
+#ifndef InputVideo_H
+#define InputVideo_H
 
 #include <string>
 
 
 using namespace std;
 
-class Video{
+class InputVideo{
 
 	public:
-		Video(string video_nome, string video_paht, string video_wdt, string video_hgt, string video_subsampling, string frames, string bit_depth);
-		~Video();
+		InputVideo(string video_nome, string video_paht, string video_wdt, string video_hgt, string video_subsampling, string frames, string bit_depth);
+		~InputVideo();
 		string getVideoNome();
 		string getVideoPaht();
 		string getVideoWdt();

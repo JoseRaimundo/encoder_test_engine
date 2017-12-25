@@ -44,3 +44,52 @@ PW-SSIM:		57.595
 
 
 
+----------------------------------------------
+CODEC LOG
+----------------------------------------------
+CONF:			/test/config.cfg
+VIDEO:			/test/videos/test.yuv
+Chroma fromat:	/4:2:0
+Color depth:	8 (bits per color component)
+Width:			3840
+Hight:			2060	
+Frames:			130
+Frame rate:		30
+----------------------------------------------
+QT: 22		Evaluate	Reference
+PSNR:		33.748		33.748		
+SSIM:		49.589		49.589
+PW-SSIM:	57.595		57.595		
+BitRate:	7871		7704
+Time:		1:33:56		2:33:56
+
+QT: 27		Evaluate	Reference
+PSNR:		33.748		33.748		
+SSIM:		49.589		49.589
+PW-SSIM:	57.595		57.595		
+BitRate:	7871		7704
+Time:		1:33:56		2:33:56
+
+QT: 32		Evaluate	Reference
+PSNR:		33.748		33.748		
+SSIM:		49.589		49.589
+PW-SSIM:	57.595		57.595		
+BitRate:	7871		7704
+Time:		1:33:56		2:33:56
+
+QT: 37		Evaluate	Reference
+PSNR:		33.748		33.748		
+SSIM:		49.589		49.589
+PW-SSIM:	57.595		57.595		
+BitRate:	7871		7704
+Time:		1:33:56		2:33:56
+----------------------------------------------
+Filnal result
+----------------------------------------------
+				Evaluate	Reference
+Total Time:		12:33:56	12:33:56	
+BD-Rate:		0.55		0.55
+BD-PSNR:		0.0096		0.0096
+PSNR (avg):		33.748		33.748
+SSIM (avg):		49.589		49.589
+PW-SSIM (avg):	57.595		57.595

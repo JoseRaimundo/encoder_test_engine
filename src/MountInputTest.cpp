@@ -126,13 +126,13 @@ void MountInputTest:: mountVideos(vector<string> command_line){
         if(temp_string.compare("-vin") == 0){
             int video_count = conversorStrToInt(command_line[i++]);
             for (int j = 0; j < video_count; j++){
-                this->videos.push_back(Video("", command_line[i++], width, height, video_subsampling, frames, bit_depth));
+                this->videos.push_back(InputVideo("", command_line[i++], width, height, video_subsampling, frames, bit_depth));
             }
             break;
         }
     }
     if (this->videos.size() == 0) {
-        this->videos.push_back(Video("video_test", "test/vin/video.yuv", width, height, video_subsampling, frames, bit_depth));
+        this->videos.push_back(InputVideo("video_test", "test/vin/video.yuv", width, height, video_subsampling, frames, bit_depth));
     }
 }
 

@@ -13,7 +13,7 @@ InputTest::InputTest(	string mode_flag,
 						vector<string> qp_vet,
 						vector<string> cfg_vet,
 				    	vector<UnitTest> unit_tests,
-				    	vector<Video> 	videos_vet ){
+				    	vector<InputVideo> 	videos_vet ){
 
 		this->mode_flag			= mode_flag; 
 		this->encoder_eva  		= encoder_eva; 
