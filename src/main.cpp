@@ -2,7 +2,11 @@
 #include "../include/common.h"
 #include "../include/Parse.h"
 
-#include "../include/Controller.h"
+
+#include "../include/ManagerTest.h"
+
+#include "../include/ManagerMetrics.h"
+#include "../include/MountManagerTest.h"
 
 
 using namespace std;
@@ -32,11 +36,49 @@ void usage(){
 }
 
 int main(int argc, char const *argv[]){
+
+	ManagerTest *input_test;
+	ManagerMetrics *manager_metrics;
+
 	if (argc < 3){
 		usage();
 		return 0;
 	}
-	Controller *control = new Controller(argv, argc);
-	control->executeEncodes();
+
+	vector<string> command_input;
+    for (int i = 0; i < argc; i++){
+        command_input.push_back(argv[i]);
+    }
+
+
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
+
+	MountManagerTest mount_input_test = MountManagerTest(command_input);
+ 	input_test = mount_input_test.getTest();
+
+	input_test->executeEncodes();
+
+	manager_metrics = new ManagerMetrics(input_test->getUnitTests());
+
+	manager_metrics->computerMetrics();
+
+
+
+
+
+	//REGISTER TIME
+	gettimeofday(&end, NULL);
+    double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + 
+             end.tv_usec - start.tv_usec) / 1.e6;
+
+    ofstream result("Result_test.txt", ios::app);
+    if (!result){
+        cout << "File couldn't open" << endl;
+    }else{
+        result << "Total time: " + FormatTime::formatTime(delta) << endl;
+        result.close();
+    } 
+
 	return 0;
 }

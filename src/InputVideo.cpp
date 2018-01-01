@@ -1,7 +1,14 @@
 #include "../include/InputVideo.h"
 
 
-InputVideo::InputVideo(string video_nome, string video_paht, string video_wdt, string video_hgt, string video_subsampling, string frames, string bit_depth){
+InputVideo::InputVideo( string video_nome, 
+						string video_paht, 
+						string video_wdt, 
+						string video_hgt, 
+						string video_subsampling, 
+						string frames, 
+						string bit_depth){
+	
 	this->video_nome 		= video_nome; 	
 	this->video_paht 		= video_paht; 	
 	this->video_wdt 		= video_wdt;	

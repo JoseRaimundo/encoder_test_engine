@@ -20,13 +20,13 @@ LogFile Parse::parseLog(string file_path){
 
     //set evaluated codec log
     if(!cod_file.is_open()){
-
             cout << "Error, file not found: " << file_path << endl;
             //return NULL;
     }
+
     while(!cod_file.eof()){
         cod_file >> temp_string;
-        if(temp_string.compare("YUV-PSNR") == 0 || chave){
+        if(temp_string.compare("YUV-PSNR") == 0 && chave){
             cod_file >> temp_string;
             total_frames = atof(temp_string.c_str());
             cod_file >> temp_string;

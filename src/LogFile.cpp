@@ -12,4 +12,19 @@ LogFile::LogFile(double   y_psnr, double u_pnsr, double v_psnr, double bit_rate,
 LogFile::~LogFile(){
 }
 
+double LogFile::getYPSNR(){
+	return y_psnr;
+}
+
+double LogFile::getUPSNR(){
+	return u_pnsr;
+}
+
+double LogFile::getVPSNR(){
+	return v_psnr;
+}
+
+double LogFile::getBitRate(){
+	return bit_rate;
+}
 

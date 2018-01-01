@@ -5,7 +5,7 @@ string converterIntToStr(int temp_nuber){
     stringstream convert;
     if(!(convert << temp_nuber))
         return "0";
-    return convert.str();;
+    return convert.str();
 }
 
 

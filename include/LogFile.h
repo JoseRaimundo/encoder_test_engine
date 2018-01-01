@@ -1,8 +1,6 @@
 #ifndef LogFile_H
 #define LogFile_H
 
-#include "common.h"
-
 
 using namespace std;
 

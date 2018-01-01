@@ -13,11 +13,14 @@
 #include <sys/types.h>
 #include <strings.h>
 #include <string>
-#include "InputTest.h"
+#include <cstdio>
+#include <cmath>
+#include <ctime>
+
+#include "ManagerTest.h"
 #include "UnitTest.h"
 #include "InputVideo.h"
 #include "LogFile.h"
-#include "ComputerMetric.h"
 #include "FormatTime.h"
 
 //maximum QP per test (considere Bjontegaard metric)

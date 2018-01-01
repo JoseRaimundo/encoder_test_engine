@@ -2,8 +2,6 @@
 #define FormatTime_H
 
 #include "common.h"
-#include "../include/LogFile.h"
-
 
 using namespace std;
 
@@ -14,8 +12,6 @@ class FormatTime{
 		static string formatTime(double time);
 	private:
 		FormatTime(){}
-
 		double time;
-
 };
 #endif

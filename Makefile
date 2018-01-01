@@ -20,18 +20,24 @@ LDFLAGS = \
 	-L/usr/local/lib\
 
 SOURCES = \
+	metrics/Image.cpp\
+	metrics/Sobel.cpp\
+	metrics/Video.cpp\
+	metrics/PSNR.cpp\
+	metrics/SSIM.cpp\
+	metrics/PWSSIM.cpp\
+	metrics/Bjontegaard.cpp\
 	Thread.cpp\
 	InputVideo.cpp\
 	UnitTest.cpp\
 	LogFile.cpp\
-	InputTest.cpp\
-	MountInputTest.cpp\
-	Bjontegaard.cpp\
+	ManagerTest.cpp\
+	MountManagerTest.cpp\
 	Parse.cpp\
 	FormatTime.cpp\
-	ComputerMetric.cpp\
 	EncoderExec.cpp\
 	Controller.cpp\
+	ManagerMetrics.cpp\
     main.cpp
 
 
