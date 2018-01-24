@@ -307,11 +307,26 @@ It is also possible to observe the values of Bit Rate per QP used in the test in
 %\pagebreak
 
 \section{Result}
-\textcolor{blue}{
-To validate the tool, a sequence of tests was performed to compare the encoder developed in \cite{oliveira:16} with the reference encoder HM.16. The tests were performed on a computer with processor SPECIFICATIONS. We used the UHD 4K videos available in \cite{sjtu:17}. In total, N frames of X sequences were used, being SEQUENCNAME.
-}
 
-The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected.
+
+To calculate metrics such as PSNR, SSIM among others, it is necessary to execute at least one coding with the modified coder and one of the reference coder, using the same configuration and the same input video, and finally calculate the metrics on the resulting videos . In the case of the metric proposed by Bjontegaard, four executions are required for each encoder, one execution for each QP, totaling eight executions.
+
+
+With the proposed tool, the execution of a simple test case, in which there are eight executions, for each pair of encoder videos with the corresponding QP, the conventional metrics are calculated, and at the end of the eight executions the Bjontegaard metric is calculated. The tool also enables more extensive test case where you can increase the number of QP, number of videos or settings.
+
+
+To validate the tool, the modified version of the HM.16 encoder proposed in \cite{oliveira:16} was evaluated, using the original version of the encoder as reference. The test was performed on a computer with AMD FX-8320 processor (8 cores), 32 GBs of RAM and Ubuntu 16.04 operating system. The 4K sequences used are available in \cite{sjtu:17}, this videos has a frame rate of 30 fps, and 8 bits per color component, in a total of 600 frames.
+
+In a simple test case, the total time spent executing the encoders and calculating the metrics using multi-threaded processing was 10 hours while the same test performed in a conventional scenario, ie running one instance of the encoder at a time, running the metrics independently and collecting data from the log files, was 100 hours.
+
+
+%\textcolor{blue}{
+
+%To validate the tool, a sequence of tests was performed to compare the encoder developed in \cite{oliveira:16} with the reference encoder HM.16. The tests were performed on a computer with processor SPECIFICATIONS. We used the UHD 4K videos available in \cite{sjtu:17}. In total, N frames of X sequences were used, being SEQUENCNAME.
+
+%}
+
+%The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected.
 
 
 \bibliographystyle{waslon}
