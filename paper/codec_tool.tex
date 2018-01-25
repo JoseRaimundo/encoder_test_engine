@@ -224,7 +224,7 @@ The tool developed in this work executes instances of the modified encoder and r
 \begin{figure}[!ht]
 	\centering
 	\caption{Tool architecture.}
-	\includegraphics[width=0.4\textwidth]{figures/fluxo.png}
+	\includegraphics[width=0.47\textwidth]{figures/fluxo.png}
 	\label{fig:fluxo}	
 \end{figure}
 \FloatBarrier
@@ -266,7 +266,7 @@ To execute the tests, the tool receives the parameters specified in Table \ref{p
 \end{table}
 \FloatBarrier
 
-The output file structure of the testing tool presents the key information about the execution of each instance, in addition to the total time values and the values of the metrics. A log file example is shown in Figure \ref{fig:log}.
+To calculate metrics such as PSNR, SSIM among others, it is necessary to execute at least one coding with the modified coder and one of the reference coder, using the same configuration and the same input video, and finally calculate the metrics on the resulting videos . In the case of the metric proposed by Bjontegaard, four executions are required for each encoder, one execution for each QP, totaling eight executions. A execution of a simple test case, in which there are eight executions, for each pair of encoder videos with the corresponding QP, the conventional metrics are calculated, and at the end of the eight executions the Bjontegaard metric is calculated. The tool also enables more extensive test case where you can increase the number of QP, number of videos or settings. The output file structure of the testing tool presents the key information about the execution of each instance, in addition to the total time values and the values of the metrics. A log file example is shown in Figure~\ref{fig:log}.
 
 \FloatBarrier
 
@@ -281,9 +281,9 @@ The output file structure of the testing tool presents the key information about
 
 \FloatBarrier
 
-For more complex tests, the implementation of a distributed version of the tool is in progress, which will allow the execution of more instances of the encoder according to the configuration and quantity available machines. Online services are also being developed, in which researchers and developers can submit the executable program of their encoders and select the configurations so that the tests are performed on a robust server. With this proposal also intends to build a database fed with the data of the tests of the users, this database will contribute to other researchers.
+This type of visualization helps developers to identify the main differences in the final result between their respective encoders and the original version.
 
-It is also possible to observe the values of Bit Rate per QP used in the test in the Figure \ref{bitqp}, and also the PSNR values by QP in the Figure\ref{psnrqp}, these graphs are generated automatically after the tool execution.
+It is also possible to observe the values of Bit Rate per QP used in the test in the Figure~\ref{bitqp}, and also the PSNR values by QP in the Figure~\ref{psnrqp}, these graphs are generated automatically after the tool execution.
 
 \FloatBarrier
 \begin{figure}[!htb]
@@ -301,32 +301,17 @@ It is also possible to observe the values of Bit Rate per QP used in the test in
 \end{figure}
 \FloatBarrier
 
-%---------------------------------------------------------	
-	
-
 %\pagebreak
 
 \section{Result}
 
-
-To calculate metrics such as PSNR, SSIM among others, it is necessary to execute at least one coding with the modified coder and one of the reference coder, using the same configuration and the same input video, and finally calculate the metrics on the resulting videos . In the case of the metric proposed by Bjontegaard, four executions are required for each encoder, one execution for each QP, totaling eight executions.
-
-
-With the proposed tool, the execution of a simple test case, in which there are eight executions, for each pair of encoder videos with the corresponding QP, the conventional metrics are calculated, and at the end of the eight executions the Bjontegaard metric is calculated. The tool also enables more extensive test case where you can increase the number of QP, number of videos or settings.
-
-
 To validate the tool, the modified version of the HM.16 encoder proposed in \cite{oliveira:16} was evaluated, using the original version of the encoder as reference. The test was performed on a computer with AMD FX-8320 processor (8 cores), 32 GBs of RAM and Ubuntu 16.04 operating system. The 4K sequences used are available in \cite{sjtu:17}, this videos has a frame rate of 30 fps, and 8 bits per color component, in a total of 600 frames.
 
-In a simple test case, the total time spent executing the encoders and calculating the metrics using multi-threaded processing was 10 hours while the same test performed in a conventional scenario, ie running one instance of the encoder at a time, running the metrics independently and collecting data from the log files, was 100 hours.
+In a simple test case, the total time spent executing the encoders and calculating the metrics using multi-threaded processing was 8  hours while the same test performed in a conventional scenario, ie running one instance of the encoder at a time, running the metrics independently and collecting data from the log files, was 1 day, 19 hours and 28 minutes, without considering the time for data collection in the log files.
 
+\section{Conclusion}
 
-%\textcolor{blue}{
-
-%To validate the tool, a sequence of tests was performed to compare the encoder developed in \cite{oliveira:16} with the reference encoder HM.16. The tests were performed on a computer with processor SPECIFICATIONS. We used the UHD 4K videos available in \cite{sjtu:17}. In total, N frames of X sequences were used, being SEQUENCNAME.
-
-%}
-
-%The total time spent executing the test sequence using the tool was considerably less than the test performed manually, ie running one encoder or more at a time, calculating the values of the metrics and documenting the results. Because it is an alternative with multi-threaded processing, time reduction is something that is already expected.
+For more complex tests, the implementation of a distributed version of the tool is in progress, which will allow the execution of more instances of the encoder according to the configuration and quantity available machines. Online services are also being developed, in which researchers and developers can submit the executable program of their encoders and select the configurations so that the tests are performed on a robust server. With this proposal also intends to build a database fed with the data of the tests of the users, this database will contribute to other researchers.
 
 
 \bibliographystyle{waslon}
