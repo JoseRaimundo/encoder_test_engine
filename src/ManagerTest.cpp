@@ -41,26 +41,29 @@ void ManagerTest::executeEncodes(){
         for (int j = 0; j < this->thread_qtd; j++){
             cout << this->unit_tests[i].getCommand() << endl;
             encoder_exec[j] = new EncoderExec(this->unit_tests[i++].getCommand());   
-            encoder_exec[j]->start();         
-
+            encoder_exec[j]->start();  
         }
 
         i--;
 
         for (int j = 0; j < this->thread_qtd; j++){
+
             encoder_exec[j]->join();  
+
         }
 
         for (int j = 0; j < this->thread_qtd; j++){
-            delete encoder_exec[j];   
+
+           // delete encoder_exec[j];   
             //fazer
             // ofstream file("backup/backup.txt");
     
             // file << this->command_line[j] << endl;
      
             //     file.close();
-            this->unit_tests[current_test].setStatus(COMPLETE);
+            //this->unit_tests[current_test].setStatus(COMPLETE);
             count_execution--;  
+
         }       
     }
 }

@@ -30,3 +30,7 @@
 //status of test units
 #define IN_QUEUE 0
 #define COMPLETE 1
+
+
+// Maximun frames test 
+#define MAX_FRAMES 130

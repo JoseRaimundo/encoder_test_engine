@@ -1,6 +1,6 @@
 #include "../include/ManagerMetrics.h"
-#define row 352
-#define col 288
+#define row 3840
+#define col 2160
 
 ManagerMetrics::ManagerMetrics(vector<UnitTest> unit_tests){//, 
 	this->unit_tests = unit_tests;
@@ -18,40 +18,54 @@ void ManagerMetrics::computerMetrics(){
 		
 
 		string reference_video 	= unit_tests[i].getInputVideo();
-		int frames = 3;
+		int frames = MAX_FRAMES;
 
-		double 	psnr_res = 0, 
-				ssim_res = 0, 
-				pwssim_res = 0, 
-				bdrate_res = 0, 
-				bd_psnr_res = 0;
+		double 	psnr_eva = 0, 
+				ssim_eva = 0, 
+				pwssim_eva = 0, 
+				bdrate_eva = 0, 
+				bd_psnr_eva = 0;
+
+		double 	psnr_ref = 0, 
+				ssim_ref = 0, 
+				pwssim_ref = 0, 
+				bdrate_ref = 0, 
+				bd_psnr_ref = 0;
 
 		Video reference, encoded, encoded2;
 		PSNR  psnr, psnr2 ;
 		SSIM ssim, ssim2;
 		PWSSIM pwssim, pwssim2;
 		
+
+		//maping video matriz
 		reference.setCoefs( 2, 2, row, col);
-		
 		reference.openFile(reference_video.c_str(), row, col, frames);
 
 		encoded.setCoefs(2,2,row,col);
 		encoded.openFile(unit_tests[i].getOutVideo().c_str(), row, col, frames);
+		encoded2.setCoefs(2,2,row,col);
+		encoded2.openFile(unit_tests[i + MAX_QP].getOutVideo().c_str(), row, col, frames);
 		
 		int numFrames = reference.returnFrames();
 			
+
 		if (true){ 
-			psnr_res = psnr.computePSNR(reference,encoded,row,col);
+			psnr_eva = psnr.computePSNR(reference,encoded,row,col);
+			psnr_ref = psnr.computePSNR(reference,encoded2,row,col);
 		}
 
 		if (true){ 
-			ssim_res = ssim.computeSSIM(reference,encoded,row,col);
+			ssim_eva = ssim.computeSSIM(reference,encoded,row,col);
+			ssim_ref = ssim.computeSSIM(reference,encoded2,row,col);
 		}
 
 		if (true){
-			pwssim_res = pwssim.computePWSSIM(reference,encoded,row,col);
+			pwssim_eva = pwssim.computePWSSIM(reference,encoded,row,col);
+			pwssim_ref = pwssim.computePWSSIM(reference,encoded2,row,col);
 		}
-		
+
+
 		file_eva_logs.push_back(Parse::parseLog(unit_tests[i].getOutFile()));
 		file_ref_logs.push_back(Parse::parseLog(unit_tests[i+MAX_QP].getOutFile()));
 
@@ -60,17 +74,23 @@ void ManagerMetrics::computerMetrics(){
 		if (!result){
 		    cout << "File couldn't open" << endl;
 		}else{
-		    result 	<<"QP:  " << unit_tests[continue_cont++].getQP() 
+		    result 	<<"QP:  " << unit_tests[continue_cont].getQP() 
 		    		<<"		 Evaluate 		Reference"	<< endl
-   				 	<< "PSNR ......: "<< psnr_res << "  		" << 256	<< endl
-   				 	<< "SSIM ......: "<< ssim_res << "  		" << 256	<< endl 
-   				 	<< "PW-SSIM ...: "<< pwssim_res << "  		" << 256	<< endl; 
+   				 	<< "PSNR ......: "<< psnr_eva << "  		" << psnr_ref	<< endl
+   				 	<< "SSIM ......: "<< ssim_eva << "  		" << ssim_ref	<< endl 
+   				 	<< "PW-SSIM ...: "<< pwssim_eva << "  		" << pwssim_ref	<< endl
+   				 	<< "BitRate ...: "<< file_eva_logs[continue_cont].getBitRate() 	<< "  		" << file_ref_logs[continue_cont].getBitRate()	<< endl
+   				 	<< "Time (s)...: "<< file_eva_logs[continue_cont].getTime() 	<< "  		" << file_ref_logs[continue_cont].getTime()	<< endl; 
+   				 	continue_cont++;
+
 		}
 
 		reference.deallocatePixelMap();
 		encoded.deallocatePixelMap();
+		encoded2.deallocatePixelMap();
 		reference.closeFile();
 		encoded.closeFile();
+		encoded2.closeFile();
 
 		if (file_ref_logs.size() == MAX_QP){
 			computerBjontegaard(file_eva_logs, file_ref_logs);

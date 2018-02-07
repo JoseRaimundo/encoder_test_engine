@@ -14,6 +14,7 @@ class LogFile{
 		double getUPSNR();
 		double getVPSNR();
 		double getBitRate();
+		double getTime();
 
 	private:
 

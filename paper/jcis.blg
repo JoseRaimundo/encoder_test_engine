@@ -1,13 +1,13 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: codec_tool.aux
+The top-level auxiliary file: jcis.aux
 The style file: waslon.bst
 Database file #1: sample.bib
 Warning--empty institution in itu:99
 Warning--empty institution in estrada:09
 You've used 33 entries,
             2244 wiz_defined-function locations,
-            726 strings with 10827 characters,
+            726 strings with 10815 characters,
 and the built_in function-call counts, 8060 in all, are:
 = -- 699
 > -- 339

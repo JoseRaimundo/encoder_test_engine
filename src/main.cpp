@@ -59,9 +59,9 @@ int main(int argc, char const *argv[]){
 
 	input_test->executeEncodes();
 
-	manager_metrics = new ManagerMetrics(input_test->getUnitTests());
+	 manager_metrics = new ManagerMetrics(input_test->getUnitTests());
 
-	manager_metrics->computerMetrics();
+	 manager_metrics->computerMetrics();
 
 
 

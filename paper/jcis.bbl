@@ -101,6 +101,14 @@ G.~Bjøntegaard.
   between RD-curves}.
 \newblock In {\em ITU-T VCEG Meeting\/}, 2001.
 
+\bibitem{danilo:15a}
+C.~D. de~Miranda~Regis, I.~de~Pontes~Oliveira, J.~V. de~Miranda~Cardoso and
+  M.~S. de~Alencar.
+\newblock \enquote{Design of Objective Video Quality Metrics Using Spatial and
+  Temporal Informations}.
+\newblock {\em IEEE Latin America Transactions\/}, vol. 13, no. 3, pp.
+  790--795, March 2015.
+
 \bibitem{Bossen:15}
 F.~Bossen, D.~Flynn, K.~Sharman and K.~Sühring.
 \newblock \enquote{HM Software Manual}.
@@ -177,14 +185,6 @@ Z.~Wang, L.~Lu and A.~C. Bovik.
   measurement}.
 \newblock In {\em Proceedings. International Conference on Image Processing\/},
   volume~3, pp. III--65--III--68 vol.3, 2002.
-
-\bibitem{danilo:15a}
-C.~D. de~Miranda~Regis, I.~de~Pontes~Oliveira, J.~V. de~Miranda~Cardoso and
-  M.~S. de~Alencar.
-\newblock \enquote{Design of Objective Video Quality Metrics Using Spatial and
-  Temporal Informations}.
-\newblock {\em IEEE Latin America Transactions\/}, vol. 13, no. 3, pp.
-  790--795, March 2015.
 
 \bibitem{furnari:15}
 A.~Furnari, G.~M. Farinella, A.~R. Bruna and S.~Battiato.

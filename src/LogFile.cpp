@@ -13,18 +13,21 @@ LogFile::~LogFile(){
 }
 
 double LogFile::getYPSNR(){
-	return y_psnr;
+	return this->y_psnr;
 }
 
 double LogFile::getUPSNR(){
-	return u_pnsr;
+	return this->u_pnsr;
 }
 
 double LogFile::getVPSNR(){
-	return v_psnr;
+	return this->v_psnr;
 }
 
 double LogFile::getBitRate(){
-	return bit_rate;
+	return this->bit_rate;
 }
 
+double LogFile::getTime(){
+	return this->total_time;
+}
