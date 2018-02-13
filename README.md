@@ -5,8 +5,25 @@ HEVC ENCODER AUTOMATED TEST
 This work has the objective is help researchers and developers in the test steps of HEVC encoder development process.
 ----------
 
+Require
+--------------------
+To compile correctly, the tool requires the following libraries that can be installed via apt-get.
 
-How use this tool??
+Install the C ++ compiler using the following command
+
+	$sudo apt-get install build-essential
+
+Install the Boots and GNUPlot library, needed to generate the graphics.
+
+	$sudo apt-get install libboost-dev libboost-filesystem-dev gnuplot
+
+Finally, install the Make program, which will do all the work of calling the appropriate compiler for each file, create the necessary directories, unpack the test files, and link each file with its header.
+
+	$sudo apt-get install make
+
+
+
+How use
 --------------------
 
 In the directory "codec_test_tool", usu the *make* command for generate the executable program.
