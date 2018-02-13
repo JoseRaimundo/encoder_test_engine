@@ -57,3 +57,19 @@ Command     | Description												| Default values
 
 
 \*Check the number of CPU cores in your computer!.
+
+
+
+If you use dlib in your research please cite:
+
+Davis E. King. Dlib-ml: A Machine Learning Toolkit. 
+   Journal of Machine Learning Research, 2009
+		
+		@Article{barbosa18,
+			  author = {José Raimundo Barbosa, Jean Felipe Fonseca de Oliveira, Carlos Danilo Miranda Regis, Ruan Delgado Gomes and Marcelo Sampaio de Alencar},
+			  title = {An Automated Testing Environment For The ITU-I/ISO-IEC Reference Video Encoders},
+			  journal = {Journal of Communication and Information Systems},
+			  year = {2018},
+			  volume = {10},
+			  pages = {1755-1758},
+		}
