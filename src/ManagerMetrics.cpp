@@ -132,9 +132,3 @@ void ManagerMetrics::computerBjontegaard(vector<LogFile> file_eva_logs, vector<L
         result <<"Bjontegaard Rate ....: " << rate <<endl;
     }
 }
-
-
-
-// // void ManagerMetrics::computerPSNR(){
-
-// // }
