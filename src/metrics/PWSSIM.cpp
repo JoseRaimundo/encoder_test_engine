@@ -16,7 +16,7 @@ double PWSSIM::computePWSSIM(Video& RefVideo, Video& TestVideo,  int row, int co
 	int coefs[2];
 	Image test;
 	Sobel RefSobel;
-	int noFrames = RefVideo.returnFrames();
+	int noFrames = TestVideo.returnFrames();
 	int noLines= row;
 	int noCols = col;
 

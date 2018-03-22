@@ -32,42 +32,52 @@ void ManagerMetrics::computerMetrics(){
 				bdrate_ref = 0, 
 				bd_psnr_ref = 0;
 
-		Video reference, encoded, encoded2;
+		Video original_video, encoded_ref, encoded_eva;
 		PSNR  psnr, psnr2 ;
 		SSIM ssim, ssim2;
 		PWSSIM pwssim, pwssim2;
 		
 
 		//maping video matriz
-		reference.setCoefs( 2, 2, row, col);
-		reference.openFile(reference_video.c_str(), row, col, frames);
+		original_video.setCoefs( 2, 2, row, col);
+		original_video.openFile(reference_video.c_str(), row, col, frames);
 
-		encoded.setCoefs(2,2,row,col);
-		encoded.openFile(unit_tests[i].getOutVideo().c_str(), row, col, frames);
-		encoded2.setCoefs(2,2,row,col);
-		encoded2.openFile(unit_tests[i + MAX_QP].getOutVideo().c_str(), row, col, frames);
+		encoded_ref.setCoefs(2,2,row,col);
+		encoded_ref.openFile(unit_tests[i].getOutVideo().c_str(), row, col, frames);
+		encoded_eva.setCoefs(2,2,row,col);
+		encoded_eva.openFile(unit_tests[i + MAX_QP].getOutVideo().c_str(), row, col, frames);
 		
-		int numFrames = reference.returnFrames();
+		int numFrames = original_video.returnFrames();
+		cout 	<< reference_video.c_str() << " - " 
+				<< unit_tests[i].getOutVideo().c_str()  << " - " 
+				<< unit_tests[i + MAX_QP].getOutVideo().c_str()<< endl;
+
+		cout 	<< "Saidas: " << original_video.returnFrames()
+				<< " - " << encoded_ref.returnFrames()
+				<< " - " << encoded_eva.returnFrames()<< endl;
 			
 
 		if (true){ 
-			psnr_eva = psnr.computePSNR(reference,encoded,row,col);
-			psnr_ref = psnr.computePSNR(reference,encoded2,row,col);
+			psnr_ref = psnr.computePSNR(original_video,encoded_ref,row,col);
+			psnr_eva = psnr.computePSNR(original_video,encoded_eva,row,col);
+			cout << "PSNR REF - EVA: " << psnr_ref << " - " << psnr_eva << endl;
 		}
 
 		if (true){ 
-			ssim_eva = ssim.computeSSIM(reference,encoded,row,col);
-			ssim_ref = ssim.computeSSIM(reference,encoded2,row,col);
+			ssim_ref = ssim.computeSSIM(original_video,encoded_ref,row,col);
+			ssim_eva = ssim.computeSSIM(original_video,encoded_eva,row,col);
+			cout << "SSIM REF - EVA: " << ssim_ref << " - " << ssim_eva << endl;
 		}
 
 		if (true){
-			pwssim_eva = pwssim.computePWSSIM(reference,encoded,row,col);
-			pwssim_ref = pwssim.computePWSSIM(reference,encoded2,row,col);
+			pwssim_ref = pwssim.computePWSSIM(original_video,encoded_ref,row,col);
+			pwssim_eva = pwssim.computePWSSIM(original_video,encoded_eva,row,col);
+			cout << "PWSSIM REF - EVA: " << pwssim_ref << " - " << pwssim_ref << endl;
 		}
 
 
-		file_eva_logs.push_back(Parse::parseLog(unit_tests[i].getOutFile()));
-		file_ref_logs.push_back(Parse::parseLog(unit_tests[i+MAX_QP].getOutFile()));
+		file_ref_logs.push_back(Parse::parseLog(unit_tests[i].getOutFile()));
+		file_eva_logs.push_back(Parse::parseLog(unit_tests[i+MAX_QP].getOutFile()));
 
 
 		ofstream result("Result_test.txt", ios::app);
@@ -75,7 +85,7 @@ void ManagerMetrics::computerMetrics(){
 		    cout << "File couldn't open" << endl;
 		}else{
 		    result 	<<"QP:  " << unit_tests[continue_cont].getQP() 
-		    		<<"		 Evaluate 		Reference"	<< endl
+		    		<<"	 Evaluate 		Reference"	<< endl
    				 	<< "PSNR ......: "<< psnr_eva << "  		" << psnr_ref	<< endl
    				 	<< "SSIM ......: "<< ssim_eva << "  		" << ssim_ref	<< endl 
    				 	<< "PW-SSIM ...: "<< pwssim_eva << "  		" << pwssim_ref	<< endl
@@ -85,12 +95,12 @@ void ManagerMetrics::computerMetrics(){
 
 		}
 
-		reference.deallocatePixelMap();
-		encoded.deallocatePixelMap();
-		encoded2.deallocatePixelMap();
-		reference.closeFile();
-		encoded.closeFile();
-		encoded2.closeFile();
+		original_video.deallocatePixelMap();
+		encoded_ref.deallocatePixelMap();
+		encoded_eva.deallocatePixelMap();
+		original_video.closeFile();
+		encoded_ref.closeFile();
+		encoded_eva.closeFile();
 
 		if (file_ref_logs.size() == MAX_QP){
 			computerBjontegaard(file_eva_logs, file_ref_logs);
