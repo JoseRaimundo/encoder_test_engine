@@ -47,14 +47,12 @@ void ManagerTest::executeEncodes(){
         i--;
 
         for (int j = 0; j < this->thread_qtd; j++){
-
             encoder_exec[j]->join();  
-
         }
 
         for (int j = 0; j < this->thread_qtd; j++){
-
-           // delete encoder_exec[j];   
+            
+            // delete encoder_exec[j];   
             //fazer
             // ofstream file("backup/backup.txt");
     
@@ -63,7 +61,6 @@ void ManagerTest::executeEncodes(){
             //     file.close();
             //this->unit_tests[current_test].setStatus(COMPLETE);
             count_execution--;  
-
         }       
     }
 }

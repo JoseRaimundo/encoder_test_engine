@@ -58,7 +58,7 @@ int main(int argc, char const *argv[]){
  	input_test = mount_input_test.getTest();
 
 	input_test->executeEncodes();
-
+	cout << "\033[1;32m Full Coding test completed!\033[0m\n";
 	 manager_metrics = new ManagerMetrics(input_test->getUnitTests());
 
 	 manager_metrics->computerMetrics();

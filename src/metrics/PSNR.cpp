@@ -1,19 +1,20 @@
 #include "../../include/PSNR.h"
 
 
-double PSNR::computePSNR(Video &RefVideo, Video &TestVideo,int row,int col)
+double PSNR::computePSNR(Video& RefVideo, Video& TestVideo,int row,int col)
 { 
     t0 = clock();
 
     int i=0,j=0, N=0;
 	int maxPixelValue = 255;
-    int noFrames = RefVideo.returnFrames();
+    int noFrames = TestVideo.returnFrames();
     int noPixels = row*col;
 
     double MSE = 0;
 
     for(N = 0; N < noFrames; N++)
     {
+       // cout << " >>>>>>>>>>> entrou aqui "<<  N  << endl;
 
         RefVideo.readVideo(N,row,col);
 
@@ -40,3 +41,5 @@ double PSNR::getPSNR()
 {
     return PSNR;
 }
+
+

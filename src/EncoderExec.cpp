@@ -14,7 +14,6 @@ void EncoderExec::codecSystemCommand(string command){
 }
 
 
-
 void *EncoderExec::run() {
 
 	struct timeval start, end;
@@ -27,6 +26,7 @@ void *EncoderExec::run() {
 	         end.tv_usec - start.tv_usec) / 1.e6;
 
 	ofstream result("Time_per_test.txt", ios::app);
+	cout << "\033[1;32m Coding successfully completed!\033[0m\n";
 	if (!result){
 		cout << "File couldn't open" << endl;
 	}else{
