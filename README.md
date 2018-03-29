@@ -62,9 +62,22 @@ Command     | Description												| Default values
 
 If you use dlib in your research please cite:
 
+
+		@Article{dlib09,
+			  author = {Davis E. King},
+			  title = {Dlib-ml: A Machine Learning Toolkit},
+			  journal = {Journal of Machine Learning Research},
+			  year = {2009},
+			  volume = {10},
+			  pages = {1755-1758},
+		}
+
+
+
+If you use this project in your research please cite:
 		
 		@Article{barbosa18,
-			  author = {José Raimundo Barbosa, Jean Felipe Fonseca de Oliveira, Carlos Danilo Miranda Regis, Ruan Delgado Gomes and Marcelo Sampaio de Alencar},
+			  author = {José Raimundo Barbosa and Jean Felipe Fonseca de Oliveira and Carlos Danilo Miranda Regis and Ruan Delgado Gomes and Marcelo Sampaio de Alencar},
 			  title = {An Automated Testing Environment For The ITU-I/ISO-IEC Reference Video Encoders},
 			  journal = {Journal of Multimedia Applications and Tools},
 			  year = {2018}
