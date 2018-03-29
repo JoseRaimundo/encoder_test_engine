@@ -63,6 +63,6 @@ If you use this project in your research please cite:
 		
 		@Article{barbosa18,
 			  author = {José Raimundo Barbosa and Jean Felipe Fonseca de Oliveira and Carlos Danilo Miranda Regis and Ruan Delgado Gomes and Marcelo Sampaio de Alencar},
-			  title = {An Automated Testing Environment For The ITU-I/ISO-IEC Reference Video Encoders},
+			  title = {A Test Automation Engine for the ITU-T/ISO-IEC Reference Video Encoders},
 			  year = {2018}
 		}
