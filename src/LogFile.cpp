@@ -1,4 +1,4 @@
-#include "../include/LogFile.h"
+#include "LogFile.h"
 
 
 LogFile::LogFile(double   y_psnr, double u_pnsr, double v_psnr, double bit_rate, double total_time){

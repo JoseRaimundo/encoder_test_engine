@@ -1,5 +1,5 @@
 
-#include "../include/Thread.h"
+#include "Thread.h"
 
 static void* runThread(void* arg)
 {

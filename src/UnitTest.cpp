@@ -1,4 +1,4 @@
-#include "../include/UnitTest.h"
+#include "UnitTest.h"
 
 UnitTest::UnitTest(	int id_test, 
 					string command, 

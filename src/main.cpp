@@ -1,12 +1,12 @@
 
-#include "../include/common.h"
-#include "../include/Parse.h"
+#include "common.h"
+#include "Parse.h"
 
 
-#include "../include/ManagerTest.h"
+#include "ManagerTest.h"
 
-#include "../include/ManagerMetrics.h"
-#include "../include/MountManagerTest.h"
+#include "ManagerMetrics.h"
+#include "MountManagerTest.h"
 
 
 using namespace std;

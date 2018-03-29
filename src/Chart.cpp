@@ -1,4 +1,4 @@
-#include "../include/Chart.h"
+#include "Chart.h"
 
 
 Chart::Chart(){

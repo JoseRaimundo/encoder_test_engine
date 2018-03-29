@@ -1,4 +1,4 @@
-#include "../include/ManagerTest.h"
+#include "ManagerTest.h"
 
 
 ManagerTest::ManagerTest(	string mode_flag, 

@@ -1,4 +1,4 @@
-#include "../include/InputVideo.h"
+#include "InputVideo.h"
 
 
 InputVideo::InputVideo( string video_nome, 

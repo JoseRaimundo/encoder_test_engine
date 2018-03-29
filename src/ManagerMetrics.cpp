@@ -1,6 +1,6 @@
-#include "../include/ManagerMetrics.h"
-#define row 3840
-#define col 2160
+#include "ManagerMetrics.h"
+#define row 288
+#define col 352
 
 ManagerMetrics::ManagerMetrics(vector<UnitTest> unit_tests){//, 
 	this->unit_tests = unit_tests;
@@ -18,7 +18,7 @@ void ManagerMetrics::computerMetrics(){
 		
 
 		string reference_video 	= unit_tests[i].getInputVideo();
-		int frames = MAX_FRAMES;
+		int frames = 5;//MAX_FRAMES;
 
 		double 	psnr_eva = 0, 
 				ssim_eva = 0, 
@@ -86,9 +86,9 @@ void ManagerMetrics::computerMetrics(){
 		}else{
 		    result 	<<"QP:  " << unit_tests[continue_cont].getQP() 
 		    		<<"	 Evaluate 		Reference"	<< endl
-   				 	<< "PSNR ......: "<< psnr_eva << "  		" << psnr_ref	<< endl
-   				 	<< "SSIM ......: "<< ssim_eva << "  		" << ssim_ref	<< endl 
-   				 	<< "PW-SSIM ...: "<< pwssim_eva << "  		" << pwssim_ref	<< endl
+   				 	<< "PSNR ......: "<< psnr_eva << "			" << psnr_ref	<< endl
+   				 	<< "SSIM ......: "<< ssim_eva << "			" << ssim_ref	<< endl 
+   				 	<< "PW-SSIM ...: "<< pwssim_eva << "		" << pwssim_ref	<< endl
    				 	<< "BitRate ...: "<< file_eva_logs[continue_cont].getBitRate() 	<< "  		" << file_ref_logs[continue_cont].getBitRate()	<< endl
    				 	<< "Time (s)...: "<< file_eva_logs[continue_cont].getTime() 	<< "  		" << file_ref_logs[continue_cont].getTime()	<< endl; 
    				 	continue_cont++;
